@@ -96,6 +96,86 @@ BOOKS = [
          se="lewis-carroll_alices-adventures-in-wonderland_john-tenniel",
          blurb="A book written for one child and owned by every generation since. Logic, nonsense, and a Queen who wants the sentence first.",
          subjects=["Fantasy fiction", "Alice (Fictitious character from Carroll)"]),
+    dict(id=1260, slug="jane-eyre", title="Jane Eyre", author="Charlotte Bronte",
+         author_file="Bronte, Charlotte", year=1847, death=1855, category="Fiction",
+         se="charlotte-bronte_jane-eyre",
+         blurb="A governess, a locked attic, and the first heroine in English fiction to insist on being spoken to as an equal.",
+         subjects=["Governesses -- Fiction", "England -- Social life and customs"]),
+    dict(id=768, slug="wuthering-heights", title="Wuthering Heights", author="Emily Bronte",
+         author_file="Bronte, Emily", year=1847, death=1848, category="Fiction",
+         se="emily-bronte_wuthering-heights",
+         blurb="One house, two families, and a love that outlives both. The strangest novel of its century, written by someone who died the year after it appeared.",
+         subjects=["Yorkshire (England) -- Fiction", "Revenge -- Fiction"]),
+    dict(id=1400, slug="great-expectations", title="Great Expectations", author="Charles Dickens",
+         author_file="Dickens, Charles", year=1861, death=1870, category="Fiction",
+         se="charles-dickens_great-expectations",
+         blurb="Pip, the convict, and Miss Havisham's stopped clocks. Dickens' tightest plot and his clearest argument about what money does to people.",
+         subjects=["England -- Social life and customs -- 19th century", "Orphans -- Fiction"]),
+    dict(id=98, slug="a-tale-of-two-cities", title="A Tale of Two Cities", author="Charles Dickens",
+         author_file="Dickens, Charles", year=1859, death=1870, category="Fiction",
+         se="charles-dickens_a-tale-of-two-cities",
+         blurb="London and Paris, the guillotine and the sacrifice. The best-selling novel in English, and still the sharpest thing written about a revolution eating its own.",
+         subjects=["France -- History -- Revolution, 1789-1799", "Historical fiction"]),
+    dict(id=2701, slug="moby-dick", title="Moby-Dick; or, The Whale", author="Herman Melville",
+         author_file="Melville, Herman", year=1851, death=1891, category="Fiction",
+         se="herman-melville_moby-dick",
+         blurb="A whaling voyage that becomes an encyclopaedia, a sermon and a curse. Ignored in its own lifetime, now the great American novel.",
+         subjects=["Whaling -- Fiction", "Ahab, Captain (Fictitious character)"]),
+    dict(id=174, slug="the-picture-of-dorian-gray", title="The Picture of Dorian Gray", author="Oscar Wilde",
+         author_file="Wilde, Oscar", year=1890, death=1900, category="Fiction",
+         se="oscar-wilde_the-picture-of-dorian-gray",
+         blurb="A portrait ages so its subject need not. Wilde's only novel, and the wittiest book ever written about the cost of never being told no.",
+         subjects=["Appearance (Philosophy) -- Fiction", "Conduct of life -- Fiction"]),
+    dict(id=345, slug="dracula", title="Dracula", author="Bram Stoker",
+         author_file="Stoker, Bram", year=1897, death=1912, category="Gothic & Horror",
+         se="bram-stoker_dracula",
+         blurb="Letters, diaries, telegrams and newspaper cuttings, assembled into the book that gave the twentieth century its monster.",
+         subjects=["Dracula, Count (Fictitious character)", "Vampires -- Fiction"]),
+    dict(id=5230, slug="the-invisible-man", title="The Invisible Man", author="H. G. Wells",
+         author_file="Wells, H. G.", year=1897, death=1946, category="Science Fiction",
+         se="h-g-wells_the-invisible-man",
+         blurb="A scientist who solves the wrong problem. Wells' nastiest idea, and his funniest: invisibility as a licence for petty cruelty.",
+         subjects=["Science -- Experiments -- Fiction", "Science fiction"]),
+    dict(id=120, slug="treasure-island", title="Treasure Island", author="Robert Louis Stevenson",
+         author_file="Stevenson, Robert Louis", year=1883, death=1894, category="Adventure",
+         se="robert-louis-stevenson_treasure-island",
+         blurb="The map with the X on it, the one-legged sailor, the boy who learns whom to trust. Every pirate cliche in English comes from here.",
+         subjects=["Treasure troves -- Fiction", "Pirates -- Fiction"]),
+    dict(id=43, slug="dr-jekyll-and-mr-hyde", title="The Strange Case of Dr. Jekyll and Mr. Hyde",
+         author="Robert Louis Stevenson", author_file="Stevenson, Robert Louis", year=1886, death=1894,
+         category="Gothic & Horror", se="robert-louis-stevenson_the-strange-case-of-dr-jekyll-and-mr-hyde",
+         blurb="Written in a few days and read ever since. A short, cold book about how a respectable man arranges his own undoing.",
+         subjects=["Physicians -- Fiction", "Multiple personality -- Fiction"]),
+    dict(id=58585, slug="the-prophet", title="The Prophet", author="Kahlil Gibran",
+         author_file="Gibran, Kahlil", year=1923, death=1931, category="Poetry",
+         se="kahlil-gibran_the-prophet",
+         blurb="Twenty-six prose poems on love, work, freedom and death. Never out of print since 1923, and never out of fashion either.",
+         subjects=["Prose poems, American", "Mysticism -- Poetry"]),
+    dict(id=76, slug="huckleberry-finn", title="The Adventures of Huckleberry Finn", author="Mark Twain",
+         author_file="Twain, Mark", year=1884, death=1910, category="Adventure",
+         se="mark-twain_the-adventures-of-huckleberry-finn",
+         blurb="A raft, a runaway, and a boy deciding that what he has been taught is wrong. American literature starts here, in the vernacular.",
+         subjects=["Mississippi River -- Fiction", "Finn, Huckleberry (Fictitious character)"]),
+    dict(id=33, slug="the-scarlet-letter", title="The Scarlet Letter", author="Nathaniel Hawthorne",
+         author_file="Hawthorne, Nathaniel", year=1850, death=1864, category="Fiction",
+         se="nathaniel-hawthorne_the-scarlet-letter",
+         blurb="A letter worn on a dress, and a town that needs it worn. The first great American novel, and still the most exact about shame.",
+         subjects=["Puritans -- Fiction", "Adultery -- Fiction"]),
+    dict(id=160, slug="the-awakening", title="The Awakening", author="Kate Chopin",
+         author_file="Chopin, Kate", year=1899, death=1904, category="Fiction",
+         se="kate-chopin_the-awakening",
+         blurb="A woman on a Louisiana coast discovers she is a person, and the century was not ready. Condemned on publication, essential now.",
+         subjects=["Women -- Louisiana -- Fiction", "Self-actualization (Psychology) -- Fiction"]),
+    dict(id=541, slug="the-age-of-innocence", title="The Age of Innocence", author="Edith Wharton",
+         author_file="Wharton, Edith", year=1920, death=1937, category="Fiction",
+         se="edith-wharton_the-age-of-innocence",
+         blurb="New York society, and a man who does the correct thing for forty years. Wharton won the Pulitzer for it, and deserved to.",
+         subjects=["New York (N.Y.) -- Social life and customs", "Married people -- Fiction"]),
+    dict(id=829, slug="gullivers-travels", title="Gulliver's Travels", author="Jonathan Swift",
+         author_file="Swift, Jonathan", year=1726, death=1745, category="Satire",
+         se="jonathan-swift_gullivers-travels",
+         blurb="Four voyages, each one a different way of being laughed at. A children's book that was never meant to be one.",
+         subjects=["Voyages, Imaginary -- Fiction", "Satire"]),
 ]
 
 # --------------------------------------------------------------------------- #
@@ -455,6 +535,24 @@ def svg_to_image(svg_path: Path, max_px=900):
     return im
 
 
+def source_id_from_tree(root: Path):
+    """The Gutenberg ebook number, read from the edition's own record.
+
+    The `id` written into BOOKS is a guess typed by a human; the OPF carries a
+    dc:source URL. When the two disagree the file is right and the guess is
+    wrong, so the record wins and the correction is logged.
+    """
+    for opf in list(root.glob("**/content.opf"))[:1]:
+        try:
+            text = opf.read_text(encoding="utf-8", errors="ignore")
+        except Exception:
+            return None
+        m = re.search(r"gutenberg\.org/(?:ebooks|files)/(\d+)", text)
+        if m:
+            return m.group(1)
+    return None
+
+
 def body_of(xhtml: str) -> str:
     m = re.search(r"(?is)<body[^>]*>(.*)</body>", xhtml)
     inner = m.group(1) if m else xhtml
@@ -637,6 +735,12 @@ def main():
             tmp_out = work / b["slug"] / "_out"
             tmp_out.mkdir(parents=True, exist_ok=True)
             pdf, epub, txt, cover, plain, cover_kind = build_from_tree(src_root, tmp_out, b, kind)
+
+            # ---- the id comes from the record, and the record wins ------- #
+            real_id = source_id_from_tree(src_root) or b["id"]
+            if str(real_id) != str(b["id"]):
+                log(f"    id corrected from the source record: {b['id']} → {real_id}")
+            b = dict(b, id=real_id)
 
             # ---- dedupe gate -------------------------------------------- #
             tsha = text_sha(plain)

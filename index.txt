@@ -1,12 +1,28 @@
-# corpus-extendum | 10 books | 1 vault(s) | built 2026-11-15T19:16Z
+# corpus-extendum | 26 books | 1 vault(s) | built 2026-11-15T19:34Z
 # id | slug | title | author | year | category | formats | vault
+27780|treasure-island|Treasure Island|Stevenson, Robert Louis|1883|Adventure|pdf,epub,txt|corpus-extendum-vault-01
+76|huckleberry-finn|The Adventures of Huckleberry Finn|Twain, Mark|1884|Adventure|pdf,epub,txt|corpus-extendum-vault-01
 11|alice-in-wonderland|Alice's Adventures in Wonderland|Carroll, Lewis|1865|Children's & Fable|pdf,epub,txt|corpus-extendum-vault-01
 408|souls-of-black-folk|The Souls of Black Folk|Du Bois, W. E. B.|1903|Essays|pdf,epub,txt|corpus-extendum-vault-01
 1342|pride-and-prejudice|Pride and Prejudice|Austen, Jane|1813|Fiction|pdf,epub,txt|corpus-extendum-vault-01
+1260|jane-eyre|Jane Eyre|Bronte, Charlotte|1847|Fiction|pdf,epub,txt|corpus-extendum-vault-01
+768|wuthering-heights|Wuthering Heights|Bronte, Emily|1847|Fiction|pdf,epub,txt|corpus-extendum-vault-01
+25344|the-scarlet-letter|The Scarlet Letter|Hawthorne, Nathaniel|1850|Fiction|pdf,epub,txt|corpus-extendum-vault-01
+2701|moby-dick|Moby-Dick; or, The Whale|Melville, Herman|1851|Fiction|pdf,epub,txt|corpus-extendum-vault-01
+98|a-tale-of-two-cities|A Tale of Two Cities|Dickens, Charles|1859|Fiction|pdf,epub,txt|corpus-extendum-vault-01
+1400|great-expectations|Great Expectations|Dickens, Charles|1861|Fiction|pdf,epub,txt|corpus-extendum-vault-01
+174|the-picture-of-dorian-gray|The Picture of Dorian Gray|Wilde, Oscar|1890|Fiction|pdf,epub,txt|corpus-extendum-vault-01
+160|the-awakening|The Awakening|Chopin, Kate|1899|Fiction|pdf,epub,txt|corpus-extendum-vault-01
+541|the-age-of-innocence|The Age of Innocence|Wharton, Edith|1920|Fiction|pdf,epub,txt|corpus-extendum-vault-01
 84|frankenstein|Frankenstein; or, The Modern Prometheus|Shelley, Mary Wollstonecraft|1818|Gothic & Horror|pdf,epub,txt|corpus-extendum-vault-01
+43|dr-jekyll-and-mr-hyde|The Strange Case of Dr. Jekyll and Mr. Hyde|Stevenson, Robert Louis|1886|Gothic & Horror|pdf,epub,txt|corpus-extendum-vault-01
+345|dracula|Dracula|Stoker, Bram|1897|Gothic & Horror|pdf,epub,txt|corpus-extendum-vault-01
 1661|sherlock-holmes|The Adventures of Sherlock Holmes|Doyle, Arthur Conan|1892|Mystery & Detective|pdf,epub,txt|corpus-extendum-vault-01
 2680|meditations|Meditations|Marcus Aurelius, Emperor of Rome|180|Philosophy|pdf,epub,txt|corpus-extendum-vault-01
 7164|gitanjali|Gitanjali|Tagore, Rabindranath|1912|Poetry|pdf,epub,txt|corpus-extendum-vault-01
+58585|the-prophet|The Prophet|Gibran, Kahlil|1923|Poetry|pdf,epub,txt|corpus-extendum-vault-01
 2388|the-song-celestial|The Song Celestial; or, Bhagavad-Gita|Arnold, Edwin, Sir|1885|Sacred Texts|pdf,epub,txt|corpus-extendum-vault-01
+829|gullivers-travels|Gulliver's Travels|Swift, Jonathan|1726|Satire|pdf,epub,txt|corpus-extendum-vault-01
 35|the-time-machine|The Time Machine|Wells, H. G.|1895|Science Fiction|pdf,epub,txt|corpus-extendum-vault-01
+5230|the-invisible-man|The Invisible Man|Wells, H. G.|1897|Science Fiction|pdf,epub,txt|corpus-extendum-vault-01
 2814|dubliners|Dubliners|Joyce, James|1914|Short Stories|pdf,epub,txt|corpus-extendum-vault-01

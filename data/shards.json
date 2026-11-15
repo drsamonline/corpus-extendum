@@ -4,8 +4,8 @@
     "repo": "drsamonline/corpus-extendum-vault-01",
     "cdn": "https://cdn.jsdelivr.net/gh/drsamonline/corpus-extendum-vault-01@main",
     "raw": "https://raw.githubusercontent.com/drsamonline/corpus-extendum-vault-01/main",
-    "books": 10,
-    "mb": 53.1,
+    "books": 26,
+    "mb": 138.1,
     "state": "open",
     "cap_books": 600,
     "cap_mb": 2500

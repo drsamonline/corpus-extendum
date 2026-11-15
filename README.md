@@ -7,7 +7,7 @@
 A free library of out-of-copyright books. Read them in the page as a PDF, an EPUB or plain text; download anything; keep it forever. No accounts, no tracking, no paywall — because the copyright has expired, not because someone is being generous.
 
 [![live](https://img.shields.io/badge/live-drsamonline.github.io%2Fcorpus--extendum-8C3A2B?style=flat-square)](https://drsamonline.github.io/corpus-extendum/)
-[![books](https://img.shields.io/badge/books-10-1F4E46?style=flat-square)](data/catalog.json)
+[![books](https://img.shields.io/badge/books-26-1F4E46?style=flat-square)](data/catalog.json)
 [![formats](https://img.shields.io/badge/formats-12%20renderable-1F4E46?style=flat-square)](#what-opens-in-the-page)
 [![licence](https://img.shields.io/badge/licence-CC0--1.0-A8823F?style=flat-square)](LICENSE)
 [![dependencies](https://img.shields.io/badge/runtime%20dependencies-0-1F4E46?style=flat-square)](#running-it)
@@ -21,7 +21,7 @@ A free library of out-of-copyright books. Read them in the page as a PDF, an EPU
 
 ## What this is
 
-Ten books, ten categories, one shelf that grows by itself. Every title is public domain in **both India and the United States** — the stricter of the two tests is the one that gates a book — and each record says on what basis, so you can audit the claim instead of trusting it.
+26 books, 12 categories, one shelf that grows by itself. Every title is public domain in **both India and the United States** — the stricter of the two tests is the one that gates a book — and each record says on what basis, so you can audit the claim instead of trusting it.
 
 - **Read in the page.** PDF, EPUB and plain text all open inside the library. No plugin, no "download to view", no new tab.
 - **One book, one card.** A title that exists as PDF, EPUB and text is a single entry with format chips, not three near-duplicate entries. The dedupe gate refuses a second copy before it is ever fetched.
@@ -35,16 +35,32 @@ Ten books, ten categories, one shelf that grows by itself. Every title is public
 
 | # | Book | Author | Year | Category | Source |
 |---|---|---|---|---|---|
-| 1 | Pride and Prejudice | Jane Austen | 1813 | Fiction | Standard Ebooks |
-| 2 | Frankenstein; or, The Modern Prometheus | Mary Wollstonecraft Shelley | 1818 | Gothic & Horror | Standard Ebooks |
-| 3 | The Adventures of Sherlock Holmes | Arthur Conan Doyle | 1892 | Mystery & Detective | Standard Ebooks |
-| 4 | The Time Machine | H. G. Wells | 1895 | Science Fiction | Standard Ebooks |
-| 5 | Meditations | Marcus Aurelius · trans. George Long | c. 180 | Philosophy | Standard Ebooks |
-| 6 | Gitanjali | Rabindranath Tagore | 1912 | Poetry | Standard Ebooks |
-| 7 | The Song Celestial; or, Bhagavad-Gita | trans. Sir Edwin Arnold | 1885 | Sacred Texts | Gutenberg mirror |
-| 8 | The Souls of Black Folk | W. E. B. Du Bois | 1903 | Essays | Standard Ebooks |
-| 9 | Dubliners | James Joyce | 1914 | Short Stories | Standard Ebooks |
-| 10 | Alice's Adventures in Wonderland | Lewis Carroll | 1865 | Children's & Fable | Standard Ebooks |
+| 1 | Treasure Island | Robert Louis Stevenson | 1883 | Adventure | Standard Ebooks |
+| 2 | The Adventures of Huckleberry Finn | Mark Twain | 1884 | Adventure | Standard Ebooks |
+| 3 | Alice's Adventures in Wonderland | Lewis Carroll | 1865 | Children's & Fable | Standard Ebooks |
+| 4 | The Souls of Black Folk | W. E. B. Du Bois | 1903 | Essays | Standard Ebooks |
+| 5 | Pride and Prejudice | Jane Austen | 1813 | Fiction | Standard Ebooks |
+| 6 | Jane Eyre | Charlotte Bronte | 1847 | Fiction | Standard Ebooks |
+| 7 | Wuthering Heights | Emily Bronte | 1847 | Fiction | Standard Ebooks |
+| 8 | The Scarlet Letter | Nathaniel Hawthorne | 1850 | Fiction | Standard Ebooks |
+| 9 | Moby-Dick; or, The Whale | Herman Melville | 1851 | Fiction | Standard Ebooks |
+| 10 | A Tale of Two Cities | Charles Dickens | 1859 | Fiction | Standard Ebooks |
+| 11 | Great Expectations | Charles Dickens | 1861 | Fiction | Standard Ebooks |
+| 12 | The Picture of Dorian Gray | Oscar Wilde | 1890 | Fiction | Standard Ebooks |
+| 13 | The Awakening | Kate Chopin | 1899 | Fiction | Standard Ebooks |
+| 14 | The Age of Innocence | Edith Wharton | 1920 | Fiction | Standard Ebooks |
+| 15 | Frankenstein; or, The Modern Prometheus | Mary Wollstonecraft Shelley | 1818 | Gothic & Horror | Standard Ebooks |
+| 16 | The Strange Case of Dr. Jekyll and Mr. Hyde | Robert Louis Stevenson | 1886 | Gothic & Horror | Standard Ebooks |
+| 17 | Dracula | Bram Stoker | 1897 | Gothic & Horror | Standard Ebooks |
+| 18 | The Adventures of Sherlock Holmes | Arthur Conan Doyle | 1892 | Mystery & Detective | Standard Ebooks |
+| 19 | Meditations | Marcus Aurelius | 180 | Philosophy | Standard Ebooks |
+| 20 | Gitanjali | Rabindranath Tagore | 1912 | Poetry | Standard Ebooks |
+| 21 | The Prophet | Kahlil Gibran | 1923 | Poetry | Standard Ebooks |
+| 22 | The Song Celestial; or, Bhagavad-Gita | trans. Sir Edwin Arnold | 1885 | Sacred Texts | Gutenberg mirror |
+| 23 | Gulliver's Travels | Jonathan Swift | 1726 | Satire | Standard Ebooks |
+| 24 | The Time Machine | H. G. Wells | 1895 | Science Fiction | Standard Ebooks |
+| 25 | The Invisible Man | H. G. Wells | 1897 | Science Fiction | Standard Ebooks |
+| 26 | Dubliners | James Joyce | 1914 | Short Stories | Standard Ebooks |
 
 Every record — title, author, translator, year, subjects, source URL, rights basis, file hashes — is in [`data/catalog.json`](data/catalog.json), and the same list is in [`index.txt`](index.txt) for anyone who would rather read it without a browser.
 

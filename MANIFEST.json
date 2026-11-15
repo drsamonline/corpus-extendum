@@ -33,17 +33,17 @@
       "class": "hand"
     },
     "README.md": {
-      "sha": "d5a17eaab89abda306e158c6cbfa1ba9215cb025",
+      "sha": "69aaba663f53232df6251fd86ceeebd72c1a054e",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "assets/app.css": {
-      "sha": "120f9b25740e81a7951f8d6dc7ee007fec3576fe",
+      "sha": "528982f91f95b4620cdad9f125e222e23e3d43f5",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "assets/app.js": {
-      "sha": "0051d1d38d52564510153c478646b9b97273deb8",
+      "sha": "d4d858868af9907b9558c710ce45f681c1f70036",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -73,27 +73,27 @@
       "class": "hand"
     },
     "data/catalog.json": {
-      "sha": "ab681e48bec0a5259f74e2874d1a954a3223a2d9",
+      "sha": "5eae6dc272024119dd457f2bb9fa7141be689d6f",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "data/categories.json": {
-      "sha": "77d6c46bd7c1f3e03289bb968d5b1a5301197581",
+      "sha": "9fa61f12c48929153684ca8a89cf085ebf73168a",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "data/search-index.json": {
-      "sha": "6e42e158f05a8218f97cd20f051616e64fa51e5f",
+      "sha": "f6212f3bc7b1853aaba329fd5a21d76d723b818e",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "data/shards.json": {
-      "sha": "c899407b4f551453ea5ca9c728b069329de5e15a",
+      "sha": "701cd91af675d8f2763ee1e4f290b055ef559367",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "dedupe-report.txt": {
-      "sha": "a34afab9768f90fad9fe757daca0971e83dbec4c",
+      "sha": "e18f1ff74f4f9259deb1d0151a78c7d586719762",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -103,7 +103,7 @@
       "class": "hand"
     },
     "docs/assets/shelf.png": {
-      "sha": "c118a41599278fc74588d566a14a95a001e698e6",
+      "sha": "b8b79e6e07d172240f3572a22a3d57aa2bc9f5f4",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -123,7 +123,7 @@
       "class": "hand"
     },
     "index.txt": {
-      "sha": "0ae2d2c2d69558683d279e0498630b3decfae45b",
+      "sha": "e0ec2b3e18b97a506c9247cdc4db5cb03e6e62e0",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -148,17 +148,17 @@
       "class": "hand"
     },
     "MANIFEST.json": {
-      "sha": "031a1890efcde7d1aa1375389c9dc1d11a84f457",
+      "sha": "2c5af903fecdb93984c6c7254cdfbef85d102f60",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "data/dedupe.json": {
-      "sha": "07fdf13c42ddb95bd03d5004f16b92c35f38eaf5",
+      "sha": "0dffeda92dee345819e3e5acd17393b7fcffb26e",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "scripts/ingest.py": {
-      "sha": "4fd0e7e5e959a08a44456f263545c1001614ed6a",
+      "sha": "1e3544d339e803bf185ed481af221abe45c34321",
       "producer": "build-2026-11-16",
       "class": "hand"
     }

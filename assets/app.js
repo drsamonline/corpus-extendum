@@ -186,6 +186,25 @@ function setFormat(fmt) {
   else renderJson(b);
 }
 
+/* Fit the page to the stage on both axes. Sizing on width alone is what cut
+ * the bottom off a page on a phone; sizing on height alone wasted a wide
+ * screen. Take the smaller ratio and the whole page always fits. */
+function fitScale(vp1) {
+  const stage = $('stage');
+  const small = window.innerWidth <= 820;
+  const availW = Math.max(200, stage.clientWidth - (small ? 12 : 56));
+  const availH = Math.max(200, stage.clientHeight - (small ? 16 : 56));
+  return Math.max(0.15, Math.min(availW / vp1.width, availH / vp1.height));
+}
+
+/* Rotating a phone or resizing a window must re-fit, not re-open. */
+let refitTimer = null;
+window.addEventListener('resize', () => {
+  if (state.fmt !== 'pdf' || !state.pdfDoc) return;
+  clearTimeout(refitTimer);
+  refitTimer = setTimeout(() => renderPdf(state.open), 180);
+});
+
 async function renderPdf(b) {
   const canvas = $('pdfCanvas');
   canvas.style.display = 'block';
@@ -199,8 +218,7 @@ async function renderPdf(b) {
     }
     const page = await state.pdfDoc.getPage(state.pdfPage);
     const vp1 = page.getViewport({ scale: 1 });
-    const maxW = Math.min(760, $('stage').clientWidth - 48);
-    const scale = maxW / vp1.width;
+    const scale = fitScale(vp1);
     const vp = page.getViewport({ scale });
     canvas.width = vp.width; canvas.height = vp.height;
     await page.render({ canvasContext: canvas.getContext('2d'), viewport: vp }).promise;
@@ -234,18 +252,10 @@ async function renderTxt(b) {
   $('rNote').textContent = 'Plain text, paginated in the browser — nothing to download to start reading.';
   try {
     const text = await fetch(cdn(b, 'txt')).then(r => r.text());
-    const wrap = [];
-    text.split(/\n\s*\n/).slice(0, 40).forEach(p => {
-      const words = p.split(/\s+/); let line = '';
-      words.forEach(w => {
-        if ((line + ' ' + w).length > 72) { wrap.push(line); line = w; }
-        else line = line ? line + ' ' + w : w;
-      });
-      if (line) wrap.push(line);
-      wrap.push('');
-    });
-    page.innerHTML = `<div class="monoh"><span>${b.slug}.txt</span><span>plain text · 72 col</span></div>`
-      + wrap.slice(0, 46).map((l, i) => `${String(i + 1).padStart(3, ' ')}  ${esc(l)}`).join('\n');
+    // Wrapped by the browser, not by a fixed column count: 72 columns is
+    // unreadable on a 360px screen and was being clipped, not wrapped.
+    page.innerHTML = `<div class="monoh"><span>${b.slug}.txt</span><span>plain text</span></div>`
+      + `<pre>${esc(text)}</pre>`;
   } catch (err) {
     page.textContent = `Could not load the text (${err.message}).`;
   }
