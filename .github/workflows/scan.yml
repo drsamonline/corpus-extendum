@@ -1,0 +1,47 @@
+name: scan
+
+# Weekly: clone every vault, rebuild the catalogue from the vaults' own
+# records, and commit if anything changed. The heartbeat line keeps GitHub
+# from disabling the schedule after 60 days of inactivity.
+
+on:
+  schedule:
+    - cron: '0 3 * * 1'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: clone the vaults
+        run: |
+          mkdir -p ../vaults
+          for repo in $(python3 -c "import json;print(' '.join(s['repo'] for s in json.load(open('data/shards.json'))))"); do
+            git clone --depth 1 "https://github.com/$repo" "../vaults/$(basename "$repo")"
+          done
+          ls ../vaults
+
+      - name: rebuild the catalogue
+        run: |
+          args=""
+          for d in ../vaults/*/; do args="$args --vault $d"; done
+          python3 scripts/build_catalog.py $args
+
+      - name: commit
+        run: |
+          git config user.name "corpus-bot"
+          git config user.email "corpus-bot@users.noreply.github.com"
+          echo "$(date -u +%FT%TZ) scan ok" >> data/scan-log.txt
+          git add -A
+          if git diff --staged --quiet; then echo "nothing changed"; else
+            git commit -m "scan: rebuild catalogue from vaults"
+            git push
+          fi

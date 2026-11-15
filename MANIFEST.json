@@ -1,0 +1,166 @@
+{
+  "schema": 1,
+  "locked": false,
+  "files": {
+    ".github/FUNDING.yml": {
+      "sha": "32431e610fcb18929460eff79f5ed2ac5423e922",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    ".gitignore": {
+      "sha": "dc816cc337299424a548f016f0ae38459f4a5808",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "LICENSE": {
+      "sha": "64bdc898b7710eb4fce5d4867fbb8c2694b2d802",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "NOTICE.md": {
+      "sha": "5e945f02dbdf02eb8612b9db012c21b34b5e0e87",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "PAGES.json": {
+      "sha": "6d28388d03ddac84027af251509d436e777b4bf2",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "PRIVACY.md": {
+      "sha": "d7b6a158f61a825393c9835bbd87c023bae82c69",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "README.md": {
+      "sha": "d5a17eaab89abda306e158c6cbfa1ba9215cb025",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "assets/app.css": {
+      "sha": "120f9b25740e81a7951f8d6dc7ee007fec3576fe",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "assets/app.js": {
+      "sha": "0051d1d38d52564510153c478646b9b97273deb8",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "assets/vendor/LICENSE-jszip.md": {
+      "sha": "2cd43d380887fab055c49d5dab12df1995d9ed22",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "assets/vendor/epub.min.js": {
+      "sha": "0c1c526ba0699bdfeee72f52e9993db68d70b262",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "assets/vendor/jszip.min.js": {
+      "sha": "c96375d50e72b199aa54de7b9ad908fd5a2dc7bc",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "assets/vendor/pdf.min.js": {
+      "sha": "a4641a2626f396d0272498e887ea09e4d013e493",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "assets/vendor/pdf.worker.min.js": {
+      "sha": "49162d546a1a5a11bd2c932b2d1b2520daef1ec3",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "data/catalog.json": {
+      "sha": "ab681e48bec0a5259f74e2874d1a954a3223a2d9",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "data/categories.json": {
+      "sha": "77d6c46bd7c1f3e03289bb968d5b1a5301197581",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "data/search-index.json": {
+      "sha": "6e42e158f05a8218f97cd20f051616e64fa51e5f",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "data/shards.json": {
+      "sha": "c899407b4f551453ea5ca9c728b069329de5e15a",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "dedupe-report.txt": {
+      "sha": "a34afab9768f90fad9fe757daca0971e83dbec4c",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "docs/assets/reader.png": {
+      "sha": "ba0ebd289cb01b5f05240af7ce06165e88162f50",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "docs/assets/shelf.png": {
+      "sha": "c118a41599278fc74588d566a14a95a001e698e6",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "docs/assets/support-portrait.jpg": {
+      "sha": "b37f178401afbdce7838d238d8f5d9352d800942",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "docs/assets/upi-qr.svg": {
+      "sha": "85be3f50c3bb40dde86dc1d1aa19439aa245ebd9",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "index.html": {
+      "sha": "d23302b758a25e7ebbdddf9dc10a999349a4567e",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "index.txt": {
+      "sha": "0ae2d2c2d69558683d279e0498630b3decfae45b",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "scripts/build_catalog.py": {
+      "sha": "ce0343f2fdbafc3354507fdaf09d6b2b5af4fcb0",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "scripts/make_shots.py": {
+      "sha": "854a9b4a2dba7af59dd87f7d26d5fb35bf61dfd9",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    ".github/workflows/deploy.yml": {
+      "sha": "4d973d59020ecd67462e9e7f7ba8efdd01e872e8",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    ".github/workflows/scan.yml": {
+      "sha": "e2e192594ae49ca8e84448208545513dca9f0370",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "MANIFEST.json": {
+      "sha": "031a1890efcde7d1aa1375389c9dc1d11a84f457",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "data/dedupe.json": {
+      "sha": "07fdf13c42ddb95bd03d5004f16b92c35f38eaf5",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "scripts/ingest.py": {
+      "sha": "4fd0e7e5e959a08a44456f263545c1001614ed6a",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "_note": "Pages are set by hand. The landing page is index.html at the repository root; there is no separate app page, because the library IS the app. A sweep must not create a second landing page or move this one.",
+  "manual": true,
+  "landing": "index.html",
+  "app": null,
+  "updated": "2026-11-16"
+}

@@ -1,0 +1,38 @@
+{
+  "source_refs": [
+    "gutenberg:1342",
+    "gutenberg:84",
+    "gutenberg:1661",
+    "gutenberg:35",
+    "gutenberg:2680",
+    "gutenberg:7164",
+    "gutenberg:2388",
+    "gutenberg:408",
+    "gutenberg:2814",
+    "gutenberg:11"
+  ],
+  "text_sha256": {
+    "78a0a582db906da05e36af990abed243f3cf64b5e3ecd77eb9ea3743be3ec65b": "pride-and-prejudice",
+    "0746682a1c24c5235aa84a688001e12f1191fde519c1fa703daa4ab25d8f81a6": "frankenstein",
+    "d1ee5f56c075ef02c0b291cfffd34a6fad23fd4cf7d52f216dac2c8ee2b767c6": "sherlock-holmes",
+    "80a067bf540e8fdd2333d350752df50003be08619cc3cef1dfdf2740a1e09417": "the-time-machine",
+    "8a65f94554e7fc73a1ce8b66c03763b92f990614fb36a2bdb563469a51b634ca": "meditations",
+    "c75eb077c7d5c193bf4163214f456a24e79acb89b1a637166d18c8e4b8d53cf8": "gitanjali",
+    "b7ca516c13b0e5ef43a86572f97edb8a60df868d773eed7205e3847a16a36d6e": "the-song-celestial",
+    "a3904a2a0cdcab666ff6c3148f64696a4d61c9c2c37830fcea2f2c3412f42301": "souls-of-black-folk",
+    "b137cc2ed618e5a0d1aa5f3936c91eaacd6fbc68b899a1de83f30d90b6770447": "dubliners",
+    "cea7d9da85d7bfb5f7c212f0f45042b1539833cf43eaad12f384c66a1c52473b": "alice-in-wonderland"
+  },
+  "work_keys": {
+    "austen|pride and prejudice|1813": "pride-and-prejudice",
+    "shelley|frankenstein; or, the modern prometheus|1818": "frankenstein",
+    "doyle|the adventures of sherlock holmes|1892": "sherlock-holmes",
+    "wells|the time machine|1895": "the-time-machine",
+    "marcus aurelius|meditations|180": "meditations",
+    "tagore|gitanjali|1912": "gitanjali",
+    "arnold|the song celestial; or, bhagavad-gita|1885": "the-song-celestial",
+    "du bois|the souls of black folk|1903": "souls-of-black-folk",
+    "joyce|dubliners|1914": "dubliners",
+    "carroll|alice's adventures in wonderland|1865": "alice-in-wonderland"
+  }
+}
