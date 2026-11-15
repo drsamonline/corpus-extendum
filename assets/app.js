@@ -24,10 +24,11 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 /* ------------------------------------------------------------------ data */
 async function boot() {
   try {
+    const FRESH = { cache: 'no-store' };
     const [catalog, shards, cats] = await Promise.all([
-      fetch('data/catalog.json').then(r => r.json()),
-      fetch('data/shards.json').then(r => r.json()),
-      fetch('data/categories.json').then(r => r.json()),
+      fetch('data/catalog.json', FRESH).then(r => r.json()),
+      fetch('data/shards.json', FRESH).then(r => r.json()),
+      fetch('data/categories.json', FRESH).then(r => r.json()),
     ]);
     state.catalog = catalog;
     state.cats = cats;
@@ -38,13 +39,14 @@ async function boot() {
     $('statVaults').textContent = Object.keys(state.shards).length;
     $('statCats').textContent = cats.length;
     $('shardName').textContent = vault.name;
-    $('shardMeta').innerHTML = `<b>${vault.books}</b> / ${vault.cap_books} books · ${vault.mb} MB / ${vault.cap_mb} MB · <span style="color:var(--teal);font-weight:600">${vault.state}</span>`;
+    const built = vault.built ? new Date(vault.built).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+    $('shardMeta').innerHTML = `<b>${vault.books}</b> / ${vault.cap_books} books · ${vault.mb} MB / ${vault.cap_mb} MB · <span style="color:var(--teal);font-weight:600">${vault.state}</span>${built ? ` · catalogue built ${built}` : ''}`;
     $('meterFill').style.width = Math.max(2, (vault.books / vault.cap_books) * 100).toFixed(1) + '%';
     $('vaultList').innerHTML = Object.values(state.shards)
       .map(s => `<a href="https://github.com/${s.repo}">${s.name}</a> · ${s.books} books`).join('<br>');
 
     try {
-      state.searchIndex = await fetch('data/search-index.json').then(r => r.json());
+      state.searchIndex = await fetch('data/search-index.json', FRESH).then(r => r.json());
     } catch (e) { state.searchIndex = []; }
 
     renderCats();

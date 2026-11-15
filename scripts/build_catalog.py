@@ -41,7 +41,9 @@ def load(p: Path, default):
 
 
 def size_mb(path: Path) -> float:
-    total = sum(f.stat().st_size for f in path.rglob("*") if f.is_file())
+    """The books, not the repository. Counting .git inflated 138 MB to 167."""
+    total = sum(f.stat().st_size for f in path.rglob("*")
+                if f.is_file() and ".git" not in f.parts)
     return round(total / (1024 * 1024), 1)
 
 
@@ -92,6 +94,7 @@ def main():
             "cdn": f"https://cdn.jsdelivr.net/gh/drsamonline/{vault.name}@main",
             "raw": f"https://raw.githubusercontent.com/drsamonline/{vault.name}/main",
             "books": len(books), "mb": mb, "state": state,
+            "built": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%MZ"),
             "cap_books": CAP_BOOKS, "cap_mb": CAP_MB,
         })
         (vault / "index.txt").write_text(vault_index(vault, books, state))

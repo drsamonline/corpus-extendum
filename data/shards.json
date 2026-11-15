@@ -5,8 +5,9 @@
     "cdn": "https://cdn.jsdelivr.net/gh/drsamonline/corpus-extendum-vault-01@main",
     "raw": "https://raw.githubusercontent.com/drsamonline/corpus-extendum-vault-01/main",
     "books": 26,
-    "mb": 138.1,
+    "mb": 87.2,
     "state": "open",
+    "built": "2026-11-15T19:45Z",
     "cap_books": 600,
     "cap_mb": 2500
   }
