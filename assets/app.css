@@ -383,3 +383,8 @@ body.locked{overscroll-behavior:none}
 
 /* plain text is wrapped by the browser, never by a fixed column count */
 .txtpage pre{white-space:pre-wrap;word-wrap:break-word;overflow-wrap:anywhere;margin:0;font:inherit}
+
+/* The native PDF viewer: fits the width, pinches, scrolls. On a phone that is
+   a better instrument than a canvas I draw and scale myself. */
+#pdfFrame{height:calc(100vh - 120px);min-height:420px}
+@media(max-width:820px){#pdfFrame{height:calc(100vh - 128px)}}

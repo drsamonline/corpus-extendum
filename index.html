@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..700&family=Inter:wght@300..700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/app.css?v=20261116c">
+<link rel="stylesheet" href="assets/app.css?v=20261116e">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%238C3A2B'/><text x='16' y='22' font-family='Georgia,serif' font-size='15' fill='%23FBF3E9' text-anchor='middle'>CE</text></svg>">
 </head>
 <body>
@@ -133,6 +133,7 @@
       <span>An open shelf of out-of-copyright books.</span>
       <span>No accounts. No tracking. No paywall.</span>
       <span><a href="index.txt">index.txt</a> · <a href="data/catalog.json">catalog.json</a></span>
+      <span style="opacity:.7">site build 20261116d</span>
     </div>
     <div class="fcol">
       <b>Vaults</b>
@@ -190,6 +191,7 @@
     <div class="stage" id="stage">
       <div class="page" id="page"></div>
       <canvas id="pdfCanvas" style="display:none;max-width:100%;box-shadow:0 26px 60px -18px rgba(0,0,0,.75);border-radius:2px"></canvas>
+      <iframe id="pdfFrame" title="Book page" style="display:none;width:100%;border:0;border-radius:2px;background:#FBF8F1"></iframe>
       <div id="epubBox" style="display:none;width:min(760px,100%);height:78vh;background:#FBF8F1;border-radius:2px"></div>
       <div class="rnote" id="rNote">Loading…</div>
     </div>
@@ -210,9 +212,9 @@
   </div>
 </div>
 
-<script src="assets/vendor/jszip.min.js?v=20261116c"></script>
-<script src="assets/vendor/epub.min.js?v=20261116c"></script>
-<script src="assets/vendor/pdf.min.js?v=20261116c"></script>
-<script src="assets/app.js?v=20261116c"></script>
+<script src="assets/vendor/jszip.min.js?v=20261116e"></script>
+<script src="assets/vendor/epub.min.js?v=20261116e"></script>
+<script src="assets/vendor/pdf.min.js?v=20261116e"></script>
+<script src="assets/app.js?v=20261116e"></script>
 </body>
 </html>

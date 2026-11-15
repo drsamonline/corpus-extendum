@@ -24,11 +24,15 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 /* ------------------------------------------------------------------ data */
 async function boot() {
   try {
+    // A unique query per load defeats every layer of caching at once: the
+    // HTTP cache, a proxy, and any service worker that keys on the URL. The
+    // catalogue is 15 KB; correctness is worth more than saving that.
     const FRESH = { cache: 'no-store' };
+    const stamp = '?t=' + Date.now();
     const [catalog, shards, cats] = await Promise.all([
-      fetch('data/catalog.json', FRESH).then(r => r.json()),
-      fetch('data/shards.json', FRESH).then(r => r.json()),
-      fetch('data/categories.json', FRESH).then(r => r.json()),
+      fetch('data/catalog.json' + stamp, FRESH).then(r => r.json()),
+      fetch('data/shards.json' + stamp, FRESH).then(r => r.json()),
+      fetch('data/categories.json' + stamp, FRESH).then(r => r.json()),
     ]);
     state.catalog = catalog;
     state.cats = cats;
@@ -46,7 +50,7 @@ async function boot() {
       .map(s => `<a href="https://github.com/${s.repo}">${s.name}</a> · ${s.books} books`).join('<br>');
 
     try {
-      state.searchIndex = await fetch('data/search-index.json', FRESH).then(r => r.json());
+      state.searchIndex = await fetch('data/search-index.json' + stamp, FRESH).then(r => r.json());
     } catch (e) { state.searchIndex = []; }
 
     renderCats();
@@ -188,6 +192,14 @@ function setFormat(fmt) {
   else renderJson(b);
 }
 
+/* A stalled fetch must surface as an error, never as an empty pane. */
+function withTimeout(promise, ms, what) {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => setTimeout(() => reject(new Error(what + ' within ' + Math.round(ms / 1000) + 's')), ms)),
+  ]);
+}
+
 /* Fit the page to the stage on both axes. Sizing on width alone is what cut
  * the bottom off a page on a phone; sizing on height alone wasted a wide
  * screen. Take the smaller ratio and the whole page always fits. */
@@ -207,7 +219,22 @@ window.addEventListener('resize', () => {
   refitTimer = setTimeout(() => renderPdf(state.open), 180);
 });
 
+function showNativePdf(b, why) {
+  const frame = $('pdfFrame');
+  $('pdfCanvas').style.display = 'none';
+  frame.style.display = 'block';
+  frame.src = cdn(b, 'pdf') + '#view=FitH';
+  $('rPrev').style.display = 'none';
+  $('rNext').style.display = 'none';
+  $('rPage').textContent = 'Scroll';
+  $('rNote').textContent = why || 'Native PDF viewer — it fits the width, and pinching zooms.';
+}
+
 async function renderPdf(b) {
+  // A phone gets the browser's own PDF viewer: it fits the width by default,
+  // it pinches, and it scrolls without me re-drawing a canvas per page.
+  if (window.innerWidth <= 820) { showNativePdf(b); return; }
+  $('pdfFrame').style.display = 'none';
   const canvas = $('pdfCanvas');
   canvas.style.display = 'block';
   $('rNote').textContent = 'Rendering the PDF in the page — pdf.js, no plugin, no download.';
@@ -215,7 +242,12 @@ async function renderPdf(b) {
     if (!window.pdfjsLib) throw new Error('pdf.js did not load');
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'assets/vendor/pdf.worker.min.js';
     if (!state.pdfDoc) {
-      state.pdfDoc = await pdfjsLib.getDocument({ url: cdn(b, 'pdf'), disableAutoFetch: true }).promise;
+      // No disableAutoFetch: that switches pdf.js to range requests, which
+      // hangs against any server that does not answer them — and a stall here
+      // looked exactly like a blank page. One whole-file fetch works anywhere.
+      state.pdfDoc = await withTimeout(
+        pdfjsLib.getDocument({ url: cdn(b, 'pdf') }).promise, 30000,
+        'the PDF did not finish loading');
       state.pdfPage = 1;
     }
     const page = await state.pdfDoc.getPage(state.pdfPage);
@@ -225,9 +257,10 @@ async function renderPdf(b) {
     canvas.width = vp.width; canvas.height = vp.height;
     await page.render({ canvasContext: canvas.getContext('2d'), viewport: vp }).promise;
     $('rPage').textContent = `Page ${state.pdfPage} / ${state.pdfDoc.numPages}`;
+    $('rNote').textContent = `${b.title} — typeset for this library, ${state.pdfDoc.numPages} pages. Use ← → or the arrows to turn.`;
   } catch (err) {
-    canvas.style.display = 'none';
-    $('rNote').innerHTML = `This PDF could not be rendered here (${esc(err.message)}). <a href="${cdn(b, 'pdf')}" target="_blank" rel="noopener" style="color:#A8C4BB">Open it directly</a>.`;
+    // Never leave a blank pane: hand it to the browser's own viewer.
+    showNativePdf(b, `The in-page renderer could not draw this (${err.message}), so the browser's own viewer is showing it instead.`);
   }
 }
 
