@@ -182,8 +182,9 @@ function setFormat(fmt) {
   $('page').style.display = 'none';
   $('pdfCanvas').style.display = 'none';
   $('epubBox').style.display = 'none';
-  $('rPrev').style.display = fmt === 'pdf' ? '' : 'none';
-  $('rNext').style.display = fmt === 'pdf' ? '' : 'none';
+  const canTurn = !(fmt === 'pdf' && window.innerWidth <= 820);
+  $('rPrev').style.display = canTurn ? '' : 'none';
+  $('rNext').style.display = canTurn ? '' : 'none';
   $('rPage').textContent = '—';
 
   if (fmt === 'pdf') renderPdf(b);
@@ -214,12 +215,19 @@ function fitScale(vp1) {
 /* Rotating a phone or resizing a window must re-fit, not re-open. */
 let refitTimer = null;
 window.addEventListener('resize', () => {
+  if (state.fmt === 'epub' && state.epubRendition) {
+    try { state.epubRendition.resize(); } catch (e) {}
+    return;
+  }
   if (state.fmt !== 'pdf' || !state.pdfDoc) return;
   clearTimeout(refitTimer);
   refitTimer = setTimeout(() => renderPdf(state.open), 180);
 });
 
 function showNativePdf(b, why) {
+  // A slow PDF failure must not hijack the reader after the reader has moved
+  // on to another format. Without this guard, a late error tore down the EPUB.
+  if (state.fmt !== 'pdf') return;
   const frame = $('pdfFrame');
   $('pdfCanvas').style.display = 'none';
   frame.style.display = 'block';
@@ -245,9 +253,11 @@ async function renderPdf(b) {
       // No disableAutoFetch: that switches pdf.js to range requests, which
       // hangs against any server that does not answer them — and a stall here
       // looked exactly like a blank page. One whole-file fetch works anywhere.
-      state.pdfDoc = await withTimeout(
+      const doc = await withTimeout(
         pdfjsLib.getDocument({ url: cdn(b, 'pdf') }).promise, 30000,
         'the PDF did not finish loading');
+      if (state.fmt !== 'pdf') return;   // the reader changed format while loading
+      state.pdfDoc = doc;
       state.pdfPage = 1;
     }
     const page = await state.pdfDoc.getPage(state.pdfPage);
@@ -257,9 +267,10 @@ async function renderPdf(b) {
     canvas.width = vp.width; canvas.height = vp.height;
     await page.render({ canvasContext: canvas.getContext('2d'), viewport: vp }).promise;
     $('rPage').textContent = `Page ${state.pdfPage} / ${state.pdfDoc.numPages}`;
-    $('rNote').textContent = `${b.title} — typeset for this library, ${state.pdfDoc.numPages} pages. Use ← → or the arrows to turn.`;
+    $('rNote').textContent = `${b.title} — typeset for this library, ${state.pdfDoc.numPages} pages. ← → turn pages, Home and End jump, Esc closes.`;
   } catch (err) {
-    // Never leave a blank pane: hand it to the browser's own viewer.
+    // Never leave a blank pane — but only if the reader is still on the PDF.
+    if (state.fmt !== 'pdf') return;
     showNativePdf(b, `The in-page renderer could not draw this (${err.message}), so the browser's own viewer is showing it instead.`);
   }
 }
@@ -272,8 +283,30 @@ async function renderEpub(b) {
     if (!window.ePub) throw new Error('epub.js did not load');
     if (state.epubRendition) { try { state.epubRendition.destroy(); } catch (e) {} }
     state.epubBook = ePub(cdn(b, 'epub'));
-    state.epubRendition = state.epubBook.renderTo(box, { width: '100%', height: '100%', flow: 'scrolled' });
+    // renderTo() before the archive has opened produces an empty box and no
+    // error — the reader looks broken rather than failing. Wait for it.
+    await state.epubBook.ready;
+    // scrolled-continuous scrolls the whole book in one column. 'scrolled'
+    // alone gave one section at a time with no way to reach the next, which is
+    // why the EPUB felt dead: no scroll, and the page buttons were hidden.
+    state.epubRendition = state.epubBook.renderTo(box, {
+      width: '100%', height: '100%', flow: 'scrolled-continuous',
+    });
+    state.epubRendition.on('relocated', (loc) => {
+      if (state.fmt !== 'epub' || !loc || !loc.start) return;
+      const pct = Math.round((loc.start.percentage || 0) * 100);
+      $('rPage').textContent = pct ? pct + '%' : 'Scroll';
+    });
+    $('rPage').textContent = 'Scroll';
     await state.epubRendition.display();
+    // epub.js measures its container when it attaches. If that happens before
+    // layout settles the iframe comes out shorter than the box, so ask it to
+    // measure again once the frame is on screen.
+    setTimeout(() => {
+      if (state.fmt === 'epub' && state.epubRendition) {
+        try { state.epubRendition.resize(); } catch (e) {}
+      }
+    }, 120);
   } catch (err) {
     box.style.display = 'none';
     $('rNote').innerHTML = `This EPUB could not be opened here (${esc(err.message)}). <a href="${cdn(b, 'epub')}" target="_blank" rel="noopener" style="color:#A8C4BB">Download it</a>.`;
@@ -321,19 +354,58 @@ function highlight(o) {
 
 /* -------------------------------------------------------------- controls */
 $('rClose').onclick = closeReader;
-$('rPrev').onclick = () => { if (state.pdfDoc && state.pdfPage > 1) { state.pdfPage--; renderPdf(state.open); } };
-$('rNext').onclick = () => {
-  if (state.pdfDoc && state.pdfPage < state.pdfDoc.numPages) { state.pdfPage++; renderPdf(state.open); }
-};
+/* One turn, four formats. A page is only meaningful for a PDF; for everything
+ * else "turn" means the next section (EPUB) or the next screenful (text, JSON).
+ */
+function turn(dir) {
+  if (state.fmt === 'pdf') {
+    if (!state.pdfDoc) return;
+    const next = state.pdfPage + dir;
+    if (next < 1 || next > state.pdfDoc.numPages) return;
+    state.pdfPage = next;
+    renderPdf(state.open);
+    return;
+  }
+  if (state.fmt === 'epub' && state.epubRendition) {
+    if (dir > 0) state.epubRendition.next();
+    else state.epubRendition.prev();
+    return;
+  }
+  // 'auto', not 'smooth': a whole-screen jump animated over 300ms reads as lag
+  // when you are turning pages, and an instant jump is what a page turn is.
+  const stage = $('stage');
+  stage.scrollBy({ top: dir * Math.round(stage.clientHeight * 0.85), behavior: 'auto' });
+}
+
+$('rPrev').onclick = () => turn(-1);
+$('rNext').onclick = () => turn(1);
 document.addEventListener('keydown', (e) => {
   if (!reader.classList.contains('open')) {
     if (e.key === '/') { e.preventDefault(); $('q').focus(); }
     return;
   }
-  if (e.key === 'Escape') closeReader();
-  if (e.key === 'ArrowRight') $('rNext').click();
-  if (e.key === 'ArrowLeft') $('rPrev').click();
+  const k = e.key;
+  if (k === 'Escape') { closeReader(); return; }
+  if (k === 'ArrowRight' || k === 'PageDown' || k === ' ') { e.preventDefault(); turn(1); return; }
+  if (k === 'ArrowLeft' || k === 'PageUp') { e.preventDefault(); turn(-1); return; }
+  if (k === 'Home') { e.preventDefault(); $('stage').scrollTo({ top: 0, behavior: 'smooth' }); return; }
+  if (k === 'End') { e.preventDefault(); const st = $('stage'); st.scrollTo({ top: st.scrollHeight, behavior: 'smooth' }); return; }
+  if (k === 'ArrowDown') { e.preventDefault(); $('stage').scrollBy({ top: 80, behavior: 'smooth' }); return; }
+  if (k === 'ArrowUp') { e.preventDefault(); $('stage').scrollBy({ top: -80, behavior: 'smooth' }); return; }
+  if (k === '1') setFormat('pdf');
+  if (k === '2' && state.open.formats.includes('epub')) setFormat('epub');
+  if (k === '3') setFormat('txt');
+  if (k === '4') setFormat('json');
 });
+
+/* Text and JSON have no page count, so report position as a percentage. */
+$('stage').addEventListener('scroll', () => {
+  if (state.fmt === 'pdf' || state.fmt === 'epub') return;
+  const st = $('stage');
+  const max = st.scrollHeight - st.clientHeight;
+  if (max <= 0) return;
+  $('rPage').textContent = Math.round((st.scrollTop / max) * 100) + '%';
+}, { passive: true });
 
 function setQuery(v) { $('q').value = v; $('q2').value = v; state.query = v.trim(); render(); }
 $('q').addEventListener('input', e => setQuery(e.target.value));

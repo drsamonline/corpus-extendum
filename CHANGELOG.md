@@ -5,6 +5,36 @@ site and a set of vaults; there are no releases, so this records the build.
 
 ---
 
+## 2026-11-16 · Reader controls for every format
+
+**Fixed**
+- The turn controls were hidden for EPUB, text and JSON, so those formats had no
+  way to move at all. `turn(dir)` now dispatches per format: pages for a PDF,
+  sections for an EPUB, a screenful for text and JSON.
+- EPUB used `flow: 'scrolled'`, which shows one section and offers no route to
+  the next. `scrolled-continuous` scrolls the whole book.
+- `renderTo()` ran before the archive had opened, which produced an empty box
+  and no error. It waits for `book.ready` now.
+- epub.js measures its container when it attaches; if that happens before layout
+  settles the iframe is shorter than the box. It re-measures after attach and on
+  rotate.
+- A late PDF failure could take over the reader after the user had switched to
+  another format. Every async continuation now checks the format first.
+- The position readout never updated for text or JSON; it now reports a
+  percentage as you scroll.
+
+**Added**
+- Keyboard: arrows, PageUp/Down, Space, Home/End, `1`–`4` to switch format,
+  `Esc` to close.
+
+**Not done**
+- An automated reader test. Chromium's virtual time does not advance Web
+  Workers, so pdf.js cannot render headless, and a hung pdf.js starves epub.js.
+  The method that does work is written up in `docs/FRONTEND.md` rather than
+  shipped as a test that fails for environmental reasons.
+
+---
+
 ## 2026-11-16 · Documentation, rotation, and the illustrated edition
 
 **Added**
