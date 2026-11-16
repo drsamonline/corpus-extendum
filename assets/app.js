@@ -430,6 +430,53 @@ let lastFocus = null;
 
 const FORMAT_LABEL = { pdf: 'PDF', epub: 'EPUB', txt: 'TXT', json: 'JSON' };
 
+/* A format chip that leads to a blank pane is worse than no chip.
+ *
+ * Two things can make a format unusable on a given device:
+ *   · a browser with no built-in PDF viewer, where the native path renders
+ *     nothing (the canvas renderer is used instead, and if that fails too the
+ *     chip goes away)
+ *   · a file that failed to load once — remembered per book and format, so the
+ *     reader does not offer the same dead end twice
+ */
+function nativePdfAvailable() {
+  return navigator.pdfViewerEnabled !== false;
+}
+
+function isDead(b, fmt) {
+  return !!(state.dead && state.dead[`${b.slug}:${fmt}`]);
+}
+
+function markDead(b, fmt) {
+  state.dead = state.dead || {};
+  state.dead[`${b.slug}:${fmt}`] = true;
+  renderFmtBar(b);
+}
+
+function renderFmtBar(b) {
+  const el = $('fmtbar');
+  if (!el) return;
+  el.innerHTML = availableFormats(b).map(f =>
+    `<button class="fp${f === state.fmt ? ' on' : ''}" data-f="${f}">${FORMAT_LABEL[f] || f.toUpperCase()}</button>`
+  ).join('');
+  el.querySelectorAll('.fp').forEach(p => p.onclick = () => setFormat(p.dataset.f));
+}
+
+function availableFormats(b) {
+  const out = (b.formats || []).filter(f => !isDead(b, f));
+  if (!out.includes('json')) out.push('json');
+  return out;
+}
+
+/* If the format we are on turns out to be unusable, move to one that is. */
+function fallbackFormat(b, from) {
+  const left = availableFormats(b).filter(f => f !== from);
+  if (!left.length) return null;
+  const order = ['epub', 'txt', 'pdf', 'json'];
+  left.sort((x, y) => order.indexOf(x) - order.indexOf(y));
+  return left[0];
+}
+
 function openBook(slug) {
   const b = state.catalog.find(x => x.slug === slug);
   if (!b) return;
@@ -451,10 +498,7 @@ function openBook(slug) {
     `<a href="${cdn(b, f)}" target="_blank" rel="noopener"><span>Download ${f.toUpperCase()}</span><span style="color:#7E7568">↗</span></a>`
   ).join('') + `<a href="${raw(b, `books/${b.slug}/meta.json`)}" target="_blank" rel="noopener"><span>Record (JSON)</span><span style="color:#7E7568">↗</span></a>`;
 
-  const fmts = [...b.formats, 'json'];
-  $('fmtbar').innerHTML = fmts.map(f =>
-    `<button class="fp" data-f="${f}">${FORMAT_LABEL[f] || f.toUpperCase()}</button>`).join('');
-  $('fmtbar').querySelectorAll('.fp').forEach(p => p.onclick = () => setFormat(p.dataset.f));
+  renderFmtBar(b);
 
   closeFind();
   $('findInput').value = '';
@@ -467,7 +511,8 @@ function openBook(slug) {
   document.body.classList.add('locked');
   $('rClose').focus();
 
-  setFormat(b.formats.includes('pdf') ? 'pdf' : b.formats[0]);
+  const start = availableFormats(b).filter(f => f !== 'json');
+  setFormat(start.includes('pdf') ? 'pdf' : (start[0] || 'json'));
   setTimeout(() => restorePosition(b), 400);
 }
 
@@ -482,8 +527,10 @@ function closeReader() {
 }
 
 function setFormat(fmt) {
-  state.fmt = fmt;
   const b = state.open;
+  // A format that already failed for this book is not a destination.
+  if (fmt !== 'json' && isDead(b, fmt)) fmt = fallbackFormat(b, fmt) || 'json';
+  state.fmt = fmt;
   $('fmtbar').querySelectorAll('.fp').forEach(p => p.classList.toggle('on', p.dataset.f === fmt));
   // Text comes from raw (the CDN refuses text files above a 50 MB repo) and
   // the record always does, so only binary formats use the CDN here.
@@ -493,7 +540,7 @@ function setFormat(fmt) {
   $('page').style.display = 'none';
   $('pdfCanvas').style.display = 'none';
   $('epubBox').style.display = 'none';
-  const canTurn = !(fmt === 'pdf' && window.innerWidth <= 820);
+  const canTurn = !(fmt === 'pdf' && window.innerWidth <= 820 && nativePdfAvailable());
   $('rPrev').style.display = canTurn ? '' : 'none';
   $('rNext').style.display = canTurn ? '' : 'none';
   $('rPage').textContent = '—';
@@ -552,7 +599,7 @@ function showNativePdf(b, why) {
 async function renderPdf(b) {
   // A phone gets the browser's own PDF viewer: it fits the width by default,
   // it pinches, and it scrolls without me re-drawing a canvas per page.
-  if (window.innerWidth <= 820) { showNativePdf(b); return; }
+  if (window.innerWidth <= 820 && nativePdfAvailable()) { showNativePdf(b); return; }
   $('pdfFrame').style.display = 'none';
   const canvas = $('pdfCanvas');
   canvas.style.display = 'block';
@@ -587,9 +634,15 @@ async function renderPdf(b) {
     $('rPage').textContent = `Page ${state.pdfPage} / ${state.pdfDoc.numPages}`;
     $('rNote').textContent = `${b.title} — typeset for this library, ${state.pdfDoc.numPages} pages. ← → turn pages, Home and End jump, Esc closes.`;
   } catch (err) {
-    // Never leave a blank pane — but only if the reader is still on the PDF.
     if (state.fmt !== 'pdf') return;
-    showNativePdf(b, `The in-page renderer could not draw this (${err.message}), so the browser's own viewer is showing it instead.`);
+    if (nativePdfAvailable()) {
+      showNativePdf(b, `The in-page renderer could not draw this (${err.message}), so the browser's own viewer is showing it instead.`);
+      return;
+    }
+    markDead(b, 'pdf');
+    const next = fallbackFormat(b, 'pdf');
+    $('rNote').textContent = `This browser cannot show PDFs in the page (${err.message}).`;
+    if (next) setFormat(next);
   }
 }
 
@@ -647,7 +700,12 @@ async function renderEpub(b) {
       } catch (e2) { /* fall through to the message below */ }
     }
     box.style.display = 'none';
-    $('rNote').innerHTML = `This EPUB could not be opened here (${esc(err.message)}). <a href="${rawFile(b, 'epub')}" target="_blank" rel="noopener" style="color:#A8C4BB">Download it</a>.`;
+    markDead(b, 'epub');
+    const next = fallbackFormat(b, 'epub');
+    $('rNote').innerHTML = `This EPUB could not be opened here (${esc(err.message)}).`
+      + (next ? ' Showing the text instead.' : '')
+      + ` <a href="${rawFile(b, 'epub')}" target="_blank" rel="noopener" style="color:#A8C4BB">Download it</a>.`;
+    if (next) setFormat(next);
   }
 }
 

@@ -43,7 +43,7 @@
       "class": "hand"
     },
     "assets/app.js": {
-      "sha": "e6c5a9df8f7c06ea31de5dabee0e15fb58efa372",
+      "sha": "1fb077aeab7db630d8b360dd95903fa688e370f3",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -118,7 +118,7 @@
       "class": "hand"
     },
     "index.html": {
-      "sha": "265cac2a1183a7102c565f9792d41f721fe4afc5",
+      "sha": "c1dd03691be0d90bd6d2980e108056d4cd5edf27",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -148,7 +148,7 @@
       "class": "hand"
     },
     "MANIFEST.json": {
-      "sha": "04ec0274ca7eb5dd56001a80cb8cefbc739404c9",
+      "sha": "1e08d5bdb2a5bbe2b5404782e130a1ae19caf383",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -168,7 +168,7 @@
       "class": "hand"
     },
     "CHANGELOG.md": {
-      "sha": "f21b3979e3b46ebf5a9ecebdc1ac7db5ac0e04a1",
+      "sha": "edbc4c755c27deeb014963c32bb23ccf586b045b",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -218,7 +218,7 @@
       "class": "hand"
     },
     "docs/FRONTEND.md": {
-      "sha": "ce9ed852a660617b9b850955290e31cc9776e6b0",
+      "sha": "873b873e6a0223a42eed1823dc12c9047d825267",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
