@@ -11,6 +11,16 @@
  */
 'use strict';
 
+/* The footer stamp is read from this script's own ?v=, so it can never say
+ * something different from the code that is running. It said 20261116d for six
+ * releases while the assets moved on, which made it useless for the one job it
+ * had: telling a reader whether they were on a stale build. */
+const BUILD = (() => {
+  const tag = document.querySelector('script[src*="app.js"]');
+  const m = tag && tag.src.match(/[?&]v=([0-9a-z]+)/i);
+  return m ? m[1] : 'dev';
+})();
+
 const state = {
   catalog: [], shards: {}, cats: [], searchIndex: [],
   cat: 'All', query: '', sort: 'curated',
@@ -53,6 +63,7 @@ async function boot() {
       state.searchIndex = await fetch('data/search-index.json' + stamp, FRESH).then(r => r.json());
     } catch (e) { state.searchIndex = []; }
 
+    if ($('buildStamp')) $('buildStamp').textContent = 'site build ' + BUILD;
     renderCats();
     render();
     renderResume();
@@ -464,6 +475,13 @@ function renderFmtBar(b) {
 
 function availableFormats(b) {
   const out = (b.formats || []).filter(f => !isDead(b, f));
+  // On a phone the PDF is either the native viewer — which iOS will not render
+  // from another origin, and which is what produced a blank pane — or a canvas
+  // that cannot be pinched. EPUB and text are better there, so PDF is simply not
+  // offered. A book that exists only as a PDF still gets it, as the last resort.
+  if (window.innerWidth <= 820 && out.some(f => f !== 'pdf')) {
+    return out.filter(f => f !== 'pdf').concat(['json']);
+  }
   if (!out.includes('json')) out.push('json');
   return out;
 }
