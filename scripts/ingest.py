@@ -1031,12 +1031,25 @@ def main():
     ap.add_argument("--all", action="store_true")
     ap.add_argument("--keep-work", action="store_true")
     ap.add_argument("--replace", action="store_true", help="re-ingest a book already on the shelf")
+    ap.add_argument("--library", default="",
+                    help="path to the library repo, for dedupe.json and the review queue. "
+                         "Defaults to a sibling directory named corpus-extendum.")
     args = ap.parse_args()
 
     vault = Path(args.vault).resolve()
     books_dir = vault / "books"
     books_dir.mkdir(parents=True, exist_ok=True)
-    data = vault / ".." / "corpus-extendum" / "data"
+    # The library directory used to be assumed to be a sibling called
+    # corpus-extendum. In CI the vault is cloned to ../vaults/<name>, so that
+    # path does not exist and the registry was written to a directory invented
+    # beside the vault — silently, and to the wrong place.
+    if args.library:
+        data = Path(args.library).resolve() / "data"
+    else:
+        data = vault.parent / "corpus-extendum" / "data"
+    if not data.exists():
+        log(f"warning: {data} does not exist — the dedupe registry will be created there. "
+            f"Pass --library if the library repo lives elsewhere.")
     dedupe_path = data / "dedupe.json"
     registry = load_json(dedupe_path, {"source_refs": [], "text_sha256": {}, "work_keys": {}})
 
@@ -1119,7 +1132,7 @@ def main():
             # ---- dedupe test 4: a title this close is held, not added --- #
             like, score = near_duplicate(b, registry)
             if like:
-                review = vault.parent / "corpus-extendum" / "data" / "review-queue.json"
+                review = data / "review-queue.json"
                 q = load_json(review, []) if review.parent.exists() else []
                 q.append({"slug": b["slug"], "title": b["title"],
                           "author": b["author"], "year": b["year"],

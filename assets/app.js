@@ -156,6 +156,18 @@ async function bookText(b) {
   return t;
 }
 
+function waitFor(fn, ms) {
+  return new Promise((resolve) => {
+    const t0 = Date.now();
+    (function poll() {
+      const v = fn();
+      if (v) return resolve(v);
+      if (Date.now() - t0 > ms) return resolve(null);
+      setTimeout(poll, 100);
+    })();
+  });
+}
+
 function paragraphs(text) {
   return text.split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
 }
@@ -213,11 +225,11 @@ async function runFind(q) {
 async function jumpToParagraph(i) {
   const b = state.open;
   $('findResults').hidden = true;
-  if (state.fmt !== 'txt') {
-    setFormat('txt');
-    await new Promise(r => setTimeout(r, 350));
-  }
-  const para = document.querySelector(`.txtpage p[data-i="${i}"]`);
+  if (state.fmt !== 'txt') setFormat('txt');
+  // The text render is asynchronous (it fetches the book), so a fixed wait
+  // loses the race on a large book and the jump silently does nothing. Wait
+  // for the paragraph itself.
+  const para = await waitFor(() => document.querySelector(`.txtpage p[data-i="${i}"]`), 6000);
   if (!para) return;
   document.querySelectorAll('.txtpage p.hit').forEach(p => p.classList.remove('hit'));
   para.classList.add('hit');
@@ -258,6 +270,7 @@ function openBook(slug) {
 
   closeFind();
   $('findInput').value = '';
+  state.epubTriedRaw = false;
   reader.classList.add('open');
   document.body.classList.add('locked');
   $('rClose').focus();
@@ -269,7 +282,7 @@ function closeReader() {
   reader.classList.remove('open');
   document.body.classList.remove('locked');
   if (state.epubRendition) { try { state.epubRendition.destroy(); } catch (e) {} state.epubRendition = null; }
-  state.pdfDoc = null; state.epubBook = null;
+  state.pdfDoc = null; state.epubBook = null; state.epubTriedRaw = false;
   if (lastFocus) lastFocus.focus();
 }
 
@@ -387,6 +400,9 @@ async function renderEpub(b) {
   try {
     if (!window.ePub) throw new Error('epub.js did not load');
     if (state.epubRendition) { try { state.epubRendition.destroy(); } catch (e) {} }
+    // Same fallback as the PDF: the CDN has per-file and per-package limits
+    // (it refuses text outright above 50 MB), so a refusal must not end the
+    // book. Try the CDN, then raw.
     state.epubBook = ePub(cdn(b, 'epub'));
     // renderTo() before the archive has opened produces an empty box and no
     // error — the reader looks broken rather than failing. Wait for it.
@@ -413,8 +429,20 @@ async function renderEpub(b) {
       }
     }, 120);
   } catch (err) {
+    if (state.fmt !== 'epub') return;
+    if (!state.epubTriedRaw) {
+      state.epubTriedRaw = true;
+      try {
+        state.epubBook = ePub(rawFile(b, 'epub'));
+        await state.epubBook.ready;
+        if (state.fmt !== 'epub') return;
+        state.epubRendition = state.epubBook.renderTo(box, { width: '100%', height: '100%', flow: 'scrolled-continuous' });
+        await state.epubRendition.display();
+        return;
+      } catch (e2) { /* fall through to the message below */ }
+    }
     box.style.display = 'none';
-    $('rNote').innerHTML = `This EPUB could not be opened here (${esc(err.message)}). <a href="${cdn(b, 'epub')}" target="_blank" rel="noopener" style="color:#A8C4BB">Download it</a>.`;
+    $('rNote').innerHTML = `This EPUB could not be opened here (${esc(err.message)}). <a href="${rawFile(b, 'epub')}" target="_blank" rel="noopener" style="color:#A8C4BB">Download it</a>.`;
   }
 }
 

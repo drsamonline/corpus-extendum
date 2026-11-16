@@ -18,7 +18,7 @@
       "class": "hand"
     },
     "NOTICE.md": {
-      "sha": "5e945f02dbdf02eb8612b9db012c21b34b5e0e87",
+      "sha": "10087bbc9b7f7747ed2d9026ab2bf613379a7813",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -33,7 +33,7 @@
       "class": "hand"
     },
     "README.md": {
-      "sha": "e6d6dbb2c01a2554c7870c2e7c3659ecb97b48bc",
+      "sha": "20e2343da827a841e01196a2227b17babddb3865",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -43,7 +43,7 @@
       "class": "hand"
     },
     "assets/app.js": {
-      "sha": "4f655b39d6c0fd4c93ee018a159ec6fae62da000",
+      "sha": "a830b5a92bed2fa55eb7f8ac31e4e4ef00d72bbf",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -148,7 +148,7 @@
       "class": "hand"
     },
     "MANIFEST.json": {
-      "sha": "fe3fd1def61c548fd763b809b6e33612a9c528a9",
+      "sha": "dc62cb2cde7ba048cfacf3c5b0790674a1fdd197",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -158,7 +158,7 @@
       "class": "hand"
     },
     "scripts/ingest.py": {
-      "sha": "48696a8bf232757839618f666849018f5fb575a3",
+      "sha": "375c4fcd528ed9f4cadecaf18af09253f45c8f4c",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -168,7 +168,7 @@
       "class": "hand"
     },
     "CHANGELOG.md": {
-      "sha": "e36b6b1c9da9d680e7bf473feff2041611950bbb",
+      "sha": "489bfdd618ff4193903dc714446b6bf517da80c1",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -178,7 +178,7 @@
       "class": "hand"
     },
     "docs/DATA-MODEL.md": {
-      "sha": "6ae2fb93dc52367ff2aa8e96a7f139e36163c4ea",
+      "sha": "48b309e0ff64838047011837be350096054dc5d1",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -254,6 +254,21 @@
     },
     "scripts/__pycache__/ingest.cpython-312.pyc": {
       "sha": "b4da1bdcf1f7b3056ff181a2ce82f49f4c5c4f44",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "LEGAL-INDEX.md": {
+      "sha": "62db1cb1817d6ff80d7210c1f04c8f7b96891046",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "assets/vendor/LICENSE-epubjs.txt": {
+      "sha": "cae4fb6d973bdc82e593cf456d5d10b975ea2d1e",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "assets/vendor/LICENSE-pdfjs.txt": {
+      "sha": "598f87f072f66e2269dd6919292b2934dbb20492",
       "producer": "build-2026-11-16",
       "class": "hand"
     }
