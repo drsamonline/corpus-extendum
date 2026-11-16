@@ -5,6 +5,23 @@ site and a set of vaults; there are no releases, so this records the build.
 
 ---
 
+## 2026-11-16 · Both Shabbir Ahmed translations identified, and his death recorded
+
+**Corrected**
+- *Karbala: Satya ke Kalpana* was recorded with no authorship. It is the second of
+  the two Gujarati translations by Dr Sohil Momin, from an English original by
+  **Dr. Shabbir Ahmed, M.D.** — the same author as *Criminals of Islam*.
+- His death is now in both records and on the page: **November 2022**. A source
+  listing his book also gives his contact as Mrs Farida Ahmed in Florida, which
+  is why the note says the permission route is his **estate**, not him.
+
+**Why it matters**
+- Died 2022 means protected in India until **2082**. Neither translation can be
+  public domain in this library's lifetime, and the page says so plainly rather
+  than implying the question is open.
+
+---
+
 ## 2026-11-16 · The shared texts read in the page, PDF only
 
 **Changed**
