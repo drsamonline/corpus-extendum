@@ -148,7 +148,7 @@
       "class": "hand"
     },
     "MANIFEST.json": {
-      "sha": "2e208ba51aa5f1197880515264dc54ec10c941fb",
+      "sha": "a02054a1fffbb7ce0c66c376520fd048691e6ea2",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -233,7 +233,7 @@
       "class": "hand"
     },
     "scripts/sync_docs.py": {
-      "sha": "9e1fa0837e50c96b7ecfacf23c6ee8b666f6a843",
+      "sha": "cde0beb7eeec552fe8b6247e31c1043ac4428f8c",
       "producer": "build-2026-11-16",
       "class": "hand"
     },

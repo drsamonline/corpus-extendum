@@ -97,7 +97,10 @@ def main():
     mirror.mkdir(parents=True, exist_ok=True)
     copied = 0
     for d in present:
-        dest = mirror / Path(d).name
+        # Preserve the relative path. Flattening by filename silently lost
+        # README.md to docs/README.md, because both are called README.md.
+        dest = mirror / d
+        dest.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(library / d, dest)
         copied += 1
     (target / "SYNC.json").write_text(json.dumps(manifest, indent=2) + "\n")
