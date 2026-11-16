@@ -91,7 +91,11 @@ function rawFile(book, fmt) {
  * 200 from the same vault.
  */
 function fileUrl(book, fmt) {
-  return fmt === 'txt' ? rawFile(book, fmt) : cdn(book, fmt);
+  // raw is the primary for every format. jsDelivr refuses text files from a
+  // repository over 50 MB and, measured on this vault at 212 MB, also returns
+  // 404 for some EPUBs and hangs on others — while raw returned 200 for every
+  // file tested. The CDN is a fallback, not the route.
+  return rawFile(book, fmt);
 }
 function raw(book, file) {
   const s = state.shards[book.vault];
@@ -475,13 +479,10 @@ function renderFmtBar(b) {
 
 function availableFormats(b) {
   const out = (b.formats || []).filter(f => !isDead(b, f));
-  // On a phone the PDF is either the native viewer — which iOS will not render
-  // from another origin, and which is what produced a blank pane — or a canvas
-  // that cannot be pinched. EPUB and text are better there, so PDF is simply not
-  // offered. A book that exists only as a PDF still gets it, as the last resort.
-  if (window.innerWidth <= 820 && out.some(f => f !== 'pdf')) {
-    return out.filter(f => f !== 'pdf').concat(['json']);
-  }
+  // PDF stays on every screen. Removing it on phones was my mistake: when the
+  // EPUB also failed there was nothing left to read, which is worse than a
+  // format that might not render. The canvas fits the page to both axes now, so
+  // the phone case is handled rather than avoided.
   if (!out.includes('json')) out.push('json');
   return out;
 }
@@ -558,7 +559,7 @@ function setFormat(fmt) {
   $('page').style.display = 'none';
   $('pdfCanvas').style.display = 'none';
   $('epubBox').style.display = 'none';
-  const canTurn = !(fmt === 'pdf' && window.innerWidth <= 820 && nativePdfAvailable());
+  const canTurn = fmt !== 'pdf' || !!state.pdfDoc;
   $('rPrev').style.display = canTurn ? '' : 'none';
   $('rNext').style.display = canTurn ? '' : 'none';
   $('rPage').textContent = '—';
@@ -617,7 +618,11 @@ function showNativePdf(b, why) {
 async function renderPdf(b) {
   // A phone gets the browser's own PDF viewer: it fits the width by default,
   // it pinches, and it scrolls without me re-drawing a canvas per page.
-  if (window.innerWidth <= 820 && nativePdfAvailable()) { showNativePdf(b); return; }
+  // Canvas at every width: it fits the page to both axes, keeps the page
+  // controls working, and does not depend on a browser PDF plugin. The native
+  // viewer is the fallback below, not the default. Hiding PDF on phones left
+  // nothing to read when the EPUB also failed, which was my mistake.
+
   $('pdfFrame').style.display = 'none';
   const canvas = $('pdfCanvas');
   canvas.style.display = 'block';
@@ -674,10 +679,11 @@ async function renderEpub(b) {
     // Same fallback as the PDF: the CDN has per-file and per-package limits
     // (it refuses text outright above 50 MB), so a refusal must not end the
     // book. Try the CDN, then raw.
-    state.epubBook = ePub(cdn(b, 'epub'));
+    state.epubBook = ePub(fileUrl(b, 'epub'));
     // renderTo() before the archive has opened produces an empty box and no
-    // error — the reader looks broken rather than failing. Wait for it.
-    await state.epubBook.ready;
+    // error. Wait for it — with a ceiling, because epub.js never rejects when
+    // the fetch 404s or hangs, which is exactly how a blank pane happened.
+    await withTimeout(state.epubBook.ready, 25000, 'the EPUB did not finish loading');
     // scrolled-continuous scrolls the whole book in one column. 'scrolled'
     // alone gave one section at a time with no way to reach the next, which is
     // why the EPUB felt dead: no scroll, and the page buttons were hidden.
