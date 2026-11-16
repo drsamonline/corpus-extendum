@@ -43,7 +43,7 @@
       "class": "hand"
     },
     "assets/app.js": {
-      "sha": "0acae014d9d6567e7c908742afb79af9d63d3b39",
+      "sha": "e6c5a9df8f7c06ea31de5dabee0e15fb58efa372",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -88,12 +88,12 @@
       "class": "hand"
     },
     "data/shards.json": {
-      "sha": "0d9606794c3fc9cc1cb6333604e345779172854d",
+      "sha": "8f92f9cc030bdc85644ec96079edd7666728900c",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "dedupe-report.txt": {
-      "sha": "8e8609389b22b497cd766c2b966539d54cccfcf7",
+      "sha": "a7a2d92dbc2d6efa3bd48ebeff8729988b50bd4a",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -123,7 +123,7 @@
       "class": "hand"
     },
     "index.txt": {
-      "sha": "fe187c5ea14d5a72656b78fbe59ba093bf0bb10f",
+      "sha": "b179c9a9fe6abb79bc164f08f8877783bd9b6ce8",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -148,17 +148,17 @@
       "class": "hand"
     },
     "MANIFEST.json": {
-      "sha": "662e0aff673b3f920e2946e47239c23b45d8fa04",
+      "sha": "04ec0274ca7eb5dd56001a80cb8cefbc739404c9",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "data/dedupe.json": {
-      "sha": "d43d8f20b3c308bbe7ba7495087e5a2337ab9fb5",
+      "sha": "7be5d0230cd5d4273aefbaff153ce6d9a3485bdb",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "scripts/ingest.py": {
-      "sha": "875ebe36c1216bea3e4b57095a8c74a5e48153c1",
+      "sha": "f71c4bb47d7fcf7deae5ded3266e0e11e19b55b0",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -168,7 +168,7 @@
       "class": "hand"
     },
     "CHANGELOG.md": {
-      "sha": "1b2f7b84d38470171a59558301983787934a8ef1",
+      "sha": "f21b3979e3b46ebf5a9ecebdc1ac7db5ac0e04a1",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -188,7 +188,7 @@
       "class": "hand"
     },
     "docs/OPERATIONS.md": {
-      "sha": "f4155a3b70cedb78527e8f14481aa93abd7032d5",
+      "sha": "a635056d4d13398b9afd4275871883f367b1d65d",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -253,7 +253,7 @@
       "class": "hand"
     },
     "scripts/__pycache__/ingest.cpython-312.pyc": {
-      "sha": "2d6608b929d4f302a2f3a8a36a28de010ba9ffaf",
+      "sha": "33c3533bc12e775e2f9da654fdee7e87388a010b",
       "producer": "build-2026-11-16",
       "class": "hand"
     },

@@ -485,7 +485,11 @@ function setFormat(fmt) {
   state.fmt = fmt;
   const b = state.open;
   $('fmtbar').querySelectorAll('.fp').forEach(p => p.classList.toggle('on', p.dataset.f === fmt));
-  $('rDownload').href = fmt === 'json' ? raw(b, `books/${b.slug}/meta.json`) : cdn(b, fmt);
+  // Text comes from raw (the CDN refuses text files above a 50 MB repo) and
+  // the record always does, so only binary formats use the CDN here.
+  $('rDownload').href = fmt === 'json'
+    ? raw(b, `books/${b.slug}/meta.json`)
+    : fileUrl(b, fmt);
   $('page').style.display = 'none';
   $('pdfCanvas').style.display = 'none';
   $('epubBox').style.display = 'none';

@@ -1221,6 +1221,39 @@ def fetch_archive_book(book: dict, work: Path):
     return meta, pdf_bytes, txt_bytes, why
 
 
+def check_epub(path: Path) -> list:
+    """The things a reader needs before it will open the file at all."""
+    problems = []
+    try:
+        with zipfile.ZipFile(path) as z:
+            names = z.namelist()
+            if not names or names[0] != "mimetype":
+                problems.append("mimetype is not the first entry")
+            elif z.getinfo("mimetype").compress_type != zipfile.ZIP_STORED:
+                problems.append("mimetype is compressed")
+            if z.read("mimetype").decode() != "application/epub+zip":
+                problems.append("mimetype has the wrong content")
+            if "META-INF/container.xml" not in names:
+                problems.append("no META-INF/container.xml")
+            else:
+                c = z.read("META-INF/container.xml").decode("utf-8", "ignore")
+                m = re.search(r'full-path="([^"]+)"', c)
+                if not m:
+                    problems.append("container.xml names no rootfile")
+                elif m.group(1) not in names:
+                    problems.append(f"container.xml points at {m.group(1)}, which is not in the zip")
+                elif not m.group(1).endswith(".opf"):
+                    problems.append(f"rootfile is {m.group(1)}, not an OPF package document")
+                else:
+                    opf = z.read(m.group(1)).decode("utf-8", "ignore")
+                    for needed in ("<manifest", "<spine"):
+                        if needed not in opf:
+                            problems.append(f"OPF has no {needed[1:]}")
+    except Exception as e:
+        problems.append(f"unreadable zip: {e}")
+    return problems
+
+
 def build_from_archive(meta: dict, pdf_bytes, txt_bytes, book: dict, out: Path):
     """A scan, not a typesetting job.
 
@@ -1251,14 +1284,35 @@ def build_from_archive(meta: dict, pdf_bytes, txt_bytes, book: dict, out: Path):
             f"<div class='ce-rule'></div><p class='ce-author'>{escape(book['author'])}</p>"
             f"<p class='ce-src'>Public domain · scanned by the Internet Archive</p></section>"
             f"{body}</body></html>")
+    # A valid EPUB needs a package document. The first version pointed
+    # container.xml straight at the XHTML, which is not an EPUB — epub.js
+    # refused it, and the reader showed "could not be opened".
     epub_path = out / f"{slug}.epub"
+    opf = f"""<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="bookid">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="bookid">corpus-extendum-{slug}</dc:identifier>
+    <dc:title>{escape(book["title"])}</dc:title>
+    <dc:creator>{escape(book["author"])}</dc:creator>
+    <dc:language>en</dc:language>
+    <dc:source>https://archive.org/details/{book.get("archive", "")}</dc:source>
+    <meta property="dcterms:modified">2026-11-16T00:00:00Z</meta>
+  </metadata>
+  <manifest>
+    <item id="content" href="content.xhtml" media-type="application/xhtml+xml"/>
+  </manifest>
+  <spine>
+    <itemref idref="content"/>
+  </spine>
+</package>"""
     with zipfile.ZipFile(epub_path, "w") as z:
         z.writestr(zipfile.ZipInfo("mimetype"), "application/epub+zip", zipfile.ZIP_STORED)
         z.writestr("META-INF/container.xml",
-                   '<?xml version="1.0"?><container version="1.0" '
-                   'xmlns="urn:oasis:names:tc:opendocument:xmlns:container"><rootfiles>'
-                   '<rootfile full-path="OEBPS/content.xhtml" '
-                   'media-type="application/xhtml+xml"/></rootfiles></container>')
+                   '<?xml version="1.0" encoding="utf-8"?>'
+                   '<container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">'
+                   '<rootfiles><rootfile full-path="OEBPS/content.opf" '
+                   'media-type="application/oebps-package+xml"/></rootfiles></container>')
+        z.writestr("OEBPS/content.opf", opf, zipfile.ZIP_DEFLATED)
         z.writestr("OEBPS/content.xhtml", html, zipfile.ZIP_DEFLATED)
 
     # cover: the scan's own first page, which beats a generated one
@@ -1335,7 +1389,7 @@ def main():
             if dest.exists():
                 shutil.rmtree(dest, ignore_errors=True)
             registry["source_refs"] = {k: v for k, v in registry["source_refs"].items()
-                                       if k != f"gutenberg:{b['id']}"}
+                                       if k != (f"archive:{b['archive']}" if b.get("archive") else f"gutenberg:{b['id']}")}
             registry["text_sha256"] = {k: v for k, v in registry["text_sha256"].items() if v != b["slug"]}
             registry["work_keys"] = {k: v for k, v in registry["work_keys"].items() if v != b["slug"]}
         if (dest / "meta.json").exists():
@@ -1370,6 +1424,11 @@ def main():
                     meta, pdf_bytes, txt_bytes, b, tmp_out)
             else:
                 pdf, epub, txt, cover, plain, cover_kind = build_from_tree(src_root, tmp_out, b, kind)
+
+            # ---- the file must be openable before it is shelved ---------- #
+            problems = check_epub(epub)
+            if problems:
+                raise RuntimeError("EPUB is not openable: " + "; ".join(problems))
 
             # ---- translator gate (before anything is written) ------------ #
             if b.get("se") and not b.get("translator"):
@@ -1419,7 +1478,10 @@ def main():
 
             # ---- dedupe gate -------------------------------------------- #
             tsha = text_sha(plain)
-            ref = f"gutenberg:{b['id']}"
+            # A scan is identified by its archive.org identifier. Using the
+            # ebook number meant every scan shared the ref "gutenberg:0" and the
+            # second one was refused as a duplicate of the first.
+            ref = (f"archive:{b['archive']}" if b.get("archive") else f"gutenberg:{b['id']}")
             if ref in registry["source_refs"]:
                 raise RuntimeError(f"duplicate: source ref {ref} already shelved")
             if tsha in registry["text_sha256"]:
