@@ -148,17 +148,17 @@
       "class": "hand"
     },
     "MANIFEST.json": {
-      "sha": "0877ace045dca51004f18c6a623f1be89daf2f5d",
+      "sha": "ee6aa2d831de4bc0ee9925b43d9334ceda261d1c",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "data/dedupe.json": {
-      "sha": "13a5ccb744ebf9461961c4a43b6d61575bd68764",
+      "sha": "69419ab9df36ee21ff98c249ff838ecf6782ddd8",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "scripts/ingest.py": {
-      "sha": "af3b1e4f802248212f06e67b5df41aef7bff7932",
+      "sha": "1c1d87af4ed66857cd6ee245e4bed0d431b9e85c",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -168,7 +168,7 @@
       "class": "hand"
     },
     "CHANGELOG.md": {
-      "sha": "b30e70ce3c0f3da6cf0b26be88b5f92d2a9ac23d",
+      "sha": "ef38449371f7b1382c5df36fe0a0d227c31e82fc",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -178,7 +178,7 @@
       "class": "hand"
     },
     "docs/DATA-MODEL.md": {
-      "sha": "eeedcaec95ccc30dbe7802c311b3cb108dfaa332",
+      "sha": "d7c98496d74db8e317b897d14e3d24d4946f6557",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -188,7 +188,7 @@
       "class": "hand"
     },
     "docs/OPERATIONS.md": {
-      "sha": "10afdd8972dd49efacbe81de8329cf24a4ea1221",
+      "sha": "f4155a3b70cedb78527e8f14481aa93abd7032d5",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -273,28 +273,24 @@
       "class": "hand"
     },
     "docs/index.html": {
-      "sha": "0cde68ac30a220521849c8f7bb5cb183ee6b36eb",
-      "producer": "app-deliver@2026-11-04",
-      "class": "generated",
-      "at": "2026-11-16T13:28:00Z"
+      "sha": "83a41c07fcf05f802c679e98dc1c192e54123aea",
+      "producer": "build-2026-11-16",
+      "class": "hand"
     },
     "docs/robots.txt": {
-      "sha": "b3691626cbe172cbb9097104f786a281a1e0e181",
-      "producer": "app-deliver@2026-11-04",
-      "class": "generated",
-      "at": "2026-11-16T13:28:03Z"
+      "sha": "c64adccb753959827e75912974f9f795c6b8f25e",
+      "producer": "build-2026-11-16",
+      "class": "hand"
     },
     "docs/sitemap.xml": {
-      "sha": "9b2ab45dc019a7913790595b8d92674e960498b5",
-      "producer": "app-deliver@2026-11-04",
-      "class": "generated",
-      "at": "2026-11-16T13:28:05Z"
+      "sha": "9e85b7f01dccb1ab1a5b82608a9c3d22409b0dbc",
+      "producer": "build-2026-11-16",
+      "class": "hand"
     },
     "docs/play/index.html": {
-      "sha": "522b141e90da9f3e17dd4b34cbde0155dd194877",
-      "producer": "app-deliver@2026-11-04",
-      "class": "generated",
-      "at": "2026-11-16T13:28:10Z"
+      "sha": "827213f4cd12cd48095ba4d28acfe976faf939e9",
+      "producer": "build-2026-11-16",
+      "class": "hand"
     }
   }
 }

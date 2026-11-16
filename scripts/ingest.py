@@ -366,6 +366,12 @@ BOOKS = [
          se="robert-louis-stevenson_kidnapped",
          blurb="An orphan sold to a ship's captain, a flight across the Highlands, and a friendship that is the best thing in the book.",
          subjects=["Scotland -- History -- 18th century -- Fiction", "Adventure stories"]),
+    dict(id=13416, slug="chekhov-short-fiction", title="Short Fiction",
+         author="Anton Chekhov", author_file="Chekhov, Anton", year=1886, death=1904,
+         category="Short Stories", se="anton-chekhov_short-fiction_constance-garnett",
+         translator="Constance Garnett", translation_year=1916,
+         blurb="Six volumes of stories in one book — the doctor, the steppe, and the ordinary evening that turns. Garnett's Chekhov, complete.",
+         subjects=["Short stories, Russian -- Translations into English", "Russia -- Social life and customs -- Fiction"]),
 ]
 
 # --------------------------------------------------------------------------- #
@@ -935,10 +941,12 @@ def build_from_tree(root: Path, out: Path, book: dict, kind: str):
                        f'<manifest>{"".join(items)}</manifest><spine>{"".join(spine)}</spine></package>')
         cover_src = None
 
-    # PDF
-    from weasyprint import HTML
-    pdf_path = out / f"{book['slug']}.pdf"
-    HTML(string=full, base_url=base).write_pdf(str(pdf_path))
+    # PDF — skipped when the caller knows it will not finish in time
+    pdf_path = None
+    if not os.environ.get("CE_SKIP_PDF"):
+        from weasyprint import HTML
+        pdf_path = out / f"{book['slug']}.pdf"
+        HTML(string=full, base_url=base).write_pdf(str(pdf_path))
 
     # TXT
     txt_path = out / f"{book['slug']}.txt"
@@ -952,6 +960,20 @@ def build_from_tree(root: Path, out: Path, book: dict, kind: str):
 # --------------------------------------------------------------------------- #
 # the gate + the shelf
 # --------------------------------------------------------------------------- #
+def normalise_registry(reg: dict) -> dict:
+    """source_refs used to be a bare list. A map of ref -> slug is what makes
+    --replace possible: without the slug, a ref cannot be traced back to the
+    book that owns it, so re-shelving a book was always refused as a duplicate.
+    """
+    refs = reg.get("source_refs")
+    if isinstance(refs, list):
+        reg["source_refs"] = {r: "" for r in refs}
+    reg.setdefault("source_refs", {})
+    reg.setdefault("text_sha256", {})
+    reg.setdefault("work_keys", {})
+    return reg
+
+
 def load_json(path: Path, default):
     if path.exists():
         try:
@@ -1114,6 +1136,9 @@ def main():
     ap.add_argument("--all", action="store_true")
     ap.add_argument("--keep-work", action="store_true")
     ap.add_argument("--replace", action="store_true", help="re-ingest a book already on the shelf")
+    ap.add_argument("--no-pdf", action="store_true",
+                    help="shelve EPUB and text only, for a book whose typesetting "
+                         "cannot finish inside the run budget")
     ap.add_argument("--library", default="",
                     help="path to the library repo, for dedupe.json and the review queue. "
                          "Defaults to a sibling directory named corpus-extendum.")
@@ -1134,7 +1159,8 @@ def main():
         log(f"warning: {data} does not exist — the dedupe registry will be created there. "
             f"Pass --library if the library repo lives elsewhere.")
     dedupe_path = data / "dedupe.json"
-    registry = load_json(dedupe_path, {"source_refs": [], "text_sha256": {}, "work_keys": {}})
+    registry = normalise_registry(
+        load_json(dedupe_path, {"source_refs": {}, "text_sha256": {}, "work_keys": {}}))
 
     wanted = [b for b in BOOKS if (args.all or str(b["id"]) in args.only.split(","))]
     if not wanted:
@@ -1144,6 +1170,8 @@ def main():
     # it and tar fails quietly. Work on the real disk instead.
     scratch = Path(os.environ.get("CE_WORK", "/scratch/work/_tmp"))
     scratch.mkdir(parents=True, exist_ok=True)
+    if args.no_pdf:
+        os.environ["CE_SKIP_PDF"] = "1"
     work = Path(tempfile.mkdtemp(prefix="ce-", dir=scratch))
     ok, failed = [], []
     for b in wanted:
@@ -1151,9 +1179,12 @@ def main():
         dest = books_dir / b["slug"]
         if args.replace:
             log("    --replace: clearing the existing copy and its registry entries")
+            registry["source_refs"] = {k: v for k, v in registry["source_refs"].items()
+                                       if v != b["slug"]}
             if dest.exists():
                 shutil.rmtree(dest, ignore_errors=True)
-            registry["source_refs"] = [r for r in registry["source_refs"] if r != f"gutenberg:{b['id']}"]
+            registry["source_refs"] = {k: v for k, v in registry["source_refs"].items()
+                                       if k != f"gutenberg:{b['id']}"}
             registry["text_sha256"] = {k: v for k, v in registry["text_sha256"].items() if v != b["slug"]}
             registry["work_keys"] = {k: v for k, v in registry["work_keys"].items() if v != b["slug"]}
         if (dest / "meta.json").exists():
@@ -1234,12 +1265,13 @@ def main():
                 raise RuntimeError(f"duplicate: text hash matches {registry['text_sha256'][tsha]}")
 
             dest.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(pdf, dest / pdf.name)
+            if pdf is not None:
+                shutil.copy2(pdf, dest / pdf.name)
             shutil.copy2(epub, dest / epub.name)
             shutil.copy2(txt, dest / txt.name)
             shutil.copy2(cover, dest / "cover.jpg")
 
-            fmts = ["pdf", "epub", "txt"]
+            fmts = ["epub", "txt"] if args.no_pdf else ["pdf", "epub", "txt"]
             meta = {
                 "id": str(b["id"]), "slug": b["slug"], "title": b["title"],
                 "author": {"name": b["author"], "file_as": b["author_file"], "death": b["death"]},
@@ -1256,9 +1288,12 @@ def main():
                 "cover_kind": cover_kind,
                 "vault": vault.name,
                 "added": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
-                "file_sha8": file_sha(dest / pdf.name)[:8],
+                "file_sha8": file_sha(dest / (pdf.name if pdf else epub.name))[:8],
                 "text_sha256": tsha,
             }
+            if args.no_pdf:
+                meta["notes"] = ("shelved without a PDF: typesetting this book exceeds the ingest "
+                                 "run budget. The EPUB is the source edition; the text is complete.")
             if gate_info:
                 meta["translator"] = {"name": gate_info["name"], "death": gate_info["death"],
                                       "translation_year": gate_info["translation_year"],
@@ -1267,12 +1302,17 @@ def main():
                 meta["rights"]["translation_verified"] = True
             (dest / "meta.json").write_text(json.dumps(meta, indent=2, ensure_ascii=False) + "\n")
 
-            registry["source_refs"].append(ref)
+            registry["source_refs"][ref] = b["slug"]
             registry["text_sha256"][tsha] = b["slug"]
             registry["work_keys"][f"{b['author_file'].split(',')[0].lower()}|{b['title'].lower()}|{b['year']}"] = b["slug"]
 
             kb = lambda p: int(p.stat().st_size / 1024)
-            log(f"    pdf {kb(dest/pdf.name)} KB · epub {kb(dest/epub.name)} KB · txt {kb(dest/txt.name)} KB · cover {cover_kind}")
+            parts = []
+            if pdf is not None:
+                parts.append(f"pdf {kb(dest / pdf.name)} KB")
+            parts += [f"epub {kb(dest / epub.name)} KB", f"txt {kb(dest / txt.name)} KB",
+                      f"cover {cover_kind}"]
+            log("    " + " · ".join(parts))
             ok.append(b["slug"])
         except Exception as e:
             log(f"    FAILED: {e}")

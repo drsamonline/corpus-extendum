@@ -84,6 +84,7 @@ One per book, in the vault. Everything else is derived from these.
 | `quarantined` | added by `build_catalog.py` if a duplicate slipped through; the book then disappears from the site |
 | `editions` | other editions of the same work, recorded here rather than shelved as separate cards |
 | `rights.translation_verified` | true when the translator's death year was read from a source |
+| `notes` | present only when something was left out, e.g. a book shelved without a PDF because typesetting exceeded the run budget |
 
 ---
 
