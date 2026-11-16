@@ -289,6 +289,12 @@
       "producer": "app-deliver@2026-11-04",
       "class": "generated",
       "at": "2026-11-16T13:28:05Z"
+    },
+    "docs/play/index.html": {
+      "sha": "522b141e90da9f3e17dd4b34cbde0155dd194877",
+      "producer": "app-deliver@2026-11-04",
+      "class": "generated",
+      "at": "2026-11-16T13:28:10Z"
     }
   }
 }
