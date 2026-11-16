@@ -73,7 +73,7 @@
       "class": "hand"
     },
     "data/catalog.json": {
-      "sha": "25dcbb7ff085134311bfb5e224eda03f3642dc42",
+      "sha": "b2fe8e0be098b8c80e6771f440e057e62db12d28",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -88,12 +88,12 @@
       "class": "hand"
     },
     "data/shards.json": {
-      "sha": "045f331d9ef7079c4510bf05a86ccc3d1b6782ab",
+      "sha": "c935d9d878f12c9f321eb77cd8329e4b2a828a50",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "dedupe-report.txt": {
-      "sha": "985ce2e1afbc46bf6a126dca1f19fde1c75f7201",
+      "sha": "6d1f7f8dae7f85def8d97ee5f3495174f29535ec",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -123,7 +123,7 @@
       "class": "hand"
     },
     "index.txt": {
-      "sha": "d15dea593a752f232e540503371791165b19ed80",
+      "sha": "e1f7988dcce14d628654907491640d44c3f36fc4",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -148,7 +148,7 @@
       "class": "hand"
     },
     "MANIFEST.json": {
-      "sha": "c1df4f53dd3fdaa0ae211fa3193bc32fc69a0cbf",
+      "sha": "142ef588f46959324bf1386c849b5e0b62799eb6",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
