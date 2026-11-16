@@ -4,8 +4,9 @@ There is nothing to collect.
 
 - **No accounts.** No sign-up, no login, no email capture.
 - **No analytics.** No Google Analytics, no Plausible, no counters, no pixels.
-- **No cookies.** Reading progress, if any, is kept in your own browser's local
-  storage and never leaves the device.
+- **No cookies.** Your reading position is kept in your browser's local storage,
+  under the key `corpus-extendum:progress`, and never leaves the device. Clearing
+  it is one button on the shelf, or your browser's site-data settings.
 - **No third-party requests on a reading page.** The renderers (pdf.js,
   epub.js, JSZip) are vendored in this repository. Fonts are the one exception:
   they load from Google Fonts, and you can block that without losing anything

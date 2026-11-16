@@ -55,6 +55,7 @@ async function boot() {
 
     renderCats();
     render();
+    renderResume();
   } catch (err) {
     $('grid').innerHTML = `<div class="empty" style="grid-column:1/-1">The catalogue did not load: ${esc(err.message)}</div>`;
   }
@@ -143,6 +144,102 @@ function render() {
     c.onclick = (e) => { e.preventDefault(); openBook(c.dataset.slug); });
 }
 
+
+
+/* --------------------------------------------------------------- progress */
+const PROGRESS_KEY = 'corpus-extendum:progress';
+
+function readProgress() {
+  try { return JSON.parse(localStorage.getItem(PROGRESS_KEY) || '{}'); }
+  catch (e) { return {}; }
+}
+function writeProgress(all) {
+  try { localStorage.setItem(PROGRESS_KEY, JSON.stringify(all)); } catch (e) {}
+}
+
+/* Where the reader is, in a form the same format can restore. A PDF has a page;
+ * everything else has a fraction. Both are stored so a format switch keeps
+ * roughly the same place. */
+function currentPosition() {
+  const st = $('stage');
+  const pct = st.scrollHeight > st.clientHeight
+    ? st.scrollTop / (st.scrollHeight - st.clientHeight) : 0;
+  return { fmt: state.fmt, page: state.pdfPage || 1, pct: Math.max(0, Math.min(1, pct)) };
+}
+
+function saveProgress() {
+  if (!state.open) return;
+  const all = readProgress();
+  all[state.open.slug] = Object.assign(currentPosition(), {
+    at: Date.now(), title: state.open.title, author: state.open.author.name,
+  });
+  writeProgress(all);
+}
+
+let progressTimer = null;
+function saveProgressSoon() {
+  clearTimeout(progressTimer);
+  progressTimer = setTimeout(saveProgress, 700);
+}
+
+function renderResume() {
+  const all = readProgress();
+  const entries = Object.entries(all)
+    .sort((a, b) => (b[1].at || 0) - (a[1].at || 0))
+    .slice(0, 8)
+    .map(([slug, p]) => ({ slug, ...p }))
+    .filter(e => state.catalog.some(b => b.slug === e.slug));
+
+  $('resume').hidden = entries.length === 0;
+  $('resumeRow').innerHTML = entries.map(e => {
+    const b = state.catalog.find(x => x.slug === e.slug);
+    const pct = e.fmt === 'pdf' ? Math.round(((e.page || 1) / 400) * 100) : Math.round((e.pct || 0) * 100);
+    return `<button class="rcard" data-slug="${e.slug}">
+      <div class="rcover">
+        <img src="${raw(b, `books/${b.slug}/cover.jpg`)}" alt="" loading="lazy" onerror="this.style.display='none'">
+        <div class="rbar-progress"><i style="width:${Math.min(100, Math.max(2, pct))}%"></i></div>
+      </div>
+      <div class="rtitle">${esc(e.title || b.title)}</div>
+      <div class="rmeta">${e.fmt === 'pdf' ? 'page ' + (e.page || 1) : pct + '%'} · ${e.fmt.toUpperCase()}</div>
+    </button>`;
+  }).join('');
+  $('resumeRow').querySelectorAll('.rcard').forEach(c =>
+    c.onclick = () => openBook(c.dataset.slug));
+}
+
+function restorePosition(b) {
+  const saved = readProgress()[b.slug];
+  if (!saved) return;
+  const fmt = saved.fmt || 'pdf';
+
+  // Restore the format as well as the place. The reader always opens as PDF, so
+  // a book last read as text would otherwise restore into the wrong view.
+  const available = ['pdf', ...(b.formats || [])];
+  if (fmt !== state.fmt && available.includes(fmt)) setFormat(fmt);
+
+  if (state.fmt === 'pdf') {
+    if (saved.page > 1) {
+      state.pendingPage = saved.page;
+      if (state.pdfDoc) { state.pdfPage = saved.page; renderPdf(b); }
+    }
+    return;
+  }
+
+  if (state.fmt === 'epub') {
+    // epub.js can only jump by percentage once its locations are generated,
+    // which this reader does not do — so an EPUB reopens at its start.
+    return;
+  }
+
+  if (saved.pct) {
+    waitFor(() => {
+      const st = $('stage');
+      return st.scrollHeight > st.clientHeight + 20 ? st : null;
+    }, 8000).then((st) => {
+      if (st) st.scrollTop = saved.pct * (st.scrollHeight - st.clientHeight);
+    });
+  }
+}
 
 /* ------------------------------------------------------------------ find */
 async function bookText(b) {
@@ -271,14 +368,18 @@ function openBook(slug) {
   closeFind();
   $('findInput').value = '';
   state.epubTriedRaw = false;
+  renderResume();
   reader.classList.add('open');
   document.body.classList.add('locked');
   $('rClose').focus();
 
   setFormat(b.formats.includes('pdf') ? 'pdf' : b.formats[0]);
+  setTimeout(() => restorePosition(b), 400);
 }
 
 function closeReader() {
+  saveProgress();
+  renderResume();
   reader.classList.remove('open');
   document.body.classList.remove('locked');
   if (state.epubRendition) { try { state.epubRendition.destroy(); } catch (e) {} state.epubRendition = null; }
@@ -376,7 +477,8 @@ async function renderPdf(b) {
       }
       if (state.fmt !== 'pdf') return;   // the reader changed format while loading
       state.pdfDoc = doc;
-      state.pdfPage = 1;
+      state.pdfPage = state.pendingPage || 1;
+      state.pendingPage = null;
     }
     const page = await state.pdfDoc.getPage(state.pdfPage);
     const vp1 = page.getViewport({ scale: 1 });
@@ -497,11 +599,13 @@ function turn(dir) {
     if (next < 1 || next > state.pdfDoc.numPages) return;
     state.pdfPage = next;
     renderPdf(state.open);
+    saveProgressSoon();
     return;
   }
   if (state.fmt === 'epub' && state.epubRendition) {
     if (dir > 0) state.epubRendition.next();
     else state.epubRendition.prev();
+    saveProgressSoon();
     return;
   }
   // 'auto', not 'smooth': a whole-screen jump animated over 300ms reads as lag
@@ -550,6 +654,7 @@ document.addEventListener('keydown', (e) => {
 
 /* Text and JSON have no page count, so report position as a percentage. */
 $('stage').addEventListener('scroll', () => {
+  saveProgressSoon();
   if (state.fmt === 'pdf' || state.fmt === 'epub') return;
   const st = $('stage');
   const max = st.scrollHeight - st.clientHeight;
@@ -561,6 +666,11 @@ function setQuery(v) { $('q').value = v; $('q2').value = v; state.query = v.trim
 $('q').addEventListener('input', e => setQuery(e.target.value));
 $('q2').addEventListener('input', e => setQuery(e.target.value));
 $('sort').onchange = e => { state.sort = e.target.value; render(); };
+$('resumeClear').onclick = () => {
+  writeProgress({});
+  renderResume();
+};
+
 $('randomBtn').onclick = () => {
   if (!state.catalog.length) return;
   openBook(state.catalog[Math.floor(Math.random() * state.catalog.length)].slug);

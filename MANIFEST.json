@@ -28,22 +28,22 @@
       "class": "hand"
     },
     "PRIVACY.md": {
-      "sha": "d7b6a158f61a825393c9835bbd87c023bae82c69",
+      "sha": "30557c3cf5dc7348c898f071243032d0c3b07c17",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "README.md": {
-      "sha": "20e2343da827a841e01196a2227b17babddb3865",
+      "sha": "12e93e3056add1cae56ec29feeccb6175797f17f",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "assets/app.css": {
-      "sha": "fe8d03685ff50659252f84562cec6ee003163dd1",
+      "sha": "c1a7556356340b486429e30bc874201087af76bc",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "assets/app.js": {
-      "sha": "a830b5a92bed2fa55eb7f8ac31e4e4ef00d72bbf",
+      "sha": "346a91d44d6b5881027068489f23d5fe782ef5c1",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -118,7 +118,7 @@
       "class": "hand"
     },
     "index.html": {
-      "sha": "98230e3761139343545f65a994bbd129171ec2dc",
+      "sha": "ed619d8d98e4cc878e5929a3c1958df1f5f38140",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -148,7 +148,7 @@
       "class": "hand"
     },
     "MANIFEST.json": {
-      "sha": "dc62cb2cde7ba048cfacf3c5b0790674a1fdd197",
+      "sha": "de2a78ef6de1eb3782e7610c80a8d72d3a6e61ed",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -168,12 +168,12 @@
       "class": "hand"
     },
     "CHANGELOG.md": {
-      "sha": "489bfdd618ff4193903dc714446b6bf517da80c1",
+      "sha": "d4b37ea751d632aed98c4411a31b74237de93385",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "docs/ARCHITECTURE.md": {
-      "sha": "428b22f2c99aa9d42526e5c70ef8fb907c2c35d2",
+      "sha": "e3b2dc4ce0519eded42c54fcf1eae5b9518f1c35",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -218,7 +218,7 @@
       "class": "hand"
     },
     "docs/FRONTEND.md": {
-      "sha": "d70099e279163912a0e04f9968d6397b92980ccb",
+      "sha": "748fb617be035e56ac5a8c0fc7284e35c36cccea",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
