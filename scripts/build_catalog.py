@@ -85,6 +85,12 @@ def main():
             m = load(meta_path, None)
             if not m:
                 continue
+            # The directory is the truth about where a book lives. A record
+            # carrying a stale vault name — after a clone into a differently
+            # named folder — would otherwise build a URL that 404s.
+            if m.get("vault") != vault.name:
+                m["vault"] = vault.name
+                meta_path.write_text(json.dumps(m, indent=2, ensure_ascii=False) + "\n")
             books.append(m)
 
         mb = size_mb(vault)

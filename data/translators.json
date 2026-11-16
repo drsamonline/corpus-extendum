@@ -1,0 +1,68 @@
+{
+  "_note": "Translators whose death year has been checked against a source, for the rights gate. A translation's copyright term runs on the TRANSLATOR's death, not the author's — so a translated work cannot be shelved unless its translator appears here with verified: true. Keys are the normalised translator name; the ingest matches on the surname and given names it finds in the edition's own record or its repository slug. Nothing is added here on memory alone.",
+  "_schema": {
+    "name": "the translator as credited",
+    "death": "year of death — drives the India test (life + 60)",
+    "verified": "true only when a source below was actually read",
+    "source": "where the death year came from",
+    "checked": "date the source was read"
+  },
+  "translators": {
+    "george-makepeace-towle": {
+      "name": "George Makepeace Towle",
+      "death": 1893,
+      "verified": true,
+      "source": "Wikipedia, George Makepeace Towle — died 9 August 1893, Brookline, Massachusetts; translated Verne's Around the World in Eighty Days, 1873",
+      "checked": "2026-11-16"
+    },
+    "benjamin-jowett": {
+      "name": "Benjamin Jowett",
+      "death": 1893,
+      "verified": true,
+      "source": "Wikipedia and Balliol College archives — died 1 October 1893; Dialogues of Plato translated 1871",
+      "checked": "2026-11-16"
+    },
+    "james-legge": {
+      "name": "James Legge",
+      "death": 1897,
+      "verified": true,
+      "source": "Wikipedia, James Legge — died 29 November 1897, Oxford; Sacred Books of the East, 1879–1891",
+      "checked": "2026-11-16"
+    },
+    "george-long": {
+      "name": "George Long",
+      "death": 1879,
+      "verified": true,
+      "source": "already recorded on the shelved Meditations record; Long's Epictetus and Marcus Aurelius were published by Bell & Daldy in the 1860s–70s",
+      "checked": "2026-11-15"
+    },
+    "constance-garnett": {
+      "name": "Constance Garnett",
+      "death": 1946,
+      "verified": false,
+      "source": "believed 17 December 1946 — NOT yet checked against a source, so the gate will refuse her",
+      "checked": null
+    },
+    "f-a-malleson": {
+      "name": "F. A. Malleson",
+      "death": null,
+      "verified": false,
+      "source": "not established",
+      "checked": null
+    },
+    "f-h-peters": {
+      "name": "F. H. Peters",
+      "death": null,
+      "verified": false,
+      "source": "not established",
+      "checked": null
+    },
+    "the-modern-library": {
+      "name": "The Modern Library",
+      "death": null,
+      "verified": false,
+      "source": "a publisher credit, not a translator — the anonymous translator is unidentified, so this can never pass",
+      "checked": null
+    }
+  }
+}

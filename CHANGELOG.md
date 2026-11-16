@@ -5,6 +5,30 @@ site and a set of vaults; there are no releases, so this records the build.
 
 ---
 
+## 2026-11-16 · Translations, gated on the translator
+
+**Added**
+- `data/translators.json` — a registry of translators with a verified death year
+  and the source it came from. Towle (d. 1893), Jowett (d. 1893), Legge (d. 1897)
+  and Long (d. 1879) were checked against sources and entered.
+- A translator gate in `ingest.py`: the edition's `trl` contributor is read from
+  the OPF, matched against the registry, and refused unless verified — then the
+  same two tests are applied to the translator, plus the translation's own
+  publication year.
+- Three translated books: Epictetus' *Discourses* (Long), the *Tao Te Ching*
+  (Legge) and *Around the World in Eighty Days* (Towle).
+
+**Refused by the gate, as intended**
+- Constance Garnett — death believed 1946, but no source read yet, so Chekhov waits.
+- F. A. Malleson, F. H. Peters, and the Modern Library *Candide* — the last
+  credits a publisher rather than a person and can never pass.
+
+**Not shelved**
+- Plato's complete *Dialogues* (Jowett). Typesetting all of Plato takes 4 m 50 s,
+  past the 290 s ingest budget. It needs a long run, like the illustrated editions.
+
+---
+
 ## 2026-11-16 · Reader controls for every format
 
 **Fixed**

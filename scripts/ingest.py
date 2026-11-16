@@ -261,6 +261,28 @@ BOOKS = [
          se="john-stuart-mill_on-liberty",
          blurb="The harm principle, stated once and never improved on: the only reason to restrain anyone is to prevent harm to others.",
          subjects=["Liberty", "Political science"]),
+    dict(id=10661, slug="epictetus-discourses", title="The Discourses of Epictetus",
+         author="Epictetus", author_file="Epictetus", year=108, death=135,
+         category="Philosophy", se="epictetus_discourses_george-long",
+         translator="George Long", translation_year=1877,
+         blurb="A freed slave's lectures on what is and is not in your power, written down by a student. The manual the Stoics actually used.",
+         subjects=["Stoics", "Ethics -- Early works to 1800"]),
+    dict(id=216, slug="tao-te-ching", title="Tao Te Ching", author="Laozi",
+         author_file="Laozi", year=-400, death=-400, category="Sacred Texts",
+         se="laozi_tao-te-ching_james-legge", translator="James Legge", translation_year=1891,
+         blurb="Eighty-one short chapters on doing less, arriving sooner. Legge's scholarly Victorian translation, with the Chinese text beside it.",
+         subjects=["Taoism -- Sacred books", "Philosophy, Chinese"]),
+    dict(id=1580, slug="plato-dialogues", title="Dialogues", author="Plato",
+         author_file="Plato", year=-380, death=-347, category="Philosophy",
+         se="plato_dialogues_benjamin-jowett", translator="Benjamin Jowett", translation_year=1871,
+         blurb="Jowett's complete Plato — Apology, Phaedo, Symposium, Republic and the rest — the translation that carried Plato into English.",
+         subjects=["Philosophy, Ancient", "Socrates"]),
+    dict(id=103, slug="around-the-world-in-eighty-days", title="Around the World in Eighty Days",
+         author="Jules Verne", author_file="Verne, Jules", year=1872, death=1905,
+         category="Adventure", se="jules-verne_around-the-world-in-eighty-days_george-makepeace-towle",
+         translator="George Makepeace Towle", translation_year=1873,
+         blurb="A wager, a timetable, and Phileas Fogg counting his steps. The first translation, made the year after the French edition.",
+         subjects=["Voyages around the world -- Fiction", "Adventure stories"]),
 ]
 
 # --------------------------------------------------------------------------- #
@@ -856,6 +878,90 @@ def load_json(path: Path, default):
     return default
 
 
+
+def normalise_name(name: str) -> str:
+    """'George Makepeace Towle' -> 'george-makepeace-towle'."""
+    n = re.sub(r"[^a-z0-9 ]+", " ", name.lower())
+    return "-".join(n.split())
+
+
+def translator_registry() -> dict:
+    path = Path(__file__).resolve().parent.parent / "data" / "translators.json"
+    if not path.exists():
+        return {}
+    try:
+        return json.loads(path.read_text()).get("translators", {})
+    except Exception:
+        return {}
+
+
+def translator_from_tree(root: Path):
+    """The translator credited by the edition itself.
+
+    Read from the OPF: a dc:contributor carrying the MARC relator `trl`.
+    Falls back to the repository slug, which Standard Ebooks builds as
+    <author>_<title>_<translator>.
+    """
+    for opf in list(root.glob("**/content.opf"))[:1]:
+        try:
+            text = opf.read_text(encoding="utf-8", errors="ignore")
+        except Exception:
+            break
+        for m in re.finditer(r'<dc:contributor[^>]*id="([^"]+)"[^>]*>([^<]+)</dc:contributor>', text):
+            cid, name = m.group(1), m.group(2).strip()
+            if re.search(r'refines="#%s"[^>]*>trl<' % re.escape(cid), text):
+                return name
+        # some editions use a plain contributor with a file-as and no relator
+        m = re.search(r'<meta property="role"[^>]*refines="#([^"]+)"[^>]*>trl<', text)
+        if m:
+            cid = m.group(1)
+            n = re.search(r'<dc:contributor[^>]*id="%s"[^>]*>([^<]+)<' % re.escape(cid), text)
+            if n:
+                return n.group(1).strip()
+    # slug fallback: author_title_translator
+    parts = root.name.split("_")
+    if len(parts) >= 3:
+        return parts[-1].replace("-", " ").title()
+    return None
+
+
+def check_translation(book: dict, registry: dict):
+    """The translator test. Returns (ok, block_or_reason).
+
+    A translation's term runs on the translator's death. If the edition names a
+    translator we cannot verify, the book is refused — the same rule as the
+    author gate, applied to the person whose work the English text actually is.
+    """
+    name = book.get("translator")
+    if not name:
+        return True, None
+    key = normalise_name(name)
+    entry = registry.get(key)
+    if not entry:
+        return False, f"translator {name!r} is not in data/translators.json"
+    if not entry.get("verified"):
+        return False, f"translator {name!r} is registered but unverified"
+    death = entry.get("death")
+    if not death:
+        return False, f"translator {name!r} has no death year"
+    year = datetime.now(timezone.utc).year
+    if death + 60 > year:
+        return False, f"translator {name!r} died {death}; not public domain in India until {death + 60}"
+    ty = book.get("translation_year")
+    if not ty:
+        return False, f"translation by {name!r} has no publication year"
+    if ty >= 1930:
+        return False, f"translation published {ty}; not public domain in the US"
+    return True, {
+        "name": entry["name"],
+        "death": death,
+        "translation_year": ty,
+        "basis": (f"translation by {entry['name']} (d. {death}), first published {ty} — "
+                  f"public domain in India (life + 60) and the United States (pre-1930)"),
+        "source": entry.get("source", ""),
+    }
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--vault", required=True, help="path to the vault repo checkout")
@@ -915,6 +1021,15 @@ def main():
             tmp_out.mkdir(parents=True, exist_ok=True)
             pdf, epub, txt, cover, plain, cover_kind = build_from_tree(src_root, tmp_out, b, kind)
 
+            # ---- translator gate (before anything is written) ------------ #
+            if b.get("se") and not b.get("translator"):
+                detected = translator_from_tree(src_root)
+                if detected:
+                    b = dict(b, translator=detected)
+            gate_ok, gate_info = check_translation(b, translator_registry())
+            if not gate_ok:
+                raise RuntimeError(f"refused: {gate_info}")
+
             # ---- the id comes from the record, and the record wins ------- #
             real_id = source_id_from_tree(src_root) or b["id"]
             if str(real_id) != str(b["id"]):
@@ -955,9 +1070,12 @@ def main():
                 "file_sha8": file_sha(dest / pdf.name)[:8],
                 "text_sha256": tsha,
             }
-            if b.get("translator"):
-                meta["translator"] = {"name": b["translator"], "death": b["translator_death"]}
-                meta["rights"]["basis"] += f"; translation by {b['translator']} (d. {b['translator_death']})"
+            if gate_info:
+                meta["translator"] = {"name": gate_info["name"], "death": gate_info["death"],
+                                      "translation_year": gate_info["translation_year"],
+                                      "source": gate_info["source"]}
+                meta["rights"]["basis"] += "; " + gate_info["basis"]
+                meta["rights"]["translation_verified"] = True
             (dest / "meta.json").write_text(json.dumps(meta, indent=2, ensure_ascii=False) + "\n")
 
             registry["source_refs"].append(ref)
