@@ -277,6 +277,12 @@
       "producer": "app-deliver@2026-11-04",
       "class": "generated",
       "at": "2026-11-16T13:28:00Z"
+    },
+    "docs/robots.txt": {
+      "sha": "b3691626cbe172cbb9097104f786a281a1e0e181",
+      "producer": "app-deliver@2026-11-04",
+      "class": "generated",
+      "at": "2026-11-16T13:28:03Z"
     }
   }
 }
