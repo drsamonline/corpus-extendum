@@ -33,7 +33,7 @@
       "class": "hand"
     },
     "README.md": {
-      "sha": "12e93e3056add1cae56ec29feeccb6175797f17f",
+      "sha": "fd596788e4ad817df05c8d3d75bb85d443d97272",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -73,27 +73,27 @@
       "class": "hand"
     },
     "data/catalog.json": {
-      "sha": "b2fe8e0be098b8c80e6771f440e057e62db12d28",
+      "sha": "1f3f5ccc76ca553e92f97574dbbc2e52d0e50046",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "data/categories.json": {
-      "sha": "2216443e408029c89a7a59639cb88b830db93897",
+      "sha": "11e984198b2c18eb9374d0946f310ebcfde6ef07",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "data/search-index.json": {
-      "sha": "b45d7b738aa7e89b3a2912e9067e3d6833b341de",
+      "sha": "2ca448e0cbd546b107cfac1ec039b4b86c8c4e16",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "data/shards.json": {
-      "sha": "c935d9d878f12c9f321eb77cd8329e4b2a828a50",
+      "sha": "eee060e36231654d31903f1b03d05b40ad44015c",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "dedupe-report.txt": {
-      "sha": "6d1f7f8dae7f85def8d97ee5f3495174f29535ec",
+      "sha": "7f00f4187ce2019f001356db5ca9292ed1aaa6a8",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -123,7 +123,7 @@
       "class": "hand"
     },
     "index.txt": {
-      "sha": "e1f7988dcce14d628654907491640d44c3f36fc4",
+      "sha": "f8c47ad528d0439b41d25867664f8078b1c3f641",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -148,17 +148,17 @@
       "class": "hand"
     },
     "MANIFEST.json": {
-      "sha": "de2a78ef6de1eb3782e7610c80a8d72d3a6e61ed",
+      "sha": "311fa615a934a5c579e6db98cb1dbba7ae01621b",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "data/dedupe.json": {
-      "sha": "fdf01c4b5800f365a43be9923f5c0c70a19991e7",
+      "sha": "b610f0f82ba2d96f0d1ac8b03bd2930f89f1e157",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "scripts/ingest.py": {
-      "sha": "375c4fcd528ed9f4cadecaf18af09253f45c8f4c",
+      "sha": "27b5f5199516016b0c0fee882f4cabea2bd4dab9",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -168,7 +168,7 @@
       "class": "hand"
     },
     "CHANGELOG.md": {
-      "sha": "d4b37ea751d632aed98c4411a31b74237de93385",
+      "sha": "d02681896c7c323afb8e5fcf6963db3d254934f7",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -178,7 +178,7 @@
       "class": "hand"
     },
     "docs/DATA-MODEL.md": {
-      "sha": "48b309e0ff64838047011837be350096054dc5d1",
+      "sha": "c1c199bb9022e857a19c9ffc528dc3e732c24c3d",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -198,7 +198,7 @@
       "class": "hand"
     },
     "docs/RIGHTS.md": {
-      "sha": "e4388587adc8b8fba85d7fd4e7de095363bef812",
+      "sha": "38c12ff2318d006b69c0366f724c2172a13665f5",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -223,12 +223,12 @@
       "class": "hand"
     },
     "docs/README.md": {
-      "sha": "258fb17323c7ba25912e09355739d273bce35b9e",
+      "sha": "03c6a50fddd514c73fb346c1b777534ee05ecdac",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "docs/VAULTS.md": {
-      "sha": "50c0d6011ef866a6e3f0d7eac3bcfefa01f09478",
+      "sha": "a1a2ae87c73fe476ae34ff7cb2987da3bddb067b",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -248,12 +248,12 @@
       "class": "hand"
     },
     "data/translators.json": {
-      "sha": "e8e2058cbfcd64eca659abbcd7a6cb6aed617320",
+      "sha": "bf3a3767d5938fbe89e47779238ffe036cbfd302",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "scripts/__pycache__/ingest.cpython-312.pyc": {
-      "sha": "b4da1bdcf1f7b3056ff181a2ce82f49f4c5c4f44",
+      "sha": "74914780a49be6e52cde5ffb9974b2201d0eebf7",
       "producer": "build-2026-11-16",
       "class": "hand"
     },

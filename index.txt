@@ -1,4 +1,4 @@
-# corpus-extendum | 46 books | 1 vault(s) | built 2026-11-16T08:05Z
+# corpus-extendum | 47 books | 1 vault(s) | built 2026-11-16T10:19Z
 # id | slug | title | author | year | category | formats | vault
 103|around-the-world-in-eighty-days|Around the World in Eighty Days|Verne, Jules|1872|Adventure|pdf,epub,txt|corpus-extendum-vault-01
 27780|treasure-island|Treasure Island|Stevenson, Robert Louis|1883|Adventure|pdf,epub,txt|corpus-extendum-vault-01
@@ -20,6 +20,7 @@
 98|a-tale-of-two-cities|A Tale of Two Cities|Dickens, Charles|1859|Fiction|pdf,epub,txt|corpus-extendum-vault-01
 1400|great-expectations|Great Expectations|Dickens, Charles|1861|Fiction|pdf,epub,txt|corpus-extendum-vault-01
 174|the-picture-of-dorian-gray|The Picture of Dorian Gray|Wilde, Oscar|1890|Fiction|pdf,epub,txt|corpus-extendum-vault-01
+13505|the-duel|The Duel|Chekhov, Anton|1891|Fiction|pdf,epub,txt|corpus-extendum-vault-01
 160|the-awakening|The Awakening|Chopin, Kate|1899|Fiction|pdf,epub,txt|corpus-extendum-vault-01
 541|the-age-of-innocence|The Age of Innocence|Wharton, Edith|1920|Fiction|pdf,epub,txt|corpus-extendum-vault-01
 84|frankenstein|Frankenstein; or, The Modern Prometheus|Shelley, Mary Wollstonecraft|1818|Gothic & Horror|pdf,epub,txt|corpus-extendum-vault-01

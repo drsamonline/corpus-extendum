@@ -40,7 +40,8 @@
     "gutenberg:2944",
     "gutenberg:3207",
     "gutenberg:34901",
-    "gutenberg:12"
+    "gutenberg:12",
+    "gutenberg:13505"
   ],
   "text_sha256": {
     "78a0a582db906da05e36af990abed243f3cf64b5e3ecd77eb9ea3743be3ec65b": "pride-and-prejudice",
@@ -83,7 +84,8 @@
     "496435fef773dac0dce08546717b0b7d2be2b9ff12c4db25f6da73f5dc16f73a": "emerson-essays",
     "7e58dddc1e278aefe69bb97168afe275c3829ebe07ac37633f05cdc0746a1a4a": "leviathan",
     "4fc52a60e416e6f848d86e37430c73c870f77be0ab26cbf82d5783f78decf75a": "on-liberty",
-    "c8f076ad1ead887bd4a771326e1d71e7961e762c451ed82fc77fc2884d4d71c3": "through-the-looking-glass"
+    "c8f076ad1ead887bd4a771326e1d71e7961e762c451ed82fc77fc2884d4d71c3": "through-the-looking-glass",
+    "f4b6be0b09051213d46c809945b07738d1837ad074c3d573cebe8c48f349f53f": "the-duel"
   },
   "work_keys": {
     "austen|pride and prejudice|1813": "pride-and-prejudice",
@@ -126,6 +128,7 @@
     "emerson|essays: first series|1841": "emerson-essays",
     "hobbes|leviathan|1651": "leviathan",
     "mill|on liberty|1859": "on-liberty",
-    "carroll|through the looking-glass|1871": "through-the-looking-glass"
+    "carroll|through the looking-glass|1871": "through-the-looking-glass",
+    "chekhov|the duel|1891": "the-duel"
   }
 }

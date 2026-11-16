@@ -283,6 +283,12 @@ BOOKS = [
          translator="George Makepeace Towle", translation_year=1873,
          blurb="A wager, a timetable, and Phileas Fogg counting his steps. The first translation, made the year after the French edition.",
          subjects=["Voyages around the world -- Fiction", "Adventure stories"]),
+    dict(id=13416, slug="the-duel", title="The Duel", author="Anton Chekhov",
+         author_file="Chekhov, Anton", year=1891, death=1904,
+         category="Fiction", se="anton-chekhov_the-duel_constance-garnett",
+         translator="Constance Garnett", translation_year=1916,
+         blurb="Two men who cannot stand each other, a town that watches, and a duel nobody quite wants. Chekhov's longest novella, and his coldest.",
+         subjects=["Dueling -- Fiction", "Russia -- Social life and customs -- Fiction"]),
 ]
 
 # --------------------------------------------------------------------------- #
