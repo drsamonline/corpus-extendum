@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Corpus Extendum — the public domain, properly shelved</title>
+<meta name="description" content="A free library of out-of-copyright books. Read PDF, EPUB or plain text in the browser, download anything, no accounts and no tracking.">
+<meta property="og:title" content="Corpus Extendum — the public domain, properly shelved">
+<meta property="og:description" content="Out-of-copyright books, free to read and free to keep. Ten books, ten categories, and a shelf that grows by itself.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..700&family=Inter:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/app.css?v=20261116j">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%238C3A2B'/><text x='16' y='22' font-family='Georgia,serif' font-size='15' fill='%23FBF3E9' text-anchor='middle'>CE</text></svg>">
+<meta name="description" content="A free library of out-of-copyright books. Read PDF, EPUB or plain text in the browser, download anything, no accounts and no tracking.">
+<link rel="canonical" href="https://drsamonline.github.io/corpus-extendum/play/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The public domain,properly shelved. — live demo">
+<meta property="og:description" content="A free library of out-of-copyright books. Read PDF, EPUB or plain text in the browser, download anything, no accounts and no tracking.">
+<meta property="og:url" content="https://drsamonline.github.io/corpus-extendum/play/">
+<meta name="twitter:card" content="summary">
+<meta name="robots" content="index, follow">
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="./">
+      <div class="mark">CE</div>
+      <div class="brand-txt">Corpus Extendum<span class="brand-sub">Public domain library</span></div>
+    </a>
+    <nav class="main">
+      <a href="#shelf">Browse</a>
+      <a href="#how">How it works</a>
+      <a href="#vaults">Vaults</a>
+      <a href="#support">Support</a>
+    </nav>
+    <div class="hsearch">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color:var(--muted);flex-shrink:0"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+      <input id="q2" type="search" placeholder="Title, author, subject" aria-label="Search the library">
+      <kbd>/</kbd>
+    </div>
+    <button class="iconbtn" id="theme" title="Toggle theme" aria-label="Toggle theme">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow" id="batchLine">Public domain · free to read, free to keep</div>
+        <h1>The public domain,<br><em>properly shelved.</em></h1>
+        <p class="lede">Every book here is free to read, free to keep, and free of a paywall — because its copyright has expired. Open any title as a <b>PDF, EPUB or plain text</b> in the page, download it, keep it. No accounts, no tracking, no ads. Nothing leaves the shelf once it is on it.</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="n" id="statBooks">—</div><div class="l">Books</div></div>
+        <div class="stat"><div class="n" id="statVaults">—</div><div class="l">Vault repos</div></div>
+        <div class="stat"><div class="n" id="statCats">—</div><div class="l">Categories</div></div>
+        <div class="stat"><div class="n">12</div><div class="l">Formats renderable</div></div>
+      </div>
+    </div>
+
+    <div class="searchbox">
+      <label class="sbig">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" style="color:var(--muted);flex-shrink:0"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+        <input id="q" type="search" placeholder="Search the shelf — try “Tagore”, “detective”, “philosophy”" aria-label="Search books">
+      </label>
+      <button class="btn" id="randomBtn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+        Surprise me
+      </button>
+    </div>
+
+    <div class="shardbar" id="vaults">
+      <span class="name" id="shardName">corpus-extendum-vault-01</span>
+      <div class="meter"><i id="meterFill" style="width:2%"></i></div>
+      <span class="meta" id="shardMeta">loading…</span>
+    </div>
+  </div>
+</section>
+
+<div class="wrap cats">
+  <div class="catrow" id="catrow"></div>
+</div>
+
+<div class="wrap" id="resume" hidden>
+  <div class="resume-head">
+    <h2>Continue reading</h2>
+    <button class="resume-clear" id="resumeClear">Clear history</button>
+  </div>
+  <div class="resume-row" id="resumeRow"></div>
+</div>
+
+<div class="wrap" id="shelf">
+  <div class="toolbar">
+    <h2 id="shelfTitle">The shelf</h2>
+    <span class="count" id="count">loading…</span>
+    <div class="spacer"></div>
+    <select class="sel" id="sort" aria-label="Sort books">
+      <option value="curated">Curated order</option>
+      <option value="title">Title A–Z</option>
+      <option value="author">Author A–Z</option>
+      <option value="year">Oldest first</option>
+      <option value="new">Newest addition</option>
+    </select>
+  </div>
+  <div class="grid" id="grid"></div>
+</div>
+
+<section class="how" id="how">
+  <div class="wrap">
+    <h3>How a book gets on this shelf</h3>
+    <p class="sub">Four steps, run as a batch job. No book is added by hand, and no book is added without passing the copyright gate.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="num">01 <span>Fetch</span></div>
+        <h4>Pull from the source</h4>
+        <p>Text and artwork come from Standard Ebooks where an edition exists, from the Gutenberg mirror otherwise, and from archive.org for a scan that exists nowhere else.</p>
+      </div>
+      <div class="step">
+        <div class="num">02 <span>Verify</span></div>
+        <h4>Pass the copyright gate</h4>
+        <p>Author's death year + 60 for India, publication year for the US. Both must pass. The basis is written into the record so any reader can audit it.</p>
+      </div>
+      <div class="step">
+        <div class="num">03 <span>Build</span></div>
+        <h4>Make the reading files</h4>
+        <p>A PDF is typeset for the screen, the EPUB is kept, text is extracted for in-book search, plates are downscaled, and a hash is stored to catch duplicates.</p>
+      </div>
+      <div class="step">
+        <div class="num">04 <span>Shelve</span></div>
+        <h4>File it in a vault</h4>
+        <p>Files are committed to the open vault repo, its <span class="mono">index.txt</span> is rewritten, and this catalogue picks the book up on the next scan.</p>
+      </div>
+    </div>
+    <div class="dedupenote">
+      <b>Duplicates are refused twice, and never merged late.</b> Once before fetching, when the source reference is already in the register — and again at ingest, where the hash of the normalised text decides what this actually is: a new book, another format of one already on the shelf, or a different edition. A book is added once; its extra formats join the same card. Nothing is ever added on a fuzzy match.
+    </div>
+  </div>
+</section>
+
+<footer id="about">
+  <div class="wrap fgrid">
+    <div class="fcol">
+      <b>Corpus Extendum</b>
+      <span>An open shelf of out-of-copyright books.</span>
+      <span>No accounts. No tracking. No paywall.</span>
+      <span><a href="index.txt">index.txt</a> · <a href="data/catalog.json">catalog.json</a></span>
+      <span style="opacity:.7">site build 20261116d</span>
+    </div>
+    <div class="fcol">
+      <b>Vaults</b>
+      <span id="vaultList">—</span>
+      <span>A vault seals at 600 books or 2.5 GB.</span>
+    </div>
+    <div class="fcol">
+      <b>Sources</b>
+      <a href="https://standardebooks.org">Standard Ebooks (CC0)</a>
+      <a href="https://www.gutenberg.org">Project Gutenberg</a>
+      <a href="https://archive.org">Internet Archive</a>
+      <span>Texts: public domain · our metadata: CC0</span>
+    </div>
+    <div class="fcol">
+      <b>Rights</b>
+      <span>Every record states its public-domain basis.</span>
+      <span><a href="NOTICE.md">Attribution &amp; notices</a></span>
+    </div>
+  </div>
+
+  <div class="wrap" id="support">
+    <div class="sponsor">
+      <img class="sponsor-portrait" src="docs/assets/support-portrait.jpg" alt="Sohil Momin" width="72" height="72" loading="lazy">
+      <div class="sponsor-copy">
+        <div class="sponsor-title">Keep the shelf open</div>
+        <p>No ads, no accounts, no analytics, nothing for sale. If this library is useful to you, you can help pay for the next batch of books — the scanning, the typesetting and the bandwidth are all paid for out of pocket.</p>
+        <div class="sponsor-links">
+          <a class="sponsor-btn" href="https://github.com/sponsors/drsamonline">Sponsor on GitHub</a>
+          <a class="sponsor-btn ghost" href="https://github.com/drsamonline">Other projects</a>
+        </div>
+      </div>
+      <img class="sponsor-qr" src="docs/assets/upi-qr.svg" alt="UPI QR code" width="112" height="112" loading="lazy">
+    </div>
+  </div>
+</footer>
+
+<!-- READER -->
+<div class="reader" id="reader" role="dialog" aria-modal="true" aria-label="Book reader">
+  <div class="rbar">
+    <div style="min-width:0">
+      <div class="rt" id="rTitle">—</div>
+      <div class="ra" id="rAuthor">—</div>
+    </div>
+    <div class="grow"></div>
+    <button class="rpill" id="rPrev" title="Previous page">‹</button>
+    <span class="rpill" id="rPage">—</span>
+    <button class="rpill" id="rNext" title="Next page">›</button>
+    <div class="fmtbar" id="fmtbar"></div>
+    <button class="rpill" id="rFind" title="Search inside (/)">Find</button>
+    <button class="rpill" id="rMark" title="Bookmark this place (b)">Mark</button>
+    <button class="rpill" id="rMarks" title="Bookmarks (m)">Marks</button>
+    <a class="rpill" id="rDownload" href="#" target="_blank" rel="noopener">Download</a>
+    <button class="rclose" id="rClose" aria-label="Close reader">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="findbar" id="findBar" hidden>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="flex-shrink:0;color:#7E7568"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+    <input id="findInput" type="search" placeholder="Search inside this book" aria-label="Search inside this book">
+    <span class="findcount" id="findCount"></span>
+    <button class="findclose" id="findClose" aria-label="Close search">✕</button>
+    <div class="findresults" id="findResults" hidden></div>
+  </div>
+  <div class="markspanel" id="marksPanel" hidden>
+    <div class="markshead"><span>Bookmarks in this book</span><button class="findclose" id="marksClose" aria-label="Close">✕</button></div>
+    <div class="markslist" id="marksList"></div>
+  </div>
+  <div class="rbody">
+    <div class="stage" id="stage">
+      <div class="page" id="page"></div>
+      <canvas id="pdfCanvas" style="display:none;max-width:100%;box-shadow:0 26px 60px -18px rgba(0,0,0,.75);border-radius:2px"></canvas>
+      <iframe id="pdfFrame" title="Book page" style="display:none;width:100%;border:0;border-radius:2px;background:#FBF8F1"></iframe>
+      <div id="epubBox" style="display:none;width:min(760px,100%);height:78vh;background:#FBF8F1;border-radius:2px;overflow:auto"></div>
+      <div class="rnote" id="rNote">Loading…</div>
+    </div>
+    <aside class="side">
+      <h6>About this edition</h6>
+      <div class="st" id="sTitle">—</div>
+      <div class="sa" id="sAuthor">—</div>
+      <div class="kv"><span>First published</span><span id="sYear">—</span></div>
+      <div class="kv"><span>Category</span><span id="sCat">—</span></div>
+      <div class="kv"><span>Language</span><span id="sLang">English</span></div>
+      <div class="kv"><span>Source</span><span id="sSrc">—</span></div>
+      <div class="kv"><span>Rights</span><span style="color:#8FC0B2">Public domain</span></div>
+      <div class="kv"><span>Stored in</span><span class="mono" id="sShard">—</span></div>
+      <p class="blurb" id="sBlurb">—</p>
+      <p class="blurb" id="sRights" style="font-size:11.5px"></p>
+      <div class="dl" id="sFiles"></div>
+    </aside>
+  </div>
+</div>
+
+<script src="assets/vendor/jszip.min.js?v=20261116j"></script>
+<script src="assets/vendor/epub.min.js?v=20261116j"></script>
+<script src="assets/vendor/pdf.min.js?v=20261116j"></script>
+<script src="assets/app.js?v=20261116j"></script>
+</body>
+</html>
