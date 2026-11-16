@@ -304,7 +304,7 @@ footer{padding:44px 0 60px;border-top:1px solid var(--line)}
 .page .pf{font-family:var(--sans);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#948A7D;margin-top:40px;padding-top:14px;border-top:1px solid #DED5C6;display:flex;justify-content:space-between}
 .rnote{
   font-family:var(--sans);font-size:10.5px;color:#7A7164;text-align:center;max-width:520px;line-height:1.5;
-}
+color:#8C8175;}
 .side{border-left:1px solid #2A2520;background:#100D0B;overflow:auto;padding:22px}
 .side h6{font-family:var(--sans);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#7E7568;margin:0 0 11px;font-weight:700}
 .side .st{font-family:var(--serif);font-size:19px;line-height:1.25;margin:0 0 5px;color:#F4ECDF}
@@ -461,3 +461,16 @@ body.locked{overscroll-behavior:none}
 .marksdel{background:none;border:0;color:#6E6459;cursor:pointer;font-size:13px;padding:2px 4px}
 .marksdel:hover{color:#D98B75}
 .marksempty{padding:14px;color:#7E7568;font-size:12px}
+
+/* ---------- polish ---------- */
+/* The category rail scrolls; a fade at the right edge is the only hint that it
+   does, since there is no scrollbar. */
+.chips{
+  -webkit-mask-image:linear-gradient(to right,#000 0,#000 calc(100% - 44px),transparent 100%);
+          mask-image:linear-gradient(to right,#000 0,#000 calc(100% - 44px),transparent 100%);
+}
+@media(min-width:1100px){.chips{-webkit-mask-image:none;mask-image:none}}
+
+/* A long storage path in a 312px column broke mid-word and dominated the panel.
+   The vault name is the useful part; the path goes in the title. */
+.kv .mono{word-break:normal;overflow-wrap:anywhere}

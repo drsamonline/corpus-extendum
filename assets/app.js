@@ -510,7 +510,8 @@ function openBook(slug) {
   $('sCat').textContent = b.category;
   $('sLang').textContent = b.language || 'English';
   $('sSrc').textContent = b.source ? b.source.name : '—';
-  $('sShard').textContent = `${b.vault}/books/${b.slug}`;
+  $('sShard').textContent = b.vault;
+  $('sShard').title = `${b.vault}/books/${b.slug}`;
   $('sBlurb').textContent = b.blurb || '';
   $('sRights').textContent = b.rights ? b.rights.basis : '';
   $('sFiles').innerHTML = ['pdf', 'epub', 'txt'].filter(f => b.formats.includes(f)).map(f =>
