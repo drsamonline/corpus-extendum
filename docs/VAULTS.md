@@ -80,7 +80,7 @@ cannot.
 |---|---|---|---|
 | `corpus-extendum-vault-01` | 43 | 146.8 MB | open |
 
-Headroom: 557 books or 2353 MB.
+Headroom: 557 books or 2353.2 MB.
 
 ## Adding a vault by hand
 

@@ -143,12 +143,12 @@
       "class": "hand"
     },
     ".github/workflows/scan.yml": {
-      "sha": "970b97226b23b7b3a9eec619da49a7f68362e798",
+      "sha": "5f3f24071e375153dbf844533fb8e241a7d65da7",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "MANIFEST.json": {
-      "sha": "521e43d8863e65d351f2a84786e71f4d0f2c0429",
+      "sha": "2e208ba51aa5f1197880515264dc54ec10c941fb",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -178,7 +178,7 @@
       "class": "hand"
     },
     "docs/DATA-MODEL.md": {
-      "sha": "27e3fbce3c9953f6ff4eeecc6b10d9328fc488ab",
+      "sha": "edb02e16d9def8640f0e9023adfdfbe0e0599d4b",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -223,12 +223,22 @@
       "class": "hand"
     },
     "docs/README.md": {
-      "sha": "47e8b3f0a8ad98164fbf2a1fe07183e6c329ab27",
+      "sha": "3f371f45277339cb0bac3ee7a41a4fcc88d3b2f8",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "docs/VAULTS.md": {
-      "sha": "2c65fc99b2bb8915fea1713392b967285c0ddf32",
+      "sha": "3d1faa8f518ed29a9fe9dbcc69036e902ec799a8",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "scripts/sync_docs.py": {
+      "sha": "9e1fa0837e50c96b7ecfacf23c6ee8b666f6a843",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "scripts/update_docs.py": {
+      "sha": "bd08f76e824006a67fcd8087e03c99a0f92c35d3",
       "producer": "build-2026-11-16",
       "class": "hand"
     }

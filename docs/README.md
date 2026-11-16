@@ -55,3 +55,5 @@ The current gaps, stated plainly:
   costs one round and not two.
 - Nothing is described as working unless a command produced the output that
   proves it.
+
+_Updated 2026-11-16._
