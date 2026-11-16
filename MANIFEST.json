@@ -283,6 +283,12 @@
       "producer": "app-deliver@2026-11-04",
       "class": "generated",
       "at": "2026-11-16T13:28:03Z"
+    },
+    "docs/sitemap.xml": {
+      "sha": "9b2ab45dc019a7913790595b8d92674e960498b5",
+      "producer": "app-deliver@2026-11-04",
+      "class": "generated",
+      "at": "2026-11-16T13:28:05Z"
     }
   }
 }
