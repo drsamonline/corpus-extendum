@@ -571,7 +571,10 @@ def shrink_tree(src: Path, dest: Path, max_px=None, quality=82) -> Path:
 
     if vector:
         try:
-            made = svg_batch_to_images([v[0] for v in vector], [v[1] for v in vector], max_px, quality)
+            if len(vector) > 8:
+                made = svg_parallel([v[0] for v in vector], [v[1] for v in vector], max_px, quality)
+            else:
+                made = svg_batch_to_images([v[0] for v in vector], [v[1] for v in vector], max_px, quality)
             shrunk += made
         except Exception as e:
             log(f"    vector batch failed ({e}); leaving plates as SVG")
@@ -642,6 +645,46 @@ def source_id_from_tree(root: Path):
         if m:
             return m.group(1)
     return None
+
+
+
+def _render_one(args):
+    """One plate, in a worker process, via PyMuPDF's own SVG renderer.
+
+    WeasyPrint is the right tool for the book, and the wrong one for a 7 MB
+    traced plate: it pulls a full layout engine into every worker for a job
+    that is one image. PyMuPDF opens an SVG as a document and gives back a
+    page, which is a fraction of the weight per process.
+    """
+    svg_path, out_path, max_px, quality = args
+    import pymupdf
+    from PIL import Image as _Image
+    svg_path, out_path = Path(svg_path), Path(out_path)
+    doc = pymupdf.open(str(svg_path))
+    pix = doc[0].get_pixmap(dpi=110)
+    im = _Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
+    doc.close()
+    im.thumbnail((max_px, max_px), _Image.LANCZOS)
+    im.save(out_path, "JPEG", quality=quality, optimize=True)
+    return True
+
+
+def svg_parallel(svg_paths, out_paths, max_px=900, quality=82, workers=None):
+    """Rasterise plates across processes.
+
+    An illustrated edition is 40+ plates of ~760 KB of path data each. WeasyPrint
+    parses every path whatever the output size, so shrinking the output does not
+    help — but running four plates at once does.
+    """
+    from concurrent.futures import ProcessPoolExecutor
+    import os as _os
+    jobs = [(str(a), str(b), max_px, quality) for a, b in zip(svg_paths, out_paths)]
+    workers = workers or min(4, (_os.cpu_count() or 2))
+    made = 0
+    with ProcessPoolExecutor(max_workers=workers) as pool:
+        for ok in pool.map(_render_one, jobs):
+            made += 1 if ok else 0
+    return made
 
 
 def svg_batch_to_images(svg_paths, out_paths, max_px=900, quality=82):

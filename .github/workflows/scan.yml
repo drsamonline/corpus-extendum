@@ -11,6 +11,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 jobs:
   scan:
@@ -28,6 +29,24 @@ jobs:
             git clone --depth 1 "https://github.com/$repo" "../vaults/$(basename "$repo")"
           done
           ls ../vaults
+
+      - name: rotate if the open vault is full
+        id: rotate
+        env:
+          CORPUS_BOT_TOKEN: ${{ secrets.CORPUS_BOT_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set +e
+          python3 scripts/rotate_vault.py
+          code=$?
+          set -e
+          if [ "$code" = "3" ]; then
+            gh issue create \
+              --title "A vault is full and could not be rotated" \
+              --body "The open vault has reached its cap and the rotation token could not create a repository. Either add a CORPUS_BOT_TOKEN with Administration: write, or create the next vault by hand:\n\n\`\`\`\ngh repo create corpus-extendum-vault-NN --public\n\`\`\`\n\nThe run log above says which name it wanted." || true
+            exit 1
+          fi
+          exit $code
 
       - name: rebuild the catalogue
         run: |

@@ -1,9 +1,10 @@
-# corpus-extendum | 42 books | 1 vault(s) | built 2026-11-16T02:19Z
+# corpus-extendum | 43 books | 1 vault(s) | built 2026-11-16T02:34Z
 # id | slug | title | author | year | category | formats | vault
 27780|treasure-island|Treasure Island|Stevenson, Robert Louis|1883|Adventure|pdf,epub,txt|corpus-extendum-vault-01
 76|huckleberry-finn|The Adventures of Huckleberry Finn|Twain, Mark|1884|Adventure|pdf,epub,txt|corpus-extendum-vault-01
 2166|king-solomons-mines|King Solomon's Mines|Haggard, H. Rider|1885|Adventure|pdf,epub,txt|corpus-extendum-vault-01
 11|alice-in-wonderland|Alice's Adventures in Wonderland|Carroll, Lewis|1865|Children's & Fable|pdf,epub,txt|corpus-extendum-vault-01
+12|through-the-looking-glass|Through the Looking-Glass|Carroll, Lewis|1871|Children's & Fable|pdf,epub,txt|corpus-extendum-vault-01
 778|five-children-and-it|Five Children and It|Nesbit, E.|1902|Children's & Fable|pdf,epub,txt|corpus-extendum-vault-01
 27805|the-wind-in-the-willows|The Wind in the Willows|Grahame, Kenneth|1908|Children's & Fable|pdf,epub,txt|corpus-extendum-vault-01
 17396|the-secret-garden|The Secret Garden|Burnett, Frances Hodgson|1911|Children's & Fable|pdf,epub,txt|corpus-extendum-vault-01
