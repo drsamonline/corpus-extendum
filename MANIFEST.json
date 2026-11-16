@@ -33,17 +33,17 @@
       "class": "hand"
     },
     "README.md": {
-      "sha": "69aaba663f53232df6251fd86ceeebd72c1a054e",
+      "sha": "ad2afd073b59c6b38b3acf4a8ba2c0c2fcc334e2",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "assets/app.css": {
-      "sha": "528982f91f95b4620cdad9f125e222e23e3d43f5",
+      "sha": "b7ccd7d3fc4f0768f5ecdd3a74f94fa3c8a00c8d",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "assets/app.js": {
-      "sha": "d4d858868af9907b9558c710ce45f681c1f70036",
+      "sha": "6e0cdc8377a183c67b9617e1be3db4fc41e1c582",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -73,27 +73,27 @@
       "class": "hand"
     },
     "data/catalog.json": {
-      "sha": "5eae6dc272024119dd457f2bb9fa7141be689d6f",
+      "sha": "2c883096188d480133213e3e52598dbd3865eb10",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "data/categories.json": {
-      "sha": "9fa61f12c48929153684ca8a89cf085ebf73168a",
+      "sha": "0cc75db63b859b203f6ee4d883a27806dbbef473",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "data/search-index.json": {
-      "sha": "f6212f3bc7b1853aaba329fd5a21d76d723b818e",
+      "sha": "8f07b0d5be42ef6e7ffcbeea3e6c5cde635ecda0",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "data/shards.json": {
-      "sha": "701cd91af675d8f2763ee1e4f290b055ef559367",
+      "sha": "8fd13c180d1fc1afab75f22645338c17ebf7bb83",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "dedupe-report.txt": {
-      "sha": "e18f1ff74f4f9259deb1d0151a78c7d586719762",
+      "sha": "b980c2b5a3b5a65187fa4e96efe80b7a641effda",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -103,7 +103,7 @@
       "class": "hand"
     },
     "docs/assets/shelf.png": {
-      "sha": "b8b79e6e07d172240f3572a22a3d57aa2bc9f5f4",
+      "sha": "71795c81f487608a2e27441fb0be227c093645d7",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -118,17 +118,17 @@
       "class": "hand"
     },
     "index.html": {
-      "sha": "d23302b758a25e7ebbdddf9dc10a999349a4567e",
+      "sha": "696ee8f341576cf2c572bc9456a6c52c1c6422b5",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "index.txt": {
-      "sha": "e0ec2b3e18b97a506c9247cdc4db5cb03e6e62e0",
+      "sha": "33b5f147011f36bfe45b11d92bce1ac5001e8295",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "scripts/build_catalog.py": {
-      "sha": "ce0343f2fdbafc3354507fdaf09d6b2b5af4fcb0",
+      "sha": "1fbc14a1f0912ce1f158b424004330410c808a42",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -148,17 +148,22 @@
       "class": "hand"
     },
     "MANIFEST.json": {
-      "sha": "2c5af903fecdb93984c6c7254cdfbef85d102f60",
+      "sha": "fe18ceec09ef96e600090fcef4208393135ed5bd",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "data/dedupe.json": {
-      "sha": "0dffeda92dee345819e3e5acd17393b7fcffb26e",
+      "sha": "92241c6d7d2d1e3f1ea0fc9b80da04530b8add27",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "scripts/ingest.py": {
-      "sha": "1e3544d339e803bf185ed481af221abe45c34321",
+      "sha": "d4567d260c24db380736ef94df29c17cc6d68d9e",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "scripts/shoot_reader.py": {
+      "sha": "c49cb4ecaebe4208913d4e827c348132a9d8e18f",
       "producer": "build-2026-11-16",
       "class": "hand"
     }

@@ -176,6 +176,91 @@ BOOKS = [
          se="jonathan-swift_gullivers-travels",
          blurb="Four voyages, each one a different way of being laughed at. A children's book that was never meant to be one.",
          subjects=["Voyages, Imaginary -- Fiction", "Satire"]),
+    dict(id=36, slug="the-war-of-the-worlds", title="The War of the Worlds", author="H. G. Wells",
+         author_file="Wells, H. G.", year=1898, death=1946, category="Science Fiction",
+         se="h-g-wells_the-war-of-the-worlds",
+         blurb="Martians land in Surrey and the British Empire discovers it is not the strongest thing in the universe.",
+         subjects=["Mars (Planet) -- Fiction", "Imaginary wars and battles"]),
+    dict(id=18247, slug="the-last-man", title="The Last Man", author="Mary Wollstonecraft Shelley",
+         author_file="Shelley, Mary Wollstonecraft", year=1826, death=1851, category="Science Fiction",
+         se="mary-shelley_the-last-man",
+         blurb="A plague empties the world and one man walks through it. The first pandemic novel, written by the author of Frankenstein.",
+         subjects=["End of the world -- Fiction", "Plague -- Fiction"]),
+    dict(id=2760, slug="king-solomons-mines", title="King Solomon's Mines", author="H. Rider Haggard",
+         author_file="Haggard, H. Rider", year=1885, death=1925, category="Adventure",
+         se="h-rider-haggard_king-solomons-mines",
+         blurb="Allan Quatermain, a map drawn in blood, and a lost civilisation. The book that invented the treasure hunt.",
+         subjects=["Quatermain, Allan (Fictitious character)", "Africa -- Fiction"]),
+    dict(id=2852, slug="the-hound-of-the-baskervilles", title="The Hound of the Baskervilles",
+         author="Arthur Conan Doyle", author_file="Doyle, Arthur Conan", year=1902, death=1930,
+         category="Mystery & Detective", se="arthur-conan-doyle_the-hound-of-the-baskervilles",
+         blurb="A family curse, a moor at night, and a hound that may not be a hound. Doyle's best novel, and he knew it.",
+         subjects=["Holmes, Sherlock (Fictitious character)", "Dartmoor (England) -- Fiction"]),
+    dict(id=204, slug="father-brown", title="The Innocence of Father Brown", author="G. K. Chesterton",
+         author_file="Chesterton, G. K.", year=1911, death=1936, category="Mystery & Detective",
+         se="g-k-chesterton_the-innocence-of-father-brown",
+         blurb="A small priest solves twelve crimes by understanding sin better than the police understand evidence.",
+         subjects=["Brown, Father (Fictitious character)", "Detective and mystery stories"]),
+    dict(id=155, slug="the-moonstone", title="The Moonstone", author="Wilkie Collins",
+         author_file="Collins, Wilkie", year=1868, death=1889, category="Mystery & Detective",
+         se="wilkie-collins_the-moonstone",
+         blurb="A diamond taken from an Indian shrine, and the household it ruins. The first detective novel in English.",
+         subjects=["Diamonds -- Fiction", "Detective and mystery stories"]),
+    dict(id=583, slug="the-woman-in-white", title="The Woman in White", author="Wilkie Collins",
+         author_file="Collins, Wilkie", year=1860, death=1889, category="Mystery & Detective",
+         se="wilkie-collins_the-woman-in-white",
+         blurb="A woman in white on a dark road, and an identity stolen for money. The original sensation novel.",
+         subjects=["England -- Social life and customs -- 19th century", "Detective and mystery stories"]),
+    dict(id=12, slug="through-the-looking-glass", title="Through the Looking-Glass", author="Lewis Carroll",
+         author_file="Carroll, Lewis", year=1871, death=1898, category="Children's & Fable",
+         se="lewis-carroll_through-the-looking-glass",
+         blurb="A mirror, a chess game, and the poems everyone learns without deciding to. The rarer of the two Alices, and the stranger.",
+         subjects=["Fantasy fiction", "Alice (Fictitious character from Carroll)"]),
+    dict(id=289, slug="the-wind-in-the-willows", title="The Wind in the Willows", author="Kenneth Grahame",
+         author_file="Grahame, Kenneth", year=1908, death=1932, category="Children's & Fable",
+         se="kenneth-grahame_the-wind-in-the-willows",
+         blurb="A river, a caravan, a motor-car and Mr Toad's complete inability to learn. Started as bedtime stories for one boy.",
+         subjects=["Animals -- Fiction", "England -- Fiction"]),
+    dict(id=17396, slug="the-secret-garden", title="The Secret Garden", author="Frances Hodgson Burnett",
+         author_file="Burnett, Frances Hodgson", year=1911, death=1924, category="Children's & Fable",
+         se="frances-hodgson-burnett_the-secret-garden",
+         blurb="A locked garden, a sickly boy, and the discovery that fresh air and work cure more than medicine does.",
+         subjects=["Orphans -- Fiction", "Gardens -- Fiction"]),
+    dict(id=778, slug="five-children-and-it", title="Five Children and It", author="E. Nesbit",
+         author_file="Nesbit, E.", year=1902, death=1924, category="Children's & Fable",
+         se="e-nesbit_five-children-and-it",
+         blurb="A sand fairy grants one wish a day, and every wish goes wrong in a way that is entirely the children's fault.",
+         subjects=["Fairies -- Fiction", "Wishes -- Fiction"]),
+    dict(id=1322, slug="leaves-of-grass", title="Leaves of Grass", author="Walt Whitman",
+         author_file="Whitman, Walt", year=1855, death=1892, category="Poetry",
+         se="walt-whitman_leaves-of-grass",
+         blurb="The book Whitman rewrote his whole life. Free verse invented in public, and a country described by someone who loved it without flinching.",
+         subjects=["American poetry -- 19th century"]),
+    dict(id=23583, slug="keats-poems", title="Poems", author="John Keats",
+         author_file="Keats, John", year=1820, death=1821, category="Poetry",
+         se="john-keats_poetry",
+         blurb="Ode to a Nightingale, Ode on a Grecian Urn, and the rest of the year 1819, which killed him.",
+         subjects=["English poetry -- 19th century"]),
+    dict(id=205, slug="walden", title="Walden", author="Henry David Thoreau",
+         author_file="Thoreau, Henry David", year=1854, death=1862, category="Essays",
+         se="henry-david-thoreau_walden",
+         blurb="Two years in a cabin, and an argument about what a person actually needs. Still the best book on choosing less.",
+         subjects=["Wilderness areas -- Massachusetts", "Solitude"]),
+    dict(id=16643, slug="emerson-essays", title="Essays: First Series", author="Ralph Waldo Emerson",
+         author_file="Emerson, Ralph Waldo", year=1841, death=1882, category="Essays",
+         se="ralph-waldo-emerson_essays",
+         blurb="Self-Reliance, Compensation, History. The essays that gave American thought permission to stop looking at Europe.",
+         subjects=["American essays -- 19th century"]),
+    dict(id=3207, slug="leviathan", title="Leviathan", author="Thomas Hobbes",
+         author_file="Hobbes, Thomas", year=1651, death=1679, category="Philosophy",
+         se="thomas-hobbes_leviathan",
+         blurb="The state as an artificial man, built to escape the war of all against all. Every argument about government starts here.",
+         subjects=["Political science -- Early works to 1800", "State, The"]),
+    dict(id=34901, slug="on-liberty", title="On Liberty", author="John Stuart Mill",
+         author_file="Mill, John Stuart", year=1859, death=1873, category="Philosophy",
+         se="john-stuart-mill_on-liberty",
+         blurb="The harm principle, stated once and never improved on: the only reason to restrain anyone is to prevent harm to others.",
+         subjects=["Liberty", "Political science"]),
 ]
 
 # --------------------------------------------------------------------------- #
@@ -416,7 +501,7 @@ def se_spine(root: Path):
     return docs
 
 
-def shrink_tree(src: Path, dest: Path, max_px=900, quality=82) -> Path:
+def shrink_tree(src: Path, dest: Path, max_px=None, quality=82) -> Path:
     """Mirror an EPUB source tree with raster images downscaled for the screen.
 
     The plates in a Victorian illustrated edition arrive at print resolution —
@@ -426,9 +511,12 @@ def shrink_tree(src: Path, dest: Path, max_px=900, quality=82) -> Path:
     """
     import base64
     from PIL import Image
+    if max_px is None:
+        max_px = int(os.environ.get("CE_MAX_PX", "900"))
     dest.mkdir(parents=True, exist_ok=True)
     shrunk = 0
     renamed = {}
+    vector = []          # (svg path, target jpg path) — rasterised in one pass
     for p in src.rglob("*"):
         rel = p.relative_to(src)
         target = dest / rel
@@ -457,16 +545,11 @@ def shrink_tree(src: Path, dest: Path, max_px=900, quality=82) -> Path:
             # No embedded raster: the plate is real vector art (Standard Ebooks'
             # Alice is 42 SVGs of path data, ~760 KB each). Rasterise it once at
             # screen size instead of asking the PDF engine to draw it.
-            try:
-                im = svg_to_image(p, max_px)
-                if im is not None:
-                    jpg = target.with_suffix(".jpg")
-                    im.save(jpg, "JPEG", quality=quality, optimize=True)
-                    renamed[rel.as_posix()] = jpg.relative_to(dest).as_posix()
-                    shrunk += 1
-                    continue
-            except Exception:
-                pass
+            if p.stat().st_size > 60_000:      # real vector art, not an icon
+                jpg = target.with_suffix(".jpg")
+                vector.append((p, jpg))
+                renamed[rel.as_posix()] = jpg.relative_to(dest).as_posix()
+                continue
         if p.suffix.lower() in {".jpg", ".jpeg", ".png", ".webp", ".gif", ".tif", ".tiff"}:
             try:
                 im = Image.open(p)
@@ -485,6 +568,14 @@ def shrink_tree(src: Path, dest: Path, max_px=900, quality=82) -> Path:
             except Exception:
                 pass
         shutil.copy2(p, target)
+
+    if vector:
+        try:
+            made = svg_batch_to_images([v[0] for v in vector], [v[1] for v in vector], max_px, quality)
+            shrunk += made
+        except Exception as e:
+            log(f"    vector batch failed ({e}); leaving plates as SVG")
+            renamed = {k: v for k, v in renamed.items() if Path(v).exists()}
 
     if renamed:
         for f in list(dest.rglob("*.xhtml")) + list(dest.rglob("*.opf")):
@@ -551,6 +642,51 @@ def source_id_from_tree(root: Path):
         if m:
             return m.group(1)
     return None
+
+
+def svg_batch_to_images(svg_paths, out_paths, max_px=900, quality=82):
+    """Rasterise many SVGs in ONE WeasyPrint pass.
+
+    Doing this one file at a time cost ~4 s each, which is 3 minutes for an
+    illustrated edition and more than the whole ingest budget. One document
+    with a page per plate, then a pixmap per page, does the same work in a
+    fraction of the time. Each page is cropped to its ink so the aspect ratio
+    survives the square page.
+    """
+    import pymupdf
+    from PIL import Image as _Image
+    from weasyprint import HTML
+
+    pages = []
+    for sp in svg_paths:
+        pages.append(f"<div class='pg'><img src='{sp.as_uri()}'></div>")
+    doc = (
+        "<html><head><style>"
+        "@page{size:1000px 1000px;margin:0}"
+        "body{margin:0}"
+        ".pg{width:1000px;height:1000px;page-break-after:always;"
+        "display:flex;align-items:center;justify-content:center}"
+        "img{max-width:960px;max-height:960px}"
+        "</style></head><body>" + "".join(pages) + "</body></html>"
+    )
+    pdf_bytes = HTML(string=doc).write_pdf()
+    pdf = pymupdf.open("pdf", pdf_bytes)
+    made = 0
+    for i, out in enumerate(out_paths):
+        if i >= pdf.page_count:
+            break
+        pix = pdf[i].get_pixmap(dpi=96)
+        im = _Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
+        # crop the white margin so the plate keeps its own proportions
+        gray = im.convert("L")
+        bbox = gray.point(lambda v: 255 if v < 245 else 0).getbbox()
+        if bbox:
+            im = im.crop(bbox)
+        im.thumbnail((max_px, max_px), _Image.LANCZOS)
+        im.save(out, "JPEG", quality=quality, optimize=True)
+        made += 1
+    pdf.close()
+    return made
 
 
 def body_of(xhtml: str) -> str:

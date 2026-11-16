@@ -1,8 +1,14 @@
-# corpus-extendum | 26 books | 1 vault(s) | built 2026-11-15T19:45Z
+# corpus-extendum | 42 books | 1 vault(s) | built 2026-11-16T02:19Z
 # id | slug | title | author | year | category | formats | vault
 27780|treasure-island|Treasure Island|Stevenson, Robert Louis|1883|Adventure|pdf,epub,txt|corpus-extendum-vault-01
 76|huckleberry-finn|The Adventures of Huckleberry Finn|Twain, Mark|1884|Adventure|pdf,epub,txt|corpus-extendum-vault-01
+2166|king-solomons-mines|King Solomon's Mines|Haggard, H. Rider|1885|Adventure|pdf,epub,txt|corpus-extendum-vault-01
 11|alice-in-wonderland|Alice's Adventures in Wonderland|Carroll, Lewis|1865|Children's & Fable|pdf,epub,txt|corpus-extendum-vault-01
+778|five-children-and-it|Five Children and It|Nesbit, E.|1902|Children's & Fable|pdf,epub,txt|corpus-extendum-vault-01
+27805|the-wind-in-the-willows|The Wind in the Willows|Grahame, Kenneth|1908|Children's & Fable|pdf,epub,txt|corpus-extendum-vault-01
+17396|the-secret-garden|The Secret Garden|Burnett, Frances Hodgson|1911|Children's & Fable|pdf,epub,txt|corpus-extendum-vault-01
+2944|emerson-essays|Essays: First Series|Emerson, Ralph Waldo|1841|Essays|pdf,epub,txt|corpus-extendum-vault-01
+205|walden|Walden|Thoreau, Henry David|1854|Essays|pdf,epub,txt|corpus-extendum-vault-01
 408|souls-of-black-folk|The Souls of Black Folk|Du Bois, W. E. B.|1903|Essays|pdf,epub,txt|corpus-extendum-vault-01
 1342|pride-and-prejudice|Pride and Prejudice|Austen, Jane|1813|Fiction|pdf,epub,txt|corpus-extendum-vault-01
 1260|jane-eyre|Jane Eyre|Bronte, Charlotte|1847|Fiction|pdf,epub,txt|corpus-extendum-vault-01
@@ -17,12 +23,22 @@
 84|frankenstein|Frankenstein; or, The Modern Prometheus|Shelley, Mary Wollstonecraft|1818|Gothic & Horror|pdf,epub,txt|corpus-extendum-vault-01
 43|dr-jekyll-and-mr-hyde|The Strange Case of Dr. Jekyll and Mr. Hyde|Stevenson, Robert Louis|1886|Gothic & Horror|pdf,epub,txt|corpus-extendum-vault-01
 345|dracula|Dracula|Stoker, Bram|1897|Gothic & Horror|pdf,epub,txt|corpus-extendum-vault-01
+583|the-woman-in-white|The Woman in White|Collins, Wilkie|1860|Mystery & Detective|pdf,epub,txt|corpus-extendum-vault-01
+155|the-moonstone|The Moonstone|Collins, Wilkie|1868|Mystery & Detective|pdf,epub,txt|corpus-extendum-vault-01
 1661|sherlock-holmes|The Adventures of Sherlock Holmes|Doyle, Arthur Conan|1892|Mystery & Detective|pdf,epub,txt|corpus-extendum-vault-01
+2852|the-hound-of-the-baskervilles|The Hound of the Baskervilles|Doyle, Arthur Conan|1902|Mystery & Detective|pdf,epub,txt|corpus-extendum-vault-01
+204|father-brown|The Innocence of Father Brown|Chesterton, G. K.|1911|Mystery & Detective|pdf,epub,txt|corpus-extendum-vault-01
 2680|meditations|Meditations|Marcus Aurelius, Emperor of Rome|180|Philosophy|pdf,epub,txt|corpus-extendum-vault-01
+3207|leviathan|Leviathan|Hobbes, Thomas|1651|Philosophy|pdf,epub,txt|corpus-extendum-vault-01
+34901|on-liberty|On Liberty|Mill, John Stuart|1859|Philosophy|pdf,epub,txt|corpus-extendum-vault-01
+23583|keats-poems|Poems|Keats, John|1820|Poetry|pdf,epub,txt|corpus-extendum-vault-01
+1322|leaves-of-grass|Leaves of Grass|Whitman, Walt|1855|Poetry|pdf,epub,txt|corpus-extendum-vault-01
 7164|gitanjali|Gitanjali|Tagore, Rabindranath|1912|Poetry|pdf,epub,txt|corpus-extendum-vault-01
 58585|the-prophet|The Prophet|Gibran, Kahlil|1923|Poetry|pdf,epub,txt|corpus-extendum-vault-01
 2388|the-song-celestial|The Song Celestial; or, Bhagavad-Gita|Arnold, Edwin, Sir|1885|Sacred Texts|pdf,epub,txt|corpus-extendum-vault-01
 829|gullivers-travels|Gulliver's Travels|Swift, Jonathan|1726|Satire|pdf,epub,txt|corpus-extendum-vault-01
+18247|the-last-man|The Last Man|Shelley, Mary Wollstonecraft|1826|Science Fiction|pdf,epub,txt|corpus-extendum-vault-01
 35|the-time-machine|The Time Machine|Wells, H. G.|1895|Science Fiction|pdf,epub,txt|corpus-extendum-vault-01
 5230|the-invisible-man|The Invisible Man|Wells, H. G.|1897|Science Fiction|pdf,epub,txt|corpus-extendum-vault-01
+36|the-war-of-the-worlds|The War of the Worlds|Wells, H. G.|1898|Science Fiction|pdf,epub,txt|corpus-extendum-vault-01
 2814|dubliners|Dubliners|Joyce, James|1914|Short Stories|pdf,epub,txt|corpus-extendum-vault-01

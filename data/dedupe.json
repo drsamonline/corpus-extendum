@@ -25,7 +25,21 @@
     "gutenberg:25344",
     "gutenberg:160",
     "gutenberg:541",
-    "gutenberg:829"
+    "gutenberg:829",
+    "gutenberg:36",
+    "gutenberg:18247",
+    "gutenberg:2166",
+    "gutenberg:2852",
+    "gutenberg:27805",
+    "gutenberg:17396",
+    "gutenberg:1322",
+    "gutenberg:204",
+    "gutenberg:778",
+    "gutenberg:23583",
+    "gutenberg:205",
+    "gutenberg:2944",
+    "gutenberg:3207",
+    "gutenberg:34901"
   ],
   "text_sha256": {
     "78a0a582db906da05e36af990abed243f3cf64b5e3ecd77eb9ea3743be3ec65b": "pride-and-prejudice",
@@ -53,7 +67,21 @@
     "962ac5b3e07f974b1adbd1d2ec2cb4646469a581a24eced975719d6f56eb469e": "the-scarlet-letter",
     "16f70dcb2419a8928ea85248d693dff4ac910a0ef631b429c29fe1fa3a0581ff": "the-awakening",
     "9bafcdb5e01100cb87b57d95ad9e26a67a38024be88dc8e14aec83f781e77467": "the-age-of-innocence",
-    "18efa15d5237a714d324756fe37e1b48e9bef8c4246aa4f27825b8de8540c6f2": "gullivers-travels"
+    "18efa15d5237a714d324756fe37e1b48e9bef8c4246aa4f27825b8de8540c6f2": "gullivers-travels",
+    "0be6eccec41e83d9b8575c69b9841f6e116e73b4afcc646a4e271eb7525ca93f": "the-war-of-the-worlds",
+    "c80a3193960dc423ae91310f3d9fe6d4b1a6c2711c49f0cc2b8f0cd09ac462e6": "the-last-man",
+    "088e77e98980397b2ee3708e438eadc7db425a8e3b278f1a1b8fa21194901141": "king-solomons-mines",
+    "72665242953ecd9cec46015cddec1cf24faf433b6885479e2214568276c4dcf9": "the-hound-of-the-baskervilles",
+    "5e3150488c334469e5734ae5887c4b2b02e4ce54cd32eb4fc7e9054b62a12007": "the-wind-in-the-willows",
+    "c55ec9a74fed33d3a516e23e7c7772561d7369edef2f4679a2d0f2985810dfc3": "the-secret-garden",
+    "6f0c73a28040eafe2bbc05434bf89354f6ae9f7f6c3b5d45c7b06ec217b532a7": "leaves-of-grass",
+    "b0366433ad3aa2e7e8dd30714f2811294ceaf1943cfb2609f4aeb4587929b9f5": "father-brown",
+    "8296105586773b59bd39be78eba4c7af710bccf9f40e4c4830a4f9ce45da1ba1": "five-children-and-it",
+    "7a3f26352f3b1fe1acb26c290fcf83a9802fed48a41b1846852c9a8357d7ebfa": "keats-poems",
+    "7487798c80f781201de3df549244ef3ee5cd0df590ed6007d41fb019acfd10d2": "walden",
+    "496435fef773dac0dce08546717b0b7d2be2b9ff12c4db25f6da73f5dc16f73a": "emerson-essays",
+    "7e58dddc1e278aefe69bb97168afe275c3829ebe07ac37633f05cdc0746a1a4a": "leviathan",
+    "4fc52a60e416e6f848d86e37430c73c870f77be0ab26cbf82d5783f78decf75a": "on-liberty"
   },
   "work_keys": {
     "austen|pride and prejudice|1813": "pride-and-prejudice",
@@ -81,6 +109,20 @@
     "hawthorne|the scarlet letter|1850": "the-scarlet-letter",
     "chopin|the awakening|1899": "the-awakening",
     "wharton|the age of innocence|1920": "the-age-of-innocence",
-    "swift|gulliver's travels|1726": "gullivers-travels"
+    "swift|gulliver's travels|1726": "gullivers-travels",
+    "wells|the war of the worlds|1898": "the-war-of-the-worlds",
+    "shelley|the last man|1826": "the-last-man",
+    "haggard|king solomon's mines|1885": "king-solomons-mines",
+    "doyle|the hound of the baskervilles|1902": "the-hound-of-the-baskervilles",
+    "grahame|the wind in the willows|1908": "the-wind-in-the-willows",
+    "burnett|the secret garden|1911": "the-secret-garden",
+    "whitman|leaves of grass|1855": "leaves-of-grass",
+    "chesterton|the innocence of father brown|1911": "father-brown",
+    "nesbit|five children and it|1902": "five-children-and-it",
+    "keats|poems|1820": "keats-poems",
+    "thoreau|walden|1854": "walden",
+    "emerson|essays: first series|1841": "emerson-essays",
+    "hobbes|leviathan|1651": "leviathan",
+    "mill|on liberty|1859": "on-liberty"
   }
 }
