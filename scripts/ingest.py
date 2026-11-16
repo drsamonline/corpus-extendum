@@ -23,6 +23,7 @@ import argparse
 import hashlib
 import io
 import json
+from html import escape
 import os
 import re
 import shutil
@@ -372,6 +373,11 @@ BOOKS = [
          translator="Constance Garnett", translation_year=1916,
          blurb="Six volumes of stories in one book — the doctor, the steppe, and the ordinary evening that turns. Garnett's Chekhov, complete.",
          subjects=["Short stories, Russian -- Translations into English", "Russia -- Social life and customs -- Fiction"]),
+    dict(id=0, slug="goody-two-shoes", title="Goody Two-Shoes", author="Anonymous",
+         author_file="Anonymous", year=1888, death=0, category="Children's & Fable",
+         anonymous=True, archive="goodytwoshoes00newyiala",
+         blurb="A foundling with one shoe, a raven, and a school of her own. The 1888 illustrated edition, scanned by the Internet Archive.",
+         subjects=["Children's literature", "Conduct of life -- Juvenile fiction"]),
 ]
 
 # --------------------------------------------------------------------------- #
@@ -379,6 +385,13 @@ BOOKS = [
 # --------------------------------------------------------------------------- #
 def log(msg):
     print(msg, flush=True)
+
+
+def fetch_json(url, timeout=60):
+    try:
+        return json.loads(fetch(url, timeout=timeout).decode("utf-8", "ignore"))
+    except Exception:
+        return {}
 
 
 def fetch(url, timeout=90):
@@ -1030,6 +1043,25 @@ def translator_from_tree(root: Path):
     return None
 
 
+def anonymous_basis(book: dict):
+    """An anonymous or corporate work has no death year to count from.
+
+    India counts 60 years from publication for anonymous works; the US counts
+    publication before 1930. Both are publication tests, so this branch needs no
+    person — and it refuses a book published too recently for either.
+    """
+    year = datetime.now(timezone.utc).year
+    pub = book.get("year")
+    if not isinstance(pub, int):
+        return False, "anonymous work without a publication year"
+    if pub >= 1930:
+        return False, f"anonymous work published {pub}; not public domain in the US"
+    if pub + 60 > year:
+        return False, f"anonymous work published {pub}; not public domain in India until {pub + 60}"
+    return True, (f"anonymous; first published {pub} — public domain in India "
+                  f"(60 years from publication) and the United States (pre-1930)")
+
+
 def check_translation(book: dict, registry: dict):
     """The translator test. Returns (ok, block_or_reason).
 
@@ -1129,6 +1161,125 @@ def near_duplicate(book: dict, registry: dict, threshold: float = 0.62):
     return None, round(best, 3)
 
 
+
+# --------------------------------------------------------------------------- #
+# Internet Archive adapter
+# --------------------------------------------------------------------------- #
+IA_PD = {"NOT_IN_COPYRIGHT", "PUBLIC_DOMAIN", "PD"}
+
+
+def archive_metadata(identifier: str) -> dict:
+    meta = fetch_json(f"https://archive.org/metadata/{identifier}")
+    if not meta or "files" not in meta:
+        raise RuntimeError(f"archive.org has no item {identifier!r}")
+    return meta
+
+
+def archive_rights(meta: dict) -> tuple:
+    """The item's own statement about its copyright, read before anything else.
+
+    `possible-copyright-status` is not trustworthy on its own — a search for it
+    turns up 2001 books — so it is a necessary signal, not a sufficient one.
+    The author gate still runs on top of it.
+    """
+    md = meta.get("metadata", {})
+    status = str(md.get("possible-copyright-status", "")).upper().replace("-", "_")
+    licence = str(md.get("licenseurl", "")).lower()
+    collections = md.get("collection", [])
+    if isinstance(collections, str):
+        collections = [collections]
+    pd_collection = any(c in {"americana", "cdl", "toronto", "library_of_congress",
+                              "wellcomelibrary", "getty", "smithsonian"} for c in collections)
+    if status in IA_PD or "publicdomain" in licence:
+        return True, f"archive.org marks it {status or licence}" + (" (public-domain collection)" if pd_collection else "")
+    if pd_collection:
+        return True, f"held in a public-domain collection ({', '.join(collections[:3])})"
+    return False, f"archive.org does not mark it public domain (status={status or 'none'})"
+
+
+def archive_files(meta: dict, identifier: str) -> dict:
+    names = [f["name"] for f in meta["files"]]
+    pdfs = [n for n in names if n.lower().endswith(".pdf") and not n.lower().endswith("_bw.pdf")]
+    texts = [n for n in names if n.endswith("_djvu.txt")]
+    if not texts:
+        raise RuntimeError("no OCR text (_djvu.txt) — the text is what makes it searchable")
+    pdf = pdfs[0] if pdfs else None
+    return {"pdf": pdf, "txt": texts[0]}
+
+
+def fetch_archive_book(book: dict, work: Path):
+    """Download a scan: the PDF as it is, the OCR text as the readable edition."""
+    ident = book["archive"]
+    meta = archive_metadata(ident)
+    ok, why = archive_rights(meta)
+    if not ok:
+        raise RuntimeError(f"refused: {why}")
+    files = archive_files(meta, ident)
+    base = f"https://archive.org/download/{ident}"
+    pdf_bytes = fetch(f"{base}/{files['pdf']}", timeout=300) if files["pdf"] else None
+    txt_bytes = fetch(f"{base}/{files['txt']}", timeout=300)
+    return meta, pdf_bytes, txt_bytes, why
+
+
+def build_from_archive(meta: dict, pdf_bytes, txt_bytes, book: dict, out: Path):
+    """A scan, not a typesetting job.
+
+    The PDF is the archive's own — we do not re-typeset a scanned book. The OCR
+    text is what makes it searchable and what the EPUB is built from, so it is
+    required even when the PDF is present.
+    """
+    from weasyprint import HTML
+    import pymupdf
+
+    slug = book["slug"]
+    out.mkdir(parents=True, exist_ok=True)
+    plain = txt_bytes.decode("utf-8", "ignore")
+
+    pdf_path = None
+    if pdf_bytes:
+        pdf_path = out / f"{slug}.pdf"
+        pdf_path.write_bytes(pdf_bytes)
+
+    txt_path = out / f"{slug}.txt"
+    txt_path.write_text(plain, encoding="utf-8")
+
+    # EPUB from the OCR text: paragraphs, a title page, nothing invented
+    paras = [p.strip() for p in plain.split("\n") if p.strip()]
+    body = "".join(f"<p>{escape(p)}</p>" for p in paras[:4000])
+    html = (f"<!DOCTYPE html><html><head><meta charset='utf-8'><style>{PDF_CSS}</style></head><body>"
+            f"<section class='ce-title'><h1>{escape(book['title'])}</h1>"
+            f"<div class='ce-rule'></div><p class='ce-author'>{escape(book['author'])}</p>"
+            f"<p class='ce-src'>Public domain · scanned by the Internet Archive</p></section>"
+            f"{body}</body></html>")
+    epub_path = out / f"{slug}.epub"
+    with zipfile.ZipFile(epub_path, "w") as z:
+        z.writestr(zipfile.ZipInfo("mimetype"), "application/epub+zip", zipfile.ZIP_STORED)
+        z.writestr("META-INF/container.xml",
+                   '<?xml version="1.0"?><container version="1.0" '
+                   'xmlns="urn:oasis:names:tc:opendocument:xmlns:container"><rootfiles>'
+                   '<rootfile full-path="OEBPS/content.xhtml" '
+                   'media-type="application/xhtml+xml"/></rootfiles></container>')
+        z.writestr("OEBPS/content.xhtml", html, zipfile.ZIP_DEFLATED)
+
+    # cover: the scan's own first page, which beats a generated one
+    cover_path = out / "cover.jpg"
+    cover_kind = "generated"
+    try:
+        if pdf_path:
+            doc = pymupdf.open(str(pdf_path))
+            pix = doc[0].get_pixmap(dpi=110)
+            from PIL import Image
+            im = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
+            im.thumbnail((600, 900))
+            im.save(cover_path, "JPEG", quality=85)
+            cover_kind = "scan"
+        else:
+            raise RuntimeError("no pdf")
+    except Exception:
+        make_cover(cover_path, book["title"], book["author"], book["category"])
+    return pdf_path, epub_path, txt_path, cover_path, plain, cover_kind
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--vault", required=True, help="path to the vault repo checkout")
@@ -1203,12 +1354,22 @@ def main():
                 source = dict(name="GITenberg (Project Gutenberg mirror)", ref=b["gitenberg"],
                               url=f"https://www.gutenberg.org/ebooks/{b['id']}",
                               licence="Project Gutenberg Licence · text public domain")
+            elif b.get("archive"):
+                meta, pdf_bytes, txt_bytes, why = fetch_archive_book(b, work / b["slug"])
+                kind = "archive"
+                source = dict(name="Internet Archive", ref=b["archive"],
+                              url=f"https://archive.org/details/{b['archive']}",
+                              licence=f"scan marked public domain ({why})")
             else:
                 raise RuntimeError("no source configured")
 
             tmp_out = work / b["slug"] / "_out"
             tmp_out.mkdir(parents=True, exist_ok=True)
-            pdf, epub, txt, cover, plain, cover_kind = build_from_tree(src_root, tmp_out, b, kind)
+            if kind == "archive":
+                pdf, epub, txt, cover, plain, cover_kind = build_from_archive(
+                    meta, pdf_bytes, txt_bytes, b, tmp_out)
+            else:
+                pdf, epub, txt, cover, plain, cover_kind = build_from_tree(src_root, tmp_out, b, kind)
 
             # ---- translator gate (before anything is written) ------------ #
             if b.get("se") and not b.get("translator"):
@@ -1220,7 +1381,7 @@ def main():
                 raise RuntimeError(f"refused: {gate_info}")
 
             # ---- the id comes from the record, and the record wins ------- #
-            real_id = source_id_from_tree(src_root) or b["id"]
+            real_id = (source_id_from_tree(src_root) if kind != "archive" else None) or b["id"]
             if str(real_id) != str(b["id"]):
                 log(f"    id corrected from the source record: {b['id']} → {real_id}")
             b = dict(b, id=real_id)
@@ -1272,13 +1433,20 @@ def main():
             shutil.copy2(cover, dest / "cover.jpg")
 
             fmts = ["epub", "txt"] if args.no_pdf else ["pdf", "epub", "txt"]
+            anon_ok, anon_info = (True, None)
+            if b.get("anonymous"):
+                anon_ok, anon_info = anonymous_basis(b)
+                if not anon_ok:
+                    raise RuntimeError(f"refused: {anon_info}")
+
             meta = {
                 "id": str(b["id"]), "slug": b["slug"], "title": b["title"],
                 "author": {"name": b["author"], "file_as": b["author_file"], "death": b["death"]},
                 "year": b["year"], "category": b["category"], "language": "en",
                 "subjects": b.get("subjects", []), "blurb": b.get("blurb", ""),
                 "rights": {
-                    "basis": (f"author d. {b['death']}; first published {b['year']} — "
+                    "basis": (anon_info if anon_info else
+                              f"author d. {b['death']}; first published {b['year']} — "
                               f"public domain in India (life + 60) and the United States (pre-1930)"),
                     "india": True, "us": True, "verified": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
                 },

@@ -56,7 +56,8 @@
     "gutenberg:421": "",
     "gutenberg:1023": "",
     "gutenberg:1676": "plato-dialogues",
-    "gutenberg:13416": "chekhov-short-fiction"
+    "gutenberg:13416": "chekhov-short-fiction",
+    "gutenberg:0": "goody-two-shoes"
   },
   "text_sha256": {
     "78a0a582db906da05e36af990abed243f3cf64b5e3ecd77eb9ea3743be3ec65b": "pride-and-prejudice",
@@ -115,7 +116,8 @@
     "1a70ff02c5c95b848661bb8aefbf024c604eaf1978c31c9a6a6536812324f6fd": "kidnapped",
     "a7f4d2a0c744a407c9ac45de2152443c2c708415af7be33e6ee35a743558fb7c": "bleak-house",
     "71521ddb3b7a86b2849f3d344893f9acc6d712b9f2cb1f962c6aacc0ca8aca24": "plato-dialogues",
-    "1cdd3032df4f7611f8694fc9a2ae73f50edc94928c1716c1ed146490f6a9af1f": "chekhov-short-fiction"
+    "1cdd3032df4f7611f8694fc9a2ae73f50edc94928c1716c1ed146490f6a9af1f": "chekhov-short-fiction",
+    "dd42360b482bdbbdbdf7fef2009cc801bfe04353e691df8107924a4703b7d7bd": "goody-two-shoes"
   },
   "work_keys": {
     "austen|pride and prejudice|1813": "pride-and-prejudice",
@@ -174,6 +176,7 @@
     "stevenson|kidnapped|1886": "kidnapped",
     "dickens|bleak house|1853": "bleak-house",
     "plato|dialogues|-380": "plato-dialogues",
-    "chekhov|short fiction|1886": "chekhov-short-fiction"
+    "chekhov|short fiction|1886": "chekhov-short-fiction",
+    "anonymous|goody two-shoes|1888": "goody-two-shoes"
   }
 }

@@ -1,4 +1,4 @@
-# corpus-extendum | 65 books | 1 vault(s) | built 2026-11-16T14:29Z
+# corpus-extendum | 66 books | 1 vault(s) | built 2026-11-16T14:55Z
 # id | slug | title | author | year | category | formats | vault
 103|around-the-world-in-eighty-days|Around the World in Eighty Days|Verne, Jules|1872|Adventure|pdf,epub,txt|corpus-extendum-vault-01
 27780|treasure-island|Treasure Island|Stevenson, Robert Louis|1883|Adventure|pdf,epub,txt|corpus-extendum-vault-01
@@ -9,6 +9,7 @@
 2226|kim|Kim|Kipling, Rudyard|1901|Adventure|pdf,epub,txt|corpus-extendum-vault-01
 11|alice-in-wonderland|Alice's Adventures in Wonderland|Carroll, Lewis|1865|Children's & Fable|pdf,epub,txt|corpus-extendum-vault-01
 12|through-the-looking-glass|Through the Looking-Glass|Carroll, Lewis|1871|Children's & Fable|pdf,epub,txt|corpus-extendum-vault-01
+0|goody-two-shoes|Goody Two-Shoes|Anonymous|1888|Children's & Fable|pdf,epub,txt|corpus-extendum-vault-01
 778|five-children-and-it|Five Children and It|Nesbit, E.|1902|Children's & Fable|pdf,epub,txt|corpus-extendum-vault-01
 27805|the-wind-in-the-willows|The Wind in the Willows|Grahame, Kenneth|1908|Children's & Fable|pdf,epub,txt|corpus-extendum-vault-01
 17396|the-secret-garden|The Secret Garden|Burnett, Frances Hodgson|1911|Children's & Fable|pdf,epub,txt|corpus-extendum-vault-01

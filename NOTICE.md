@@ -54,8 +54,17 @@ whose terms are respected here:
 
 ### Internet Archive
 
-Not used. Its `collection:gutenberg` items were checked and carry no text, only
-a readme. Any future use would check the item's own rights statement first.
+Used for scans that exist nowhere else. Its `collection:gutenberg` items were
+checked and carry no text, only a readme, so the adapter looks in the dated
+public-domain collections instead (`americana`, `cdl`, `toronto` and similar).
+
+For each item the adapter reads the archive's own statement before anything is
+downloaded — `possible-copyright-status` and `licenseurl` — and refuses the item
+if it is not marked public domain. That signal is necessary but not sufficient:
+a search for it turns up 2001 books, so the author gate still runs on top.
+
+The PDF is the archive's scan, unmodified. The EPUB is built from the item's OCR
+text. Credit and the item identifier are in the book's record.
 
 ## What is ours
 
