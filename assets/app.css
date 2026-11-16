@@ -394,3 +394,31 @@ body.locked{overscroll-behavior:none}
    screenful. */
 #epubBox{overflow:auto;-webkit-overflow-scrolling:touch;box-shadow:0 26px 60px -18px rgba(0,0,0,.75)}
 #epubBox iframe{border:0;display:block;width:100%}
+
+/* ---------- find inside a book ---------- */
+.findbar{
+  display:flex;align-items:center;gap:10px;padding:9px 16px;position:relative;
+  background:#100D0B;border-bottom:1px solid #2A2520;
+}
+.findbar[hidden]{display:none}
+.findbar input{
+  flex:1;min-width:0;background:#1A1613;border:1px solid #332C26;border-radius:7px;
+  color:#EDE6DA;font:inherit;font-size:13px;padding:7px 10px;outline:none;
+}
+.findbar input:focus{border-color:#8C3A2B}
+.findcount{font-size:11px;color:#8C8175;white-space:nowrap;font-variant-numeric:tabular-nums}
+.findclose{background:none;border:0;color:#8C8175;cursor:pointer;font-size:13px;padding:4px 6px}
+.findclose:hover{color:#EDE6DA}
+.findresults{
+  position:absolute;top:100%;left:0;right:0;z-index:20;max-height:52vh;overflow:auto;
+  background:#141110;border-bottom:1px solid #2A2520;box-shadow:0 20px 40px -20px rgba(0,0,0,.9);
+}
+.findresults[hidden]{display:none}
+.fresult{display:block;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid #211C18;
+  padding:10px 16px;color:#C9C0B2;font:inherit;font-size:12.5px;line-height:1.5;cursor:pointer}
+.fresult:hover,.fresult:focus{background:#1D1815;color:#F2EADC;outline:none}
+.fresult mark{background:#5A2A20;color:#F6E6DF;padding:0 2px;border-radius:2px}
+.fempty{padding:12px 16px;color:#7E7568;font-size:12px}
+/* plain text as paragraphs, so a search hit has somewhere to land */
+.txtpage p{margin:0 0 .75em;white-space:pre-wrap;word-wrap:break-word}
+.txtpage p.hit{background:rgba(140,58,43,.22);outline:1px solid rgba(140,58,43,.5);border-radius:3px}

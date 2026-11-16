@@ -65,6 +65,22 @@ function cdn(book, fmt) {
   const base = s ? s.cdn : '';
   return `${base}/books/${book.slug}/${book.slug}.${fmt}`;
 }
+
+function rawFile(book, fmt) {
+  const s = state.shards[book.vault];
+  return `${s ? s.raw : ''}/books/${book.slug}/${book.slug}.${fmt}`;
+}
+
+/* jsDelivr refuses text files from a repository over 50 MB — its package
+ * limit — while still serving the PDFs and covers from the same repo. Raw has
+ * no such limit, so text goes there and binary tries the CDN first with raw as
+ * a fallback. Measured, not assumed: the .txt returned 403 with "Package size
+ * exceeded the configured limit of 50 MB" while the .pdf beside it returned
+ * 200 from the same vault.
+ */
+function fileUrl(book, fmt) {
+  return fmt === 'txt' ? rawFile(book, fmt) : cdn(book, fmt);
+}
 function raw(book, file) {
   const s = state.shards[book.vault];
   return `${s ? s.raw : ''}/${file}`;
@@ -127,6 +143,87 @@ function render() {
     c.onclick = (e) => { e.preventDefault(); openBook(c.dataset.slug); });
 }
 
+
+/* ------------------------------------------------------------------ find */
+async function bookText(b) {
+  if (state.textCache && state.textCache[b.slug]) return state.textCache[b.slug];
+  state.textCache = state.textCache || {};
+  const t = await fetch(fileUrl(b, 'txt'), { cache: 'force-cache' }).then(r => {
+    if (!r.ok) throw new Error(`text fetch failed (${r.status})`);
+    return r.text();
+  });
+  state.textCache[b.slug] = t;
+  return t;
+}
+
+function paragraphs(text) {
+  return text.split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
+}
+
+function openFind() {
+  if (!state.open) return;
+  $('findBar').hidden = false;
+  $('findInput').focus();
+  $('findInput').select();
+}
+
+function closeFind() {
+  $('findBar').hidden = true;
+  $('findResults').hidden = true;
+  $('findCount').textContent = '';
+}
+
+let findTimer = null;
+async function runFind(q) {
+  const b = state.open;
+  const results = $('findResults');
+  q = q.trim();
+  if (!b || q.length < 2) {
+    $('findCount').textContent = '';
+    results.hidden = true;
+    return;
+  }
+  let text;
+  try {
+    text = await bookText(b);
+  } catch (err) {
+    $('findCount').textContent = 'text unavailable';
+    return;
+  }
+  const paras = paragraphs(text);
+  const needle = q.toLowerCase();
+  const hits = [];
+  for (let i = 0; i < paras.length && hits.length < 60; i++) {
+    const idx = paras[i].toLowerCase().indexOf(needle);
+    if (idx === -1) continue;
+    const from = Math.max(0, idx - 45);
+    const to = Math.min(paras[i].length, idx + needle.length + 60);
+    hits.push({ i, pre: paras[i].slice(from, idx), word: paras[i].slice(idx, idx + q.length),
+                post: paras[i].slice(idx + q.length, to) });
+  }
+  $('findCount').textContent = hits.length ? `${hits.length}${hits.length === 60 ? '+' : ''} match${hits.length === 1 ? '' : 'es'}` : 'no matches';
+  if (!hits.length) { results.hidden = true; return; }
+  results.innerHTML = hits.map(h =>
+    `<button class="fresult" data-i="${h.i}">…${esc(h.pre)}<mark>${esc(h.word)}</mark>${esc(h.post)}…</button>`
+  ).join('');
+  results.hidden = false;
+  results.querySelectorAll('.fresult').forEach(el => el.onclick = () => jumpToParagraph(+el.dataset.i));
+}
+
+async function jumpToParagraph(i) {
+  const b = state.open;
+  $('findResults').hidden = true;
+  if (state.fmt !== 'txt') {
+    setFormat('txt');
+    await new Promise(r => setTimeout(r, 350));
+  }
+  const para = document.querySelector(`.txtpage p[data-i="${i}"]`);
+  if (!para) return;
+  document.querySelectorAll('.txtpage p.hit').forEach(p => p.classList.remove('hit'));
+  para.classList.add('hit');
+  para.scrollIntoView({ block: 'center', behavior: 'auto' });
+}
+
 /* ---------------------------------------------------------------- reader */
 const reader = $('reader');
 let lastFocus = null;
@@ -159,6 +256,8 @@ function openBook(slug) {
     `<button class="fp" data-f="${f}">${FORMAT_LABEL[f] || f.toUpperCase()}</button>`).join('');
   $('fmtbar').querySelectorAll('.fp').forEach(p => p.onclick = () => setFormat(p.dataset.f));
 
+  closeFind();
+  $('findInput').value = '';
   reader.classList.add('open');
   document.body.classList.add('locked');
   $('rClose').focus();
@@ -253,9 +352,15 @@ async function renderPdf(b) {
       // No disableAutoFetch: that switches pdf.js to range requests, which
       // hangs against any server that does not answer them — and a stall here
       // looked exactly like a blank page. One whole-file fetch works anywhere.
-      const doc = await withTimeout(
-        pdfjsLib.getDocument({ url: cdn(b, 'pdf') }).promise, 30000,
-        'the PDF did not finish loading');
+      const load = (url) => withTimeout(pdfjsLib.getDocument({ url }).promise, 30000,
+                                        'the PDF did not finish loading');
+      let doc;
+      try {
+        doc = await load(cdn(b, 'pdf'));
+      } catch (e) {
+        if (state.fmt !== 'pdf') return;
+        doc = await load(rawFile(b, 'pdf'));   // CDN refused; raw has no size limit
+      }
       if (state.fmt !== 'pdf') return;   // the reader changed format while loading
       state.pdfDoc = doc;
       state.pdfPage = 1;
@@ -319,11 +424,11 @@ async function renderTxt(b) {
   page.style.display = 'block';
   $('rNote').textContent = 'Plain text, paginated in the browser — nothing to download to start reading.';
   try {
-    const text = await fetch(cdn(b, 'txt')).then(r => r.text());
-    // Wrapped by the browser, not by a fixed column count: 72 columns is
-    // unreadable on a 360px screen and was being clipped, not wrapped.
+    const text = await bookText(b);
+    // One paragraph per element: the browser does the wrapping, and a search
+    // hit has an element to scroll to and highlight.
     page.innerHTML = `<div class="monoh"><span>${b.slug}.txt</span><span>plain text</span></div>`
-      + `<pre>${esc(text)}</pre>`;
+      + paragraphs(text).map((p, i) => `<p data-i="${i}">${esc(p)}</p>`).join('');
   } catch (err) {
     page.textContent = `Could not load the text (${err.message}).`;
   }
@@ -377,6 +482,17 @@ function turn(dir) {
   stage.scrollBy({ top: dir * Math.round(stage.clientHeight * 0.85), behavior: 'auto' });
 }
 
+$('rFind').onclick = () => { $('findBar').hidden ? openFind() : closeFind(); };
+$('findClose').onclick = closeFind;
+$('findInput').addEventListener('input', (e) => {
+  clearTimeout(findTimer);
+  const q = e.target.value;
+  findTimer = setTimeout(() => runFind(q), 180);
+});
+$('findInput').addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') { e.stopPropagation(); closeFind(); }
+});
+
 $('rPrev').onclick = () => turn(-1);
 $('rNext').onclick = () => turn(1);
 document.addEventListener('keydown', (e) => {
@@ -385,7 +501,13 @@ document.addEventListener('keydown', (e) => {
     return;
   }
   const k = e.key;
-  if (k === 'Escape') { closeReader(); return; }
+  // Ctrl/Cmd+F or / opens find; Escape closes find before it closes the reader
+  if ((e.ctrlKey || e.metaKey) && k === 'f') { e.preventDefault(); openFind(); return; }
+  if (k === '/' && document.activeElement !== $('findInput')) { e.preventDefault(); openFind(); return; }
+  if (k === 'Escape') {
+    if (!$('findBar').hidden) { closeFind(); return; }
+    closeReader(); return;
+  }
   if (k === 'ArrowRight' || k === 'PageDown' || k === ' ') { e.preventDefault(); turn(1); return; }
   if (k === 'ArrowLeft' || k === 'PageUp') { e.preventDefault(); turn(-1); return; }
   if (k === 'Home') { e.preventDefault(); $('stage').scrollTo({ top: 0, behavior: 'smooth' }); return; }

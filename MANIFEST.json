@@ -33,17 +33,17 @@
       "class": "hand"
     },
     "README.md": {
-      "sha": "70119c64a842b67f1c897ca805a6b751d37c8885",
+      "sha": "e6d6dbb2c01a2554c7870c2e7c3659ecb97b48bc",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "assets/app.css": {
-      "sha": "7f550fc3afb439b198f2e0e602faf1b4c95e0061",
+      "sha": "fe8d03685ff50659252f84562cec6ee003163dd1",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "assets/app.js": {
-      "sha": "51341739f4b2bad10715cdeb6d0ad09244c613c4",
+      "sha": "4f655b39d6c0fd4c93ee018a159ec6fae62da000",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -118,7 +118,7 @@
       "class": "hand"
     },
     "index.html": {
-      "sha": "f49c3127c877e378e5f0b09e7c086b341e93d577",
+      "sha": "98230e3761139343545f65a994bbd129171ec2dc",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -148,7 +148,7 @@
       "class": "hand"
     },
     "MANIFEST.json": {
-      "sha": "142ef588f46959324bf1386c849b5e0b62799eb6",
+      "sha": "fe3fd1def61c548fd763b809b6e33612a9c528a9",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -168,12 +168,12 @@
       "class": "hand"
     },
     "CHANGELOG.md": {
-      "sha": "31921e3c391441eea4da16189d171ec0ae302bd5",
+      "sha": "e36b6b1c9da9d680e7bf473feff2041611950bbb",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "docs/ARCHITECTURE.md": {
-      "sha": "209cf6aafa1937a080fc92adbf48c7b074c97cae",
+      "sha": "428b22f2c99aa9d42526e5c70ef8fb907c2c35d2",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -183,7 +183,7 @@
       "class": "hand"
     },
     "docs/DECISIONS.md": {
-      "sha": "464b61409676f11d80bbcc0646fbd1119ee6deb1",
+      "sha": "7d417e75cadd9f4184dad3732e4bb3c9b2d188fc",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -223,7 +223,7 @@
       "class": "hand"
     },
     "docs/README.md": {
-      "sha": "859b70727cb2d6f6fdb7ea6b3c3929b67fb090bb",
+      "sha": "258fb17323c7ba25912e09355739d273bce35b9e",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
