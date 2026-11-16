@@ -962,6 +962,68 @@ def check_translation(book: dict, registry: dict):
     }
 
 
+
+# --------------------------------------------------------------------------- #
+# Identity: work keys and near-duplicate titles (dedupe tests 3 and 4)
+# --------------------------------------------------------------------------- #
+def work_key(book: dict) -> str:
+    """surname|title|year — the same work, whatever the edition.
+
+    The subtitle is dropped because editions disagree about it ("Moby-Dick; or,
+    The Whale" vs "Moby-Dick"), and the surname alone because editions disagree
+    about the forenames even more.
+    """
+    surname = book["author_file"].split(",")[0].strip().lower()
+    title = book["title"].lower()
+    title = re.split(r"[;:]", title)[0]
+    title = re.sub(r"[^a-z0-9 ]", " ", title)
+    title = re.sub(r"\s+", " ", title).strip()
+    return f"{surname}|{title}|{book['year']}"
+
+
+def trigrams(text: str) -> set:
+    t = re.sub(r"[^a-z0-9 ]", " ", text.lower())
+    t = " " + re.sub(r"\s+", " ", t).strip() + " "
+    return {t[i:i + 3] for i in range(len(t) - 2)}
+
+
+def similarity(a: str, b: str) -> float:
+    ta, tb = trigrams(a), trigrams(b)
+    if not ta or not tb:
+        return 0.0
+    return len(ta & tb) / len(ta | tb)
+
+
+def near_duplicate(book: dict, registry: dict, threshold: float = 0.62):
+    """Test 4: a title this close to an existing one, by the same author.
+
+    Returns the slug it resembles, or None. Deliberately conservative — the
+    caller holds the book for review rather than adding it, because a false
+    duplicate hides a real book and a missed duplicate makes the library lie
+    about its size.
+
+    The threshold is 0.62 because it was measured, not chosen. On real titles:
+    "The Adventures of Huckleberry Finn" vs "Adventures of Huckleberry Finn"
+    0.88, "Pride and Prejudice" vs "Pride & Prejudice" 0.68, "The Picture of
+    Dorian Gray" vs "Picture of Dorian Gray" 0.85 — while genuinely different
+    works by the same author sit far lower: "Dracula" vs "Dracula's Guest" 0.47,
+    "Jane Eyre" vs "Villette" 0.00. The design said 0.92, which no real
+    near-duplicate reaches; it would never have fired.
+    """
+    surname = book["author_file"].split(",")[0].strip().lower()
+    best, best_slug = 0.0, None
+    for key, slug in registry.get("work_keys", {}).items():
+        if not key.startswith(surname + "|"):
+            continue
+        other_title = key.split("|")[1]
+        sim = similarity(book["title"], other_title)
+        if sim > best:
+            best, best_slug = sim, slug
+    if best >= threshold:
+        return best_slug, round(best, 3)
+    return None, round(best, 3)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--vault", required=True, help="path to the vault repo checkout")
@@ -1035,6 +1097,37 @@ def main():
             if str(real_id) != str(b["id"]):
                 log(f"    id corrected from the source record: {b['id']} → {real_id}")
             b = dict(b, id=real_id)
+
+            # ---- dedupe test 3: same work, different edition ------------ #
+            wk = work_key(b)
+            canonical = registry.get("work_keys", {}).get(wk)
+            if canonical and canonical != b["slug"]:
+                canon_meta = books_dir / canonical / "meta.json"
+                if canon_meta.exists():
+                    cm = json.loads(canon_meta.read_text())
+                    eds = cm.setdefault("editions", [])
+                    if not any(e.get("source_ref") == b["source"]["ref"] for e in eds):
+                        eds.append({
+                            "source": source["name"], "source_ref": source["ref"],
+                            "year": b["year"], "note": "another edition of this work; not shelved separately",
+                            "seen": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+                        })
+                        canon_meta.write_text(json.dumps(cm, indent=2, ensure_ascii=False) + "\n")
+                        log(f"    edition of {canonical} — recorded on that record, not added as a second card")
+                raise RuntimeError(f"same work as {canonical} (work key {wk})")
+
+            # ---- dedupe test 4: a title this close is held, not added --- #
+            like, score = near_duplicate(b, registry)
+            if like:
+                review = vault.parent / "corpus-extendum" / "data" / "review-queue.json"
+                q = load_json(review, []) if review.parent.exists() else []
+                q.append({"slug": b["slug"], "title": b["title"],
+                          "author": b["author"], "year": b["year"],
+                          "resembles": like, "similarity": score,
+                          "held": datetime.now(timezone.utc).strftime("%Y-%m-%d")})
+                if review.parent.exists():
+                    review.write_text(json.dumps(q, indent=2) + "\n")
+                raise RuntimeError(f"held for review: title {score} similar to {like}")
 
             # ---- dedupe gate -------------------------------------------- #
             tsha = text_sha(plain)

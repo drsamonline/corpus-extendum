@@ -33,7 +33,7 @@
       "class": "hand"
     },
     "README.md": {
-      "sha": "9cd7e9dfeb98bc1bf5f144fded273058ca820248",
+      "sha": "70119c64a842b67f1c897ca805a6b751d37c8885",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -148,7 +148,7 @@
       "class": "hand"
     },
     "MANIFEST.json": {
-      "sha": "0236e6a5c2079b63378ebf5cd939a4d796b41fdb",
+      "sha": "c1df4f53dd3fdaa0ae211fa3193bc32fc69a0cbf",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -158,7 +158,7 @@
       "class": "hand"
     },
     "scripts/ingest.py": {
-      "sha": "b2b0ff054bd4db65df904e433ad57f899f2f6a1f",
+      "sha": "48696a8bf232757839618f666849018f5fb575a3",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -168,22 +168,22 @@
       "class": "hand"
     },
     "CHANGELOG.md": {
-      "sha": "c22a258d1f2f7383579bb095186fbd3227fbbab4",
+      "sha": "31921e3c391441eea4da16189d171ec0ae302bd5",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "docs/ARCHITECTURE.md": {
-      "sha": "e0e5543137db9825d6b244fb321454cfd5ce6fa2",
+      "sha": "209cf6aafa1937a080fc92adbf48c7b074c97cae",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "docs/DATA-MODEL.md": {
-      "sha": "85c5a1594862edddc06805ee5980cb24408a288e",
+      "sha": "6ae2fb93dc52367ff2aa8e96a7f139e36163c4ea",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "docs/DECISIONS.md": {
-      "sha": "1c20ebbb8753d04ada97a8729d43bba6b4d28462",
+      "sha": "464b61409676f11d80bbcc0646fbd1119ee6deb1",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -193,7 +193,7 @@
       "class": "hand"
     },
     "docs/PIPELINE.md": {
-      "sha": "da18506b5efd68ee5c16fafa73f0a27357b0962a",
+      "sha": "ba09fbf9717665dc605a9938a87797ac74ef42a9",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -223,7 +223,7 @@
       "class": "hand"
     },
     "docs/README.md": {
-      "sha": "fb3623c4eecdf0fd4439b238ee91b0bc14889edb",
+      "sha": "859b70727cb2d6f6fdb7ea6b3c3929b67fb090bb",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -253,7 +253,7 @@
       "class": "hand"
     },
     "scripts/__pycache__/ingest.cpython-312.pyc": {
-      "sha": "72a33d88fd15a38dc9e0a136abc0f9e169efc589",
+      "sha": "b4da1bdcf1f7b3056ff181a2ce82f49f4c5c4f44",
       "producer": "build-2026-11-16",
       "class": "hand"
     }
