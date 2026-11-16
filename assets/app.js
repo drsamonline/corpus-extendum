@@ -164,7 +164,9 @@ function currentPosition() {
   const st = $('stage');
   const pct = st.scrollHeight > st.clientHeight
     ? st.scrollTop / (st.scrollHeight - st.clientHeight) : 0;
-  return { fmt: state.fmt, page: state.pdfPage || 1, pct: Math.max(0, Math.min(1, pct)) };
+  const pos = { fmt: state.fmt, page: state.pdfPage || 1, pct: Math.max(0, Math.min(1, pct)) };
+  if (state.fmt === 'epub' && state.epubCfi) pos.cfi = state.epubCfi;
+  return pos;
 }
 
 function saveProgress() {
@@ -226,8 +228,12 @@ function restorePosition(b) {
   }
 
   if (state.fmt === 'epub') {
-    // epub.js can only jump by percentage once its locations are generated,
-    // which this reader does not do — so an EPUB reopens at its start.
+    // A CFI is epub.js's own locator and needs nothing precomputed.
+    if (!saved.cfi) return;
+    waitFor(() => (state.epubRendition ? state.epubRendition : null), 8000)
+      .then((rendition) => {
+        try { if (rendition) rendition.display(saved.cfi); } catch (e) {}
+      });
     return;
   }
 
@@ -368,6 +374,7 @@ function openBook(slug) {
   closeFind();
   $('findInput').value = '';
   state.epubTriedRaw = false;
+  state.epubCfi = null;
   renderResume();
   reader.classList.add('open');
   document.body.classList.add('locked');
@@ -383,7 +390,7 @@ function closeReader() {
   reader.classList.remove('open');
   document.body.classList.remove('locked');
   if (state.epubRendition) { try { state.epubRendition.destroy(); } catch (e) {} state.epubRendition = null; }
-  state.pdfDoc = null; state.epubBook = null; state.epubTriedRaw = false;
+  state.pdfDoc = null; state.epubBook = null; state.epubTriedRaw = false; state.epubCfi = null;
   if (lastFocus) lastFocus.focus();
 }
 
@@ -517,8 +524,13 @@ async function renderEpub(b) {
     });
     state.epubRendition.on('relocated', (loc) => {
       if (state.fmt !== 'epub' || !loc || !loc.start) return;
+      // epub.js hands us a CFI for free. Storing that instead of a percentage
+      // is what makes an EPUB reopen where you left it — jumping by percentage
+      // would need book.locations.generate(), a full pass over the book.
+      if (loc.start.cfi) state.epubCfi = loc.start.cfi;
       const pct = Math.round((loc.start.percentage || 0) * 100);
       $('rPage').textContent = pct ? pct + '%' : 'Scroll';
+      saveProgressSoon();
     });
     $('rPage').textContent = 'Scroll';
     await state.epubRendition.display();
