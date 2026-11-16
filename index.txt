@@ -1,4 +1,4 @@
-# corpus-extendum | 63 books | 1 vault(s) | built 2026-11-16T14:13Z
+# corpus-extendum | 65 books | 1 vault(s) | built 2026-11-16T14:29Z
 # id | slug | title | author | year | category | formats | vault
 103|around-the-world-in-eighty-days|Around the World in Eighty Days|Verne, Jules|1872|Adventure|pdf,epub,txt|corpus-extendum-vault-01
 27780|treasure-island|Treasure Island|Stevenson, Robert Louis|1883|Adventure|pdf,epub,txt|corpus-extendum-vault-01
@@ -45,6 +45,7 @@
 2852|the-hound-of-the-baskervilles|The Hound of the Baskervilles|Doyle, Arthur Conan|1902|Mystery & Detective|pdf,epub,txt|corpus-extendum-vault-01
 204|father-brown|The Innocence of Father Brown|Chesterton, G. K.|1911|Mystery & Detective|pdf,epub,txt|corpus-extendum-vault-01
 223|the-wisdom-of-father-brown|The Wisdom of Father Brown|Chesterton, G. K.|1914|Mystery & Detective|pdf,epub,txt|corpus-extendum-vault-01
+1676|plato-dialogues|Dialogues|Plato|-380|Philosophy|epub,txt|corpus-extendum-vault-01
 10661|epictetus-discourses|The Discourses of Epictetus|Epictetus|108|Philosophy|pdf,epub,txt|corpus-extendum-vault-01
 2680|meditations|Meditations|Marcus Aurelius, Emperor of Rome|180|Philosophy|pdf,epub,txt|corpus-extendum-vault-01
 3207|leviathan|Leviathan|Hobbes, Thomas|1651|Philosophy|pdf,epub,txt|corpus-extendum-vault-01
@@ -62,4 +63,5 @@
 5230|the-invisible-man|The Invisible Man|Wells, H. G.|1897|Science Fiction|pdf,epub,txt|corpus-extendum-vault-01
 36|the-war-of-the-worlds|The War of the Worlds|Wells, H. G.|1898|Science Fiction|pdf,epub,txt|corpus-extendum-vault-01
 52501|the-first-men-in-the-moon|The First Men in the Moon|Wells, H. G.|1901|Science Fiction|pdf,epub,txt|corpus-extendum-vault-01
+13416|chekhov-short-fiction|Short Fiction|Chekhov, Anton|1886|Short Stories|epub,txt|corpus-extendum-vault-01
 2814|dubliners|Dubliners|Joyce, James|1914|Short Stories|pdf,epub,txt|corpus-extendum-vault-01

@@ -2083,6 +2083,58 @@
     "text_sha256": "9ecbc9c34b62f5d8cbc7c8ef9e0caeaff250183fcbf53b7f8c6ed5cd94c0ff4d"
   },
   {
+    "id": "1676",
+    "slug": "plato-dialogues",
+    "title": "Dialogues",
+    "author": {
+      "name": "Plato",
+      "file_as": "Plato",
+      "death": -347
+    },
+    "year": -380,
+    "category": "Philosophy",
+    "language": "en",
+    "subjects": [
+      "Philosophy, Ancient",
+      "Socrates"
+    ],
+    "blurb": "Jowett's complete Plato — Apology, Phaedo, Symposium, Republic and the rest — the translation that carried Plato into English.",
+    "rights": {
+      "basis": "author d. -347; first published -380 — public domain in India (life + 60) and the United States (pre-1930); translation by Benjamin Jowett (d. 1893), first published 1871 — public domain in India (life + 60) and the United States (pre-1930)",
+      "india": true,
+      "us": true,
+      "verified": "2026-11-16",
+      "translation_verified": true
+    },
+    "source": {
+      "name": "Standard Ebooks",
+      "ref": "plato_dialogues_benjamin-jowett",
+      "url": "https://standardebooks.org/ebooks/plato/dialogues_benjamin-jowett",
+      "licence": "CC0 1.0 (edition) · text public domain"
+    },
+    "formats": [
+      "epub",
+      "txt"
+    ],
+    "files": {
+      "epub": "books/plato-dialogues/plato-dialogues.epub",
+      "txt": "books/plato-dialogues/plato-dialogues.txt",
+      "cover": "books/plato-dialogues/cover.jpg"
+    },
+    "cover_kind": "source",
+    "vault": "corpus-extendum-vault-01",
+    "added": "2026-11-16",
+    "file_sha8": "db7e1a63",
+    "text_sha256": "71521ddb3b7a86b2849f3d344893f9acc6d712b9f2cb1f962c6aacc0ca8aca24",
+    "notes": "shelved without a PDF: typesetting this book exceeds the ingest run budget. The EPUB is the source edition; the text is complete.",
+    "translator": {
+      "name": "Benjamin Jowett",
+      "death": 1893,
+      "translation_year": 1871,
+      "source": "Wikipedia and Balliol College archives — died 1 October 1893; Dialogues of Plato translated 1871"
+    }
+  },
+  {
     "id": "10661",
     "slug": "epictetus-discourses",
     "title": "The Discourses of Epictetus",
@@ -2879,6 +2931,58 @@
     "added": "2026-11-16",
     "file_sha8": "a65f2188",
     "text_sha256": "ddc92f54f26169791cbb7874db58f887fe830503561e4b975f293991ffac382d"
+  },
+  {
+    "id": "13416",
+    "slug": "chekhov-short-fiction",
+    "title": "Short Fiction",
+    "author": {
+      "name": "Anton Chekhov",
+      "file_as": "Chekhov, Anton",
+      "death": 1904
+    },
+    "year": 1886,
+    "category": "Short Stories",
+    "language": "en",
+    "subjects": [
+      "Short stories, Russian -- Translations into English",
+      "Russia -- Social life and customs -- Fiction"
+    ],
+    "blurb": "Six volumes of stories in one book — the doctor, the steppe, and the ordinary evening that turns. Garnett's Chekhov, complete.",
+    "rights": {
+      "basis": "author d. 1904; first published 1886 — public domain in India (life + 60) and the United States (pre-1930); translation by Constance Garnett (d. 1946), first published 1916 — public domain in India (life + 60) and the United States (pre-1930)",
+      "india": true,
+      "us": true,
+      "verified": "2026-11-16",
+      "translation_verified": true
+    },
+    "source": {
+      "name": "Standard Ebooks",
+      "ref": "anton-chekhov_short-fiction_constance-garnett",
+      "url": "https://standardebooks.org/ebooks/anton-chekhov/short-fiction_constance-garnett",
+      "licence": "CC0 1.0 (edition) · text public domain"
+    },
+    "formats": [
+      "epub",
+      "txt"
+    ],
+    "files": {
+      "epub": "books/chekhov-short-fiction/chekhov-short-fiction.epub",
+      "txt": "books/chekhov-short-fiction/chekhov-short-fiction.txt",
+      "cover": "books/chekhov-short-fiction/cover.jpg"
+    },
+    "cover_kind": "source",
+    "vault": "corpus-extendum-vault-01",
+    "added": "2026-11-16",
+    "file_sha8": "e84776e9",
+    "text_sha256": "1cdd3032df4f7611f8694fc9a2ae73f50edc94928c1716c1ed146490f6a9af1f",
+    "notes": "shelved without a PDF: typesetting this book exceeds the ingest run budget. The EPUB is the source edition; the text is complete.",
+    "translator": {
+      "name": "Constance Garnett",
+      "death": 1946,
+      "translation_year": 1916,
+      "source": "Wikipedia (died 17 December 1946, The Cearne, Kent), Britannica and Orlando/Cambridge all give 1861-1946; her Chekhov volumes, The Tales of Tchehov, Chatto & Windus, ran 1916-1922"
+    }
   },
   {
     "id": "2814",

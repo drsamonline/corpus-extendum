@@ -56,7 +56,10 @@ def vault_index(vault: Path, books: list[dict], state: str) -> str:
     lines = [head, cols]
     for b in sorted(books, key=lambda x: x["slug"]):
         f = b["files"]
-        pdf_kb = int((vault / f["pdf"]).stat().st_size / 1024) if (vault / f["pdf"]).exists() else 0
+        # A book may be shelved without a PDF — --no-pdf, for one whose
+        # typesetting cannot finish inside the run budget. Indexing it must not
+        # assume a key that is not there.
+        pdf_kb = int((vault / f["pdf"]).stat().st_size / 1024) if f.get("pdf") and (vault / f["pdf"]).exists() else 0
         epub_kb = int((vault / f["epub"]).stat().st_size / 1024) if (vault / f["epub"]).exists() else 0
         lines.append("|".join([
             b["id"], b["slug"], b["title"], b["author"]["file_as"], str(b["year"]),
