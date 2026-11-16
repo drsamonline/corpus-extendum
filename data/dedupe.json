@@ -57,7 +57,20 @@
     "gutenberg:1023": "",
     "gutenberg:1676": "plato-dialogues",
     "gutenberg:13416": "chekhov-short-fiction",
-    "archive:goodytwoshoes00newyiala": "goody-two-shoes"
+    "archive:goodytwoshoes00newyiala": "goody-two-shoes",
+    "gutenberg:10661": "epictetus-short-works",
+    "gutenberg:974": "the-secret-agent",
+    "gutenberg:2021": "nostromo",
+    "gutenberg:2480": "under-western-eyes",
+    "gutenberg:32954": "the-black-arrow",
+    "gutenberg:139": "the-lost-world",
+    "gutenberg:108": "the-return-of-sherlock-holmes",
+    "gutenberg:86": "a-connecticut-yankee",
+    "gutenberg:308": "three-men-in-a-boat",
+    "gutenberg:32488": "just-so-stories",
+    "gutenberg:2186": "captains-courageous",
+    "gutenberg:14851": "uncle-silas",
+    "gutenberg:37172": "the-room-in-the-dragon-volant"
   },
   "text_sha256": {
     "78a0a582db906da05e36af990abed243f3cf64b5e3ecd77eb9ea3743be3ec65b": "pride-and-prejudice",
@@ -117,7 +130,20 @@
     "a7f4d2a0c744a407c9ac45de2152443c2c708415af7be33e6ee35a743558fb7c": "bleak-house",
     "71521ddb3b7a86b2849f3d344893f9acc6d712b9f2cb1f962c6aacc0ca8aca24": "plato-dialogues",
     "1cdd3032df4f7611f8694fc9a2ae73f50edc94928c1716c1ed146490f6a9af1f": "chekhov-short-fiction",
-    "dd42360b482bdbbdbdf7fef2009cc801bfe04353e691df8107924a4703b7d7bd": "goody-two-shoes"
+    "dd42360b482bdbbdbdf7fef2009cc801bfe04353e691df8107924a4703b7d7bd": "goody-two-shoes",
+    "4544a8ac871141686a551b813862ff135ed1f8b8a7f9bb91e94ee34794c4be1b": "epictetus-short-works",
+    "af69f8fb129f0475ced61e0b05511aaf12c67f539983f7f3e93b3f27e0d687e9": "the-secret-agent",
+    "659e1c11132c6bada0fb6133e98d627976fa35fa83793e8ca899ab83f218748f": "nostromo",
+    "ce711b0b112c7b0afe84e49cb3e9c757b03b8e612a1bcbd1460d9e3864ad6d2b": "under-western-eyes",
+    "506cf4f4a5067dbe0e8c61ea9ce1f737b04d977127fdcf49a18ce862edf53ec7": "the-black-arrow",
+    "bb785f636a4559d44b7ef32c2e67884c2b8862004a990c9e874af7e1ce481cdf": "the-lost-world",
+    "afcce019f45589f2c8e90998559db613cac4f91511b546bb0488293cd1a017a9": "the-return-of-sherlock-holmes",
+    "7c6cb56ee4e7552b1fa113eb7d424659c16214bef9331df09da6a4c91e9e1da8": "a-connecticut-yankee",
+    "5276ec36bab75c412bbdb9e347d169fd309f30a3d7d0301d51d4da69b232eccd": "three-men-in-a-boat",
+    "ef7f2b9e72d054e8f6b332380cb6655c53fd60b3ffab8f69ef7585cef45ff219": "just-so-stories",
+    "8ac741813f1c289501253623e1903e453bccc632fc18cdf1de5d9edabf4b8db4": "captains-courageous",
+    "54142b229cbadb15cc93580d511f42bd757640442001fe12e977b069434256ce": "uncle-silas",
+    "5eeabc56a6922d4e70b6e3f8e5294c5254e831f34c001c789cf2d22a5bda99ee": "the-room-in-the-dragon-volant"
   },
   "work_keys": {
     "austen|pride and prejudice|1813": "pride-and-prejudice",
@@ -177,6 +203,19 @@
     "dickens|bleak house|1853": "bleak-house",
     "plato|dialogues|-380": "plato-dialogues",
     "chekhov|short fiction|1886": "chekhov-short-fiction",
-    "anonymous|goody two-shoes|1888": "goody-two-shoes"
+    "anonymous|goody two-shoes|1888": "goody-two-shoes",
+    "epictetus|short works|108": "epictetus-short-works",
+    "conrad|the secret agent|1907": "the-secret-agent",
+    "conrad|nostromo|1904": "nostromo",
+    "conrad|under western eyes|1911": "under-western-eyes",
+    "stevenson|the black arrow|1888": "the-black-arrow",
+    "doyle|the lost world|1912": "the-lost-world",
+    "doyle|the return of sherlock holmes|1905": "the-return-of-sherlock-holmes",
+    "twain|a connecticut yankee in king arthur's court|1889": "a-connecticut-yankee",
+    "jerome|three men in a boat|1889": "three-men-in-a-boat",
+    "kipling|just so stories|1902": "just-so-stories",
+    "kipling|captains courageous|1897": "captains-courageous",
+    "le fanu|uncle silas|1864": "uncle-silas",
+    "le fanu|the room in the dragon volant|1872": "the-room-in-the-dragon-volant"
   }
 }

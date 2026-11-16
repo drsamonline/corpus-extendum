@@ -1,16 +1,19 @@
-# corpus-extendum | 66 books | 1 vault(s) | built 2026-11-16T17:33Z
+# corpus-extendum | 79 books | 1 vault(s) | built 2026-11-16T18:00Z
 # id | slug | title | author | year | category | formats | vault
 103|around-the-world-in-eighty-days|Around the World in Eighty Days|Verne, Jules|1872|Adventure|pdf,epub,txt|corpus-extendum-vault-01
 27780|treasure-island|Treasure Island|Stevenson, Robert Louis|1883|Adventure|pdf,epub,txt|corpus-extendum-vault-01
 76|huckleberry-finn|The Adventures of Huckleberry Finn|Twain, Mark|1884|Adventure|pdf,epub,txt|corpus-extendum-vault-01
 2166|king-solomons-mines|King Solomon's Mines|Haggard, H. Rider|1885|Adventure|pdf,epub,txt|corpus-extendum-vault-01
 421|kidnapped|Kidnapped|Stevenson, Robert Louis|1886|Adventure|pdf,epub,txt|corpus-extendum-vault-01
+32954|the-black-arrow|The Black Arrow|Stevenson, Robert Louis|1888|Adventure|pdf,epub,txt|corpus-extendum-vault-01
+2186|captains-courageous|Captains Courageous|Kipling, Rudyard|1897|Adventure|pdf,epub,txt|corpus-extendum-vault-01
 5658|lord-jim|Lord Jim|Conrad, Joseph|1900|Adventure|pdf,epub,txt|corpus-extendum-vault-01
 2226|kim|Kim|Kipling, Rudyard|1901|Adventure|pdf,epub,txt|corpus-extendum-vault-01
 11|alice-in-wonderland|Alice's Adventures in Wonderland|Carroll, Lewis|1865|Children's & Fable|pdf,epub,txt|corpus-extendum-vault-01
 12|through-the-looking-glass|Through the Looking-Glass|Carroll, Lewis|1871|Children's & Fable|pdf,epub,txt|corpus-extendum-vault-01
 0|goody-two-shoes|Goody Two-Shoes|Anonymous|1888|Children's & Fable|pdf,epub,txt|corpus-extendum-vault-01
 778|five-children-and-it|Five Children and It|Nesbit, E.|1902|Children's & Fable|pdf,epub,txt|corpus-extendum-vault-01
+32488|just-so-stories|Just So Stories|Kipling, Rudyard|1902|Children's & Fable|pdf,epub,txt|corpus-extendum-vault-01
 27805|the-wind-in-the-willows|The Wind in the Willows|Grahame, Kenneth|1908|Children's & Fable|pdf,epub,txt|corpus-extendum-vault-01
 17396|the-secret-garden|The Secret Garden|Burnett, Frances Hodgson|1911|Children's & Fable|pdf,epub,txt|corpus-extendum-vault-01
 2944|emerson-essays|Essays: First Series|Emerson, Ralph Waldo|1841|Essays|pdf,epub,txt|corpus-extendum-vault-01
@@ -36,17 +39,24 @@
 174|the-picture-of-dorian-gray|The Picture of Dorian Gray|Wilde, Oscar|1890|Fiction|pdf,epub,txt|corpus-extendum-vault-01
 13505|the-duel|The Duel|Chekhov, Anton|1891|Fiction|pdf,epub,txt|corpus-extendum-vault-01
 160|the-awakening|The Awakening|Chopin, Kate|1899|Fiction|pdf,epub,txt|corpus-extendum-vault-01
+2021|nostromo|Nostromo|Conrad, Joseph|1904|Fiction|pdf,epub,txt|corpus-extendum-vault-01
+974|the-secret-agent|The Secret Agent|Conrad, Joseph|1907|Fiction|pdf,epub,txt|corpus-extendum-vault-01
+2480|under-western-eyes|Under Western Eyes|Conrad, Joseph|1911|Fiction|pdf,epub,txt|corpus-extendum-vault-01
 541|the-age-of-innocence|The Age of Innocence|Wharton, Edith|1920|Fiction|pdf,epub,txt|corpus-extendum-vault-01
 84|frankenstein|Frankenstein; or, The Modern Prometheus|Shelley, Mary Wollstonecraft|1818|Gothic & Horror|pdf,epub,txt|corpus-extendum-vault-01
+14851|uncle-silas|Uncle Silas|Le Fanu, Joseph Sheridan|1864|Gothic & Horror|pdf,epub,txt|corpus-extendum-vault-01
+37172|the-room-in-the-dragon-volant|The Room in the Dragon Volant|Le Fanu, Joseph Sheridan|1872|Gothic & Horror|pdf,epub,txt|corpus-extendum-vault-01
 43|dr-jekyll-and-mr-hyde|The Strange Case of Dr. Jekyll and Mr. Hyde|Stevenson, Robert Louis|1886|Gothic & Horror|pdf,epub,txt|corpus-extendum-vault-01
 345|dracula|Dracula|Stoker, Bram|1897|Gothic & Horror|pdf,epub,txt|corpus-extendum-vault-01
 583|the-woman-in-white|The Woman in White|Collins, Wilkie|1860|Mystery & Detective|pdf,epub,txt|corpus-extendum-vault-01
 155|the-moonstone|The Moonstone|Collins, Wilkie|1868|Mystery & Detective|pdf,epub,txt|corpus-extendum-vault-01
 1661|sherlock-holmes|The Adventures of Sherlock Holmes|Doyle, Arthur Conan|1892|Mystery & Detective|pdf,epub,txt|corpus-extendum-vault-01
 2852|the-hound-of-the-baskervilles|The Hound of the Baskervilles|Doyle, Arthur Conan|1902|Mystery & Detective|pdf,epub,txt|corpus-extendum-vault-01
+108|the-return-of-sherlock-holmes|The Return of Sherlock Holmes|Doyle, Arthur Conan|1905|Mystery & Detective|pdf,epub,txt|corpus-extendum-vault-01
 204|father-brown|The Innocence of Father Brown|Chesterton, G. K.|1911|Mystery & Detective|pdf,epub,txt|corpus-extendum-vault-01
 223|the-wisdom-of-father-brown|The Wisdom of Father Brown|Chesterton, G. K.|1914|Mystery & Detective|pdf,epub,txt|corpus-extendum-vault-01
 1676|plato-dialogues|Dialogues|Plato|-380|Philosophy|epub,txt|corpus-extendum-vault-01
+10661|epictetus-short-works|Short Works|Epictetus|108|Philosophy|pdf,epub,txt|corpus-extendum-vault-01
 10661|epictetus-discourses|The Discourses of Epictetus|Epictetus|108|Philosophy|pdf,epub,txt|corpus-extendum-vault-01
 2680|meditations|Meditations|Marcus Aurelius, Emperor of Rome|180|Philosophy|pdf,epub,txt|corpus-extendum-vault-01
 3207|leviathan|Leviathan|Hobbes, Thomas|1651|Philosophy|pdf,epub,txt|corpus-extendum-vault-01
@@ -58,11 +68,14 @@
 216|tao-te-ching|Tao Te Ching|Laozi|-400|Sacred Texts|pdf,epub,txt|corpus-extendum-vault-01
 2388|the-song-celestial|The Song Celestial; or, Bhagavad-Gita|Arnold, Edwin, Sir|1885|Sacred Texts|pdf,epub,txt|corpus-extendum-vault-01
 829|gullivers-travels|Gulliver's Travels|Swift, Jonathan|1726|Satire|pdf,epub,txt|corpus-extendum-vault-01
+86|a-connecticut-yankee|A Connecticut Yankee in King Arthur's Court|Twain, Mark|1889|Satire|pdf,epub,txt|corpus-extendum-vault-01
+308|three-men-in-a-boat|Three Men in a Boat|Jerome, Jerome K.|1889|Satire|pdf,epub,txt|corpus-extendum-vault-01
 18247|the-last-man|The Last Man|Shelley, Mary Wollstonecraft|1826|Science Fiction|pdf,epub,txt|corpus-extendum-vault-01
 35|the-time-machine|The Time Machine|Wells, H. G.|1895|Science Fiction|pdf,epub,txt|corpus-extendum-vault-01
 159|the-island-of-doctor-moreau|The Island of Doctor Moreau|Wells, H. G.|1896|Science Fiction|pdf,epub,txt|corpus-extendum-vault-01
 5230|the-invisible-man|The Invisible Man|Wells, H. G.|1897|Science Fiction|pdf,epub,txt|corpus-extendum-vault-01
 36|the-war-of-the-worlds|The War of the Worlds|Wells, H. G.|1898|Science Fiction|pdf,epub,txt|corpus-extendum-vault-01
 52501|the-first-men-in-the-moon|The First Men in the Moon|Wells, H. G.|1901|Science Fiction|pdf,epub,txt|corpus-extendum-vault-01
+139|the-lost-world|The Lost World|Doyle, Arthur Conan|1912|Science Fiction|pdf,epub,txt|corpus-extendum-vault-01
 13416|chekhov-short-fiction|Short Fiction|Chekhov, Anton|1886|Short Stories|epub,txt|corpus-extendum-vault-01
 2814|dubliners|Dubliners|Joyce, James|1914|Short Stories|pdf,epub,txt|corpus-extendum-vault-01

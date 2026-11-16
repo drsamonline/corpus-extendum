@@ -1,26 +1,30 @@
 [
   [
     "Fiction",
-    21
+    24
   ],
   [
     "Adventure",
-    7
+    9
   ],
   [
     "Children's & Fable",
-    6
+    7
   ],
   [
     "Mystery & Detective",
-    6
+    7
   ],
   [
     "Science Fiction",
-    6
+    7
   ],
   [
     "Philosophy",
+    6
+  ],
+  [
+    "Gothic & Horror",
     5
   ],
   [
@@ -32,7 +36,7 @@
     3
   ],
   [
-    "Gothic & Horror",
+    "Satire",
     3
   ],
   [
@@ -42,9 +46,5 @@
   [
     "Short Stories",
     2
-  ],
-  [
-    "Satire",
-    1
   ]
 ]
