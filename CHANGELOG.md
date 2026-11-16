@@ -5,6 +5,21 @@ site and a set of vaults; there are no releases, so this records the build.
 
 ---
 
+## 2026-11-16 · The shared texts read in the page, PDF only
+
+**Changed**
+- `shared.html` gained an in-page reader: **Read here** opens the PDF in an
+  overlay, the same promise the library makes for its own books. **New tab**
+  stays as the escape hatch, and Esc closes the overlay.
+- PDF only, deliberately. A legacy non-Unicode Gujarati font means the text
+  layer is mojibake, so there is nothing to convert to EPUB or text and nothing
+  to search. The page says so rather than offering formats it cannot produce.
+
+**Verified**
+- 16 cards · Read opens the right file with the right title · Esc closes it
+
+---
+
 ## 2026-11-16 · A shared collection, kept outside the library
 
 **Added**

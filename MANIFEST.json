@@ -148,7 +148,7 @@
       "class": "hand"
     },
     "MANIFEST.json": {
-      "sha": "3f539224de0ec3acab379376a522077fdcc7f19a",
+      "sha": "2ae6863c8ca6ac34a22d5b16441dd1d92c0d6fa0",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -168,7 +168,7 @@
       "class": "hand"
     },
     "CHANGELOG.md": {
-      "sha": "d863cd8ce680e39efa2f2760a589fd891c324632",
+      "sha": "57ad7072f808e458c59386f03e658e0a2df807f3",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -378,7 +378,7 @@
       "class": "hand"
     },
     "shared.html": {
-      "sha": "62fe939389db00a62b82ca821861d462fde59421",
+      "sha": "c495f8afc85024b9977c99ccfe4f52034f297b36",
       "producer": "build-2026-11-16",
       "class": "hand"
     }

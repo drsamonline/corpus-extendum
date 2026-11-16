@@ -52,12 +52,28 @@ h1 em{font-style:italic;color:var(--accent)}
 .item p{margin:6px 0 0;font-size:12.5px;line-height:1.55;color:var(--muted)}
 .item .who{font-size:12.5px;color:var(--ink)}
 .item .who b{font-weight:600}
-.item a.open{margin-top:auto;align-self:flex-start;display:inline-flex;align-items:center;gap:7px;
-  text-decoration:none;font-size:13px;font-weight:600;color:var(--accent);border:1px solid var(--line-2);
-  border-radius:8px;padding:7px 13px;background:#fff}
-.item a.open:hover{border-color:var(--accent)}
+.acts{margin-top:auto;display:flex;gap:8px;flex-wrap:wrap}
+.item .open{display:inline-flex;align-items:center;gap:7px;cursor:pointer;
+  font:600 13px/1 var(--sans);color:var(--accent);border:1px solid var(--line-2);
+  border-radius:8px;padding:8px 13px;background:#fff;text-decoration:none}
+.item .open:hover{border-color:var(--accent)}
+.item .open.ghost{color:var(--muted)}
+.item .open.ghost:hover{color:var(--ink)}
 footer{border-top:1px solid var(--line);padding:26px 0 60px;color:var(--muted);font-size:13px}
 footer a{color:var(--accent)}
+/* in-page reader */
+.viewer{position:fixed;inset:0;z-index:200;background:#100D0B;display:grid;grid-template-rows:52px 1fr}
+.viewer[hidden]{display:none}
+.vbar{display:flex;align-items:center;gap:10px;padding:0 14px;border-bottom:1px solid #2A2520}
+.vt{font:500 14px/1 var(--serif);color:#F2EADC;flex:1;min-width:0;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap}
+.vdl,.vclose{font:600 11.5px/1 var(--sans);color:#C9C0B2;text-decoration:none;border:1px solid #332C26;
+  border-radius:7px;padding:7px 11px;background:#191512}
+.vdl:hover,.vclose:hover{color:#F8F0E2;border-color:#4A4038}
+.vclose{cursor:pointer;padding:7px 10px}
+#vFrame{width:100%;height:100%;border:0;background:#FBF8F1}
+body.viewing{overflow:hidden}
+
 @media(max-width:640px){
   .wrap{padding:0 18px}
   nav{gap:14px;font-size:12.5px}
@@ -98,6 +114,16 @@ footer a{color:var(--accent)}
   <div class="grid" id="grid"></div>
 </main>
 
+<div class="viewer" id="viewer" hidden>
+  <div class="vbar">
+    <span class="vt" id="vTitle"></span>
+    <a class="vdl" id="vDownload" href="#" download>Download</a>
+    <a class="vdl" id="vTab" href="#" target="_blank" rel="noopener">New tab ↗</a>
+    <button class="vclose" id="vClose" aria-label="Close">✕</button>
+  </div>
+  <iframe id="vFrame" title="Document"></iframe>
+</div>
+
 <footer><div class="wrap">
   Part of <a href="./">Corpus Extendum</a>, which publishes only out-of-copyright books. This page is the
   exception, and says so.
@@ -115,13 +141,39 @@ fetch('data/shared.json', { cache: 'no-store' })
         ${b.translator ? `<div class="who">Translation: <b>${esc(b.translator)}</b></div>` : ''}
         ${b.original ? `<div class="who">Original: <b>${esc(b.original)}</b></div>` : ''}
         <p>${esc(b.note)}</p>
-        <a class="open" href="${b.file}" target="_blank" rel="noopener">Open PDF ↗</a>
+        <div class="acts">
+          <button class="open" data-read="${b.file}" data-title="${esc(b.title)}">Read here</button>
+          <a class="open ghost" href="${b.file}" target="_blank" rel="noopener">New tab ↗</a>
+        </div>
       </div>`).join('');
   })
   .catch(() => {
     document.getElementById('grid').innerHTML =
       '<p style="color:#8C3A2B">The list could not be loaded.</p>';
   });
+/* Reading happens on the page, as it does for every book in the library. The
+ * PDFs are same-origin, so an iframe renders them without a viewer plugin. */
+function openViewer(file, title) {
+  const v = document.getElementById('viewer');
+  document.getElementById('vTitle').textContent = title;
+  document.getElementById('vFrame').src = file + '#view=FitH';
+  document.getElementById('vDownload').href = file;
+  document.getElementById('vTab').href = file;
+  v.hidden = false;
+  document.body.classList.add('viewing');
+}
+function closeViewer() {
+  document.getElementById('viewer').hidden = true;
+  document.getElementById('vFrame').src = '';
+  document.body.classList.remove('viewing');
+}
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('[data-read]');
+  if (btn) { openViewer(btn.dataset.read, btn.dataset.title); return; }
+  if (e.target.id === 'vClose' || e.target.id === 'viewer') closeViewer();
+});
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeViewer(); });
+
 function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 </script>
 </body>
