@@ -97,33 +97,39 @@ Every record — title, author, translator, year, subjects, source URL, rights b
 
 Before fetching, the source reference is checked against `data/dedupe.json`. At ingest, the hash of the **normalised text** — boilerplate stripped, lowercased, punctuation and page numbers removed — decides what this actually is:
 
-| Test | Catches | Action |
-|---|---|---|
-| source ref | the same ebook pulled twice | refuse, never fetched |
-| text hash | the same text from a different source | merge formats into the existing record |
-| work key | a different edition of the same work | merge as an edition |
-| trigram ≥ 0.92 + same author | near-duplicates the hashes missed | hold for review, never auto-add |
+| Test | Catches | Action | Status |
+|---|---|---|---|
+| source ref | the same ebook pulled twice | refuse, never fetched | built |
+| text hash | the same text from a different source | merge formats into the existing record | built |
+| work key | a different edition of the same work | merge as an edition | designed, not built |
+| trigram ≥ 0.92 + same author | near-duplicates the hashes missed | hold for review, never auto-add | designed, not built |
 
-Nothing is ever added on a fuzzy match. A false duplicate is a book missing from the shelf; a missed duplicate is a library that lies about its size — the gate prefers the first.
+The first two have fired in anger; the last two are recorded in the registry but
+not yet consulted, so a different edition of the same work can still arrive as a
+separate record. Nothing is ever added on a fuzzy match. A false duplicate is a book missing from the shelf; a missed duplicate is a library that lies about its size — the gate prefers the first.
 
 ---
 
 ## What opens in the page
 
-| Format | Viewer | In-book search |
+Built today, honestly labelled:
+
+| Format | Viewer | Status |
 |---|---|---|
-| PDF | pdf.js | yes |
-| EPUB | epub.js | yes |
-| TXT | text pager | yes |
-| Markdown | renderer | yes |
-| HTML | sandboxed frame | yes |
-| JSON / XML | collapsible tree | yes |
-| CSV / TSV | table viewer | yes |
-| Images · Audio · Video · CBZ | native players | — |
+| PDF | pdf.js on desktop; the browser's own viewer at ≤820 px | working |
+| EPUB | epub.js | working |
+| TXT | plain text, wrapped by the browser | working |
+| JSON | the book's own record as a syntax-highlighted tree | working |
 
-MOBI, AZW3, DjVu, DOCX, ODT, RTF, CBR and archives are **converted at ingest** and never served raw. If the library cannot open a file in the page, it does not shelve it — it converts it first.
+Designed and not yet built — in-book search (no text layer is extracted for it
+yet), Markdown, HTML, XML, CSV, images, audio, video and CBZ viewers, and the
+ingest-side conversion of MOBI, AZW3, DjVu, DOCX, ODT, RTF and CBR. They are
+specified in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) with a status marker on
+each, and nothing here claims them as working.
 
-The renderers are vendored in `assets/vendor/` and lazy-loaded per format, so opening a text file downloads no PDF engine. Nothing on a reading page comes from a third party.
+The four renderers that do exist are vendored in `assets/vendor/` and lazy-loaded
+per format, so opening a text file downloads no PDF engine. Nothing on a reading
+page comes from a third party.
 
 ---
 
@@ -134,6 +140,20 @@ Books do not live in this repository. They live in vault repos — `corpus-exten
 A vault seals at **600 books or 2.5 GB**, whichever comes first, and the next one opens. This repo holds only HTML, JSON and the catalogue, so it stays a few hundred kilobytes forever.
 
 Vaults are deliberately **not** GitHub Pages sites: Pages caps a published site at 1 GB, and a 2.5 GB vault would never fit. Books are served through jsDelivr and `raw.githubusercontent.com` instead, which also spreads the bandwidth.
+
+---
+
+## Documentation
+
+| Document | What it covers |
+|---|---|
+| [Architecture](docs/ARCHITECTURE.md) | how the pieces fit, and a built/designed/planned marker on each |
+| [Pipeline](docs/PIPELINE.md) | fetch → gate → typeset → dedupe → shelve, and every failure mode seen in practice |
+| [Data model](docs/DATA-MODEL.md) | every file and every field |
+| [Operations](docs/OPERATIONS.md) | the runbook: add a book, rebuild, rotate, deploy, troubleshoot |
+| [Decisions](docs/DECISIONS.md) | eleven choices, with the evidence behind each |
+| [Rights](docs/RIGHTS.md) | the public-domain test, source licences, corrections |
+| [Changelog](CHANGELOG.md) | what was built, when, and what broke on the way |
 
 ---
 

@@ -33,7 +33,7 @@
       "class": "hand"
     },
     "README.md": {
-      "sha": "ad2afd073b59c6b38b3acf4a8ba2c0c2fcc334e2",
+      "sha": "c26b7dbd7e68d75f31249edb2ddfe20e8abb274d",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -73,27 +73,27 @@
       "class": "hand"
     },
     "data/catalog.json": {
-      "sha": "2c883096188d480133213e3e52598dbd3865eb10",
+      "sha": "9b75a75886824688d992199c9f7fc10ec0c01cb8",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "data/categories.json": {
-      "sha": "0cc75db63b859b203f6ee4d883a27806dbbef473",
+      "sha": "6fe5f5c7da7701b22b4976525afcd7c53d8291c9",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "data/search-index.json": {
-      "sha": "8f07b0d5be42ef6e7ffcbeea3e6c5cde635ecda0",
+      "sha": "37b7e84379e730d70f350fe11c9d96a8de18ab52",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "data/shards.json": {
-      "sha": "8fd13c180d1fc1afab75f22645338c17ebf7bb83",
+      "sha": "c5a849c3315883ad067075cd691a634a9350ee17",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "dedupe-report.txt": {
-      "sha": "b980c2b5a3b5a65187fa4e96efe80b7a641effda",
+      "sha": "3e1c69c01c756edbc4b0a117b541619abfc8e31b",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -103,7 +103,7 @@
       "class": "hand"
     },
     "docs/assets/shelf.png": {
-      "sha": "71795c81f487608a2e27441fb0be227c093645d7",
+      "sha": "4e5046bd04eb688ec8e6c90b60d97b06325c75b1",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -123,7 +123,7 @@
       "class": "hand"
     },
     "index.txt": {
-      "sha": "33b5f147011f36bfe45b11d92bce1ac5001e8295",
+      "sha": "0fbf9059ba7d9086e967cd580205628ba038789f",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -143,27 +143,67 @@
       "class": "hand"
     },
     ".github/workflows/scan.yml": {
-      "sha": "e2e192594ae49ca8e84448208545513dca9f0370",
+      "sha": "970b97226b23b7b3a9eec619da49a7f68362e798",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "MANIFEST.json": {
-      "sha": "fe18ceec09ef96e600090fcef4208393135ed5bd",
+      "sha": "091c3421ec80c886ddfbb227a49905cfaee08816",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "data/dedupe.json": {
-      "sha": "92241c6d7d2d1e3f1ea0fc9b80da04530b8add27",
+      "sha": "fdf01c4b5800f365a43be9923f5c0c70a19991e7",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "scripts/ingest.py": {
-      "sha": "d4567d260c24db380736ef94df29c17cc6d68d9e",
+      "sha": "253f8e99abeb275413be476c862437c6360dddac",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "scripts/shoot_reader.py": {
       "sha": "c49cb4ecaebe4208913d4e827c348132a9d8e18f",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "CHANGELOG.md": {
+      "sha": "f78b4edfee7c6e6dd126e277774fae7bb9fdca5f",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "docs/ARCHITECTURE.md": {
+      "sha": "9502b4e1e1e3571c3a33d001d8226f9504dd1c60",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "docs/DATA-MODEL.md": {
+      "sha": "27e3fbce3c9953f6ff4eeecc6b10d9328fc488ab",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "docs/DECISIONS.md": {
+      "sha": "1d469c01fa56701c8e9cd790d7e38963d33203d1",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "docs/OPERATIONS.md": {
+      "sha": "10afdd8972dd49efacbe81de8329cf24a4ea1221",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "docs/PIPELINE.md": {
+      "sha": "da18506b5efd68ee5c16fafa73f0a27357b0962a",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "docs/RIGHTS.md": {
+      "sha": "799d53e96dabade01c77e5c8a1f1eb54c2381c8e",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "scripts/rotate_vault.py": {
+      "sha": "21c00d3872c48522688e5805b8444e84ae09dd2a",
       "producer": "build-2026-11-16",
       "class": "hand"
     }
