@@ -247,6 +247,91 @@ function restorePosition(b) {
   }
 }
 
+
+/* ------------------------------------------------------------- bookmarks */
+const MARKS_KEY = 'corpus-extendum:bookmarks';
+
+function readMarks() {
+  try { return JSON.parse(localStorage.getItem(MARKS_KEY) || '{}'); } catch (e) { return {}; }
+}
+function writeMarks(all) {
+  try { localStorage.setItem(MARKS_KEY, JSON.stringify(all)); } catch (e) {}
+}
+
+function positionLabel(pos) {
+  if (pos.fmt === 'pdf') return `page ${pos.page}`;
+  if (pos.fmt === 'epub') return 'section';
+  return `${Math.round((pos.pct || 0) * 100)}% through`;
+}
+
+function addBookmark() {
+  if (!state.open) return;
+  const all = readMarks();
+  const slug = state.open.slug;
+  const pos = currentPosition();
+  const list = all[slug] || [];
+  // one mark per place, so pressing it twice does not stack duplicates
+  const dupe = list.some(m => m.fmt === pos.fmt && m.page === pos.page &&
+                              Math.abs((m.pct || 0) - (pos.pct || 0)) < 0.01 && m.cfi === pos.cfi);
+  if (!dupe) {
+    list.unshift(Object.assign(pos, { at: Date.now(), label: positionLabel(pos) }));
+    all[slug] = list.slice(0, 30);
+    writeMarks(all);
+  }
+  renderMarks();
+  $('marksPanel').hidden = false;
+}
+
+function jumpToPosition(pos) {
+  const b = state.open;
+  const available = ['pdf', ...(b.formats || [])];
+  if (pos.fmt && pos.fmt !== state.fmt && available.includes(pos.fmt)) setFormat(pos.fmt);
+  $('marksPanel').hidden = true;
+  if (state.fmt === 'pdf') {
+    if (pos.page > 1) {
+      state.pendingPage = pos.page;
+      if (state.pdfDoc) { state.pdfPage = pos.page; renderPdf(b); }
+    }
+    return;
+  }
+  if (state.fmt === 'epub') {
+    if (!pos.cfi) return;
+    waitFor(() => (state.epubRendition ? state.epubRendition : null), 8000)
+      .then(r => { try { if (r) r.display(pos.cfi); } catch (e) {} });
+    return;
+  }
+  if (typeof pos.pct === 'number') {
+    waitFor(() => {
+      const st = $('stage');
+      return st.scrollHeight > st.clientHeight + 20 ? st : null;
+    }, 8000).then(st => { if (st) st.scrollTop = pos.pct * (st.scrollHeight - st.clientHeight); });
+  }
+}
+
+function renderMarks() {
+  if (!state.open) return;
+  const list = readMarks()[state.open.slug] || [];
+  const el = $('marksList');
+  if (!list.length) {
+    el.innerHTML = '<div class="marksempty">No bookmarks yet. Press <b>b</b> or Mark to save this place.</div>';
+    return;
+  }
+  el.innerHTML = list.map((m, i) => `
+    <div class="marksrow">
+      <button class="marksjump" data-i="${i}">${esc(m.label)}
+        <small>${new Date(m.at).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })} · ${(m.fmt || '').toUpperCase()}</small>
+      </button>
+      <button class="marksdel" data-del="${i}" title="Remove">✕</button>
+    </div>`).join('');
+  el.querySelectorAll('.marksjump').forEach(btn => btn.onclick = () => jumpToPosition(list[+btn.dataset.i]));
+  el.querySelectorAll('.marksdel').forEach(btn => btn.onclick = () => {
+    const all = readMarks();
+    all[state.open.slug].splice(+btn.dataset.del, 1);
+    writeMarks(all);
+    renderMarks();
+  });
+}
+
 /* ------------------------------------------------------------------ find */
 async function bookText(b) {
   if (state.textCache && state.textCache[b.slug]) return state.textCache[b.slug];
@@ -375,6 +460,8 @@ function openBook(slug) {
   $('findInput').value = '';
   state.epubTriedRaw = false;
   state.epubCfi = null;
+  $('marksPanel').hidden = true;
+  renderMarks();
   renderResume();
   reader.classList.add('open');
   document.body.classList.add('locked');
@@ -627,6 +714,12 @@ function turn(dir) {
 }
 
 $('rFind').onclick = () => { $('findBar').hidden ? openFind() : closeFind(); };
+$('rMark').onclick = addBookmark;
+$('rMarks').onclick = () => {
+  renderMarks();
+  $('marksPanel').hidden = !$('marksPanel').hidden;
+};
+$('marksClose').onclick = () => { $('marksPanel').hidden = true; };
 $('findClose').onclick = closeFind;
 $('findInput').addEventListener('input', (e) => {
   clearTimeout(findTimer);

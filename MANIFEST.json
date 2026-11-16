@@ -28,22 +28,22 @@
       "class": "hand"
     },
     "PRIVACY.md": {
-      "sha": "30557c3cf5dc7348c898f071243032d0c3b07c17",
+      "sha": "085da79e1f0d0abd6297025b193810de3d689b4e",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "README.md": {
-      "sha": "fd596788e4ad817df05c8d3d75bb85d443d97272",
+      "sha": "1d8120c71ab65313df6c2ddfcb08ffbe83189963",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "assets/app.css": {
-      "sha": "c1a7556356340b486429e30bc874201087af76bc",
+      "sha": "017f3a183467fd9e61c8256a30194775fbe68140",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "assets/app.js": {
-      "sha": "b24baabf8248727309e11f538cba8712c792a223",
+      "sha": "0acae014d9d6567e7c908742afb79af9d63d3b39",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -88,12 +88,12 @@
       "class": "hand"
     },
     "data/shards.json": {
-      "sha": "eee060e36231654d31903f1b03d05b40ad44015c",
+      "sha": "b2f51f6f409710af15a04474008d2741d51d553b",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "dedupe-report.txt": {
-      "sha": "7f00f4187ce2019f001356db5ca9292ed1aaa6a8",
+      "sha": "d8245053843111989f8d5925114a0803872044e6",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -118,12 +118,12 @@
       "class": "hand"
     },
     "index.html": {
-      "sha": "ed619d8d98e4cc878e5929a3c1958df1f5f38140",
+      "sha": "265cac2a1183a7102c565f9792d41f721fe4afc5",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "index.txt": {
-      "sha": "f8c47ad528d0439b41d25867664f8078b1c3f641",
+      "sha": "badc57a05102b5b285ab074c49a5277cc403c211",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -148,7 +148,7 @@
       "class": "hand"
     },
     "MANIFEST.json": {
-      "sha": "8cd58cc7a649f660ef83b88e262616965e5de774",
+      "sha": "a53b9b92464924e6ce867de5768fef5780edc731",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -168,12 +168,12 @@
       "class": "hand"
     },
     "CHANGELOG.md": {
-      "sha": "d4ca7086d5b10319a035baba6e522833a3b89cf8",
+      "sha": "61af0034827dbb9e69232b369dde36e6e2f29ebd",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
     "docs/ARCHITECTURE.md": {
-      "sha": "e3b2dc4ce0519eded42c54fcf1eae5b9518f1c35",
+      "sha": "00ac896678787441bff147556a7ed4fe6cdf6881",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -218,7 +218,7 @@
       "class": "hand"
     },
     "docs/FRONTEND.md": {
-      "sha": "e663a4cf7d5f21cb3b5be06ee321f77ea61d4dde",
+      "sha": "ce9ed852a660617b9b850955290e31cc9776e6b0",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -243,7 +243,7 @@
       "class": "hand"
     },
     "data/scan-log.txt": {
-      "sha": "4e25fcad0a43adf0f266ee5b6a64226de077b219",
+      "sha": "adb8240ea1e1b694b8f77873db5501fba17d2d3f",
       "producer": "build-2026-11-16",
       "class": "hand"
     },

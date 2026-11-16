@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..700&family=Inter:wght@300..700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/app.css?v=20261116i">
+<link rel="stylesheet" href="assets/app.css?v=20261116j">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%238C3A2B'/><text x='16' y='22' font-family='Georgia,serif' font-size='15' fill='%23FBF3E9' text-anchor='middle'>CE</text></svg>">
 </head>
 <body>
@@ -191,6 +191,8 @@
     <button class="rpill" id="rNext" title="Next page">›</button>
     <div class="fmtbar" id="fmtbar"></div>
     <button class="rpill" id="rFind" title="Search inside (/)">Find</button>
+    <button class="rpill" id="rMark" title="Bookmark this place (b)">Mark</button>
+    <button class="rpill" id="rMarks" title="Bookmarks (m)">Marks</button>
     <a class="rpill" id="rDownload" href="#" target="_blank" rel="noopener">Download</a>
     <button class="rclose" id="rClose" aria-label="Close reader">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 6 6 18M6 6l12 12"/></svg>
@@ -202,6 +204,10 @@
     <span class="findcount" id="findCount"></span>
     <button class="findclose" id="findClose" aria-label="Close search">✕</button>
     <div class="findresults" id="findResults" hidden></div>
+  </div>
+  <div class="markspanel" id="marksPanel" hidden>
+    <div class="markshead"><span>Bookmarks in this book</span><button class="findclose" id="marksClose" aria-label="Close">✕</button></div>
+    <div class="markslist" id="marksList"></div>
   </div>
   <div class="rbody">
     <div class="stage" id="stage">
@@ -228,9 +234,9 @@
   </div>
 </div>
 
-<script src="assets/vendor/jszip.min.js?v=20261116i"></script>
-<script src="assets/vendor/epub.min.js?v=20261116i"></script>
-<script src="assets/vendor/pdf.min.js?v=20261116i"></script>
-<script src="assets/app.js?v=20261116i"></script>
+<script src="assets/vendor/jszip.min.js?v=20261116j"></script>
+<script src="assets/vendor/epub.min.js?v=20261116j"></script>
+<script src="assets/vendor/pdf.min.js?v=20261116j"></script>
+<script src="assets/app.js?v=20261116j"></script>
 </body>
 </html>
