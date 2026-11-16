@@ -145,14 +145,20 @@ Vaults are deliberately **not** GitHub Pages sites: Pages caps a published site 
 
 ## Documentation
 
+Start at **[docs/](docs/README.md)** — it indexes the rest and states the current gaps.
+
 | Document | What it covers |
 |---|---|
 | [Architecture](docs/ARCHITECTURE.md) | how the pieces fit, and a built/designed/planned marker on each |
 | [Pipeline](docs/PIPELINE.md) | fetch → gate → typeset → dedupe → shelve, and every failure mode seen in practice |
 | [Data model](docs/DATA-MODEL.md) | every file and every field |
 | [Operations](docs/OPERATIONS.md) | the runbook: add a book, rebuild, rotate, deploy, troubleshoot |
+| [Frontend](docs/FRONTEND.md) | the page: data flow, the four renderers, design tokens, breakpoints |
+| [Vaults](docs/VAULTS.md) | the storage contract, `index.txt`, sealing |
 | [Decisions](docs/DECISIONS.md) | eleven choices, with the evidence behind each |
 | [Rights](docs/RIGHTS.md) | the public-domain test, source licences, corrections |
+| [Security](SECURITY.md) | scope, how the obvious risks are handled |
+| [Contributing](CONTRIBUTING.md) | what gets accepted, and how to report a wrong record |
 | [Changelog](CHANGELOG.md) | what was built, when, and what broke on the way |
 
 ---

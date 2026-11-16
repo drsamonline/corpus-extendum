@@ -33,7 +33,7 @@
       "class": "hand"
     },
     "README.md": {
-      "sha": "c26b7dbd7e68d75f31249edb2ddfe20e8abb274d",
+      "sha": "2e95c59206fb57a567c9acf64c1f95ee4de20511",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -148,7 +148,7 @@
       "class": "hand"
     },
     "MANIFEST.json": {
-      "sha": "091c3421ec80c886ddfbb227a49905cfaee08816",
+      "sha": "521e43d8863e65d351f2a84786e71f4d0f2c0429",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -204,6 +204,31 @@
     },
     "scripts/rotate_vault.py": {
       "sha": "21c00d3872c48522688e5805b8444e84ae09dd2a",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "CONTRIBUTING.md": {
+      "sha": "30111f064af6acb93eb8c4031ccf49f5baecd6e2",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "SECURITY.md": {
+      "sha": "ab310937efdfacc049e886f2060bda2bf5a19713",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "docs/FRONTEND.md": {
+      "sha": "577ebf4915939a3f1c111b121a55a045d9eb42ea",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "docs/README.md": {
+      "sha": "47e8b3f0a8ad98164fbf2a1fe07183e6c329ab27",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "docs/VAULTS.md": {
+      "sha": "2c65fc99b2bb8915fea1713392b967285c0ddf32",
       "producer": "build-2026-11-16",
       "class": "hand"
     }
