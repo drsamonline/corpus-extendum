@@ -41,7 +41,20 @@
     "gutenberg:3207",
     "gutenberg:34901",
     "gutenberg:12",
-    "gutenberg:13505"
+    "gutenberg:13505",
+    "gutenberg:158",
+    "gutenberg:161",
+    "gutenberg:141",
+    "gutenberg:121",
+    "gutenberg:9182",
+    "gutenberg:969",
+    "gutenberg:159",
+    "gutenberg:223",
+    "gutenberg:52501",
+    "gutenberg:2226",
+    "gutenberg:5658",
+    "gutenberg:421",
+    "gutenberg:1023"
   ],
   "text_sha256": {
     "78a0a582db906da05e36af990abed243f3cf64b5e3ecd77eb9ea3743be3ec65b": "pride-and-prejudice",
@@ -85,7 +98,20 @@
     "7e58dddc1e278aefe69bb97168afe275c3829ebe07ac37633f05cdc0746a1a4a": "leviathan",
     "4fc52a60e416e6f848d86e37430c73c870f77be0ab26cbf82d5783f78decf75a": "on-liberty",
     "c8f076ad1ead887bd4a771326e1d71e7961e762c451ed82fc77fc2884d4d71c3": "through-the-looking-glass",
-    "f4b6be0b09051213d46c809945b07738d1837ad074c3d573cebe8c48f349f53f": "the-duel"
+    "f4b6be0b09051213d46c809945b07738d1837ad074c3d573cebe8c48f349f53f": "the-duel",
+    "d119670c61055f64cada2a4128fc289281761f93f254806be56acce957a7cc2c": "emma",
+    "62978a42afbaab90a4ff60843073233857875538ad3c4ce23208d0826393f8fc": "sense-and-sensibility",
+    "87ee0ef241bd1d8393a3013d28ed5bfcddc3dc00ea41f1ce59ca7f461aa0f36c": "mansfield-park",
+    "412c675010d6533120fabc8b5043ba8168835a6cf57d68b7d751d1ed98c0d533": "northanger-abbey",
+    "9327b69427150a9b47e1344ff5e9c6766eff0773b795d19aba6d8bb038a24cce": "villette",
+    "b0b520a742b7da6339b1ffba9f556ae4c063b39b4c6954111afd066bb37bd375": "the-tenant-of-wildfell-hall",
+    "19dd9beac6a49fa05d5ef1ca15058dfa70488bcaf1d7e1309d6254c38be0d50f": "the-island-of-doctor-moreau",
+    "9ecbc9c34b62f5d8cbc7c8ef9e0caeaff250183fcbf53b7f8c6ed5cd94c0ff4d": "the-wisdom-of-father-brown",
+    "ddc92f54f26169791cbb7874db58f887fe830503561e4b975f293991ffac382d": "the-first-men-in-the-moon",
+    "a01f1d57cb868e60b18bce6aac3cc1870a4c678061daab15549835deefe48495": "kim",
+    "249251c98e7631d0f85ffd2407c75f0793e44be3f82137bc18d28c385b2dcb7d": "lord-jim",
+    "1a70ff02c5c95b848661bb8aefbf024c604eaf1978c31c9a6a6536812324f6fd": "kidnapped",
+    "a7f4d2a0c744a407c9ac45de2152443c2c708415af7be33e6ee35a743558fb7c": "bleak-house"
   },
   "work_keys": {
     "austen|pride and prejudice|1813": "pride-and-prejudice",
@@ -129,6 +155,19 @@
     "hobbes|leviathan|1651": "leviathan",
     "mill|on liberty|1859": "on-liberty",
     "carroll|through the looking-glass|1871": "through-the-looking-glass",
-    "chekhov|the duel|1891": "the-duel"
+    "chekhov|the duel|1891": "the-duel",
+    "austen|emma|1815": "emma",
+    "austen|sense and sensibility|1811": "sense-and-sensibility",
+    "austen|mansfield park|1814": "mansfield-park",
+    "austen|northanger abbey|1817": "northanger-abbey",
+    "bronte|villette|1853": "villette",
+    "bronte|the tenant of wildfell hall|1848": "the-tenant-of-wildfell-hall",
+    "wells|the island of doctor moreau|1896": "the-island-of-doctor-moreau",
+    "chesterton|the wisdom of father brown|1914": "the-wisdom-of-father-brown",
+    "wells|the first men in the moon|1901": "the-first-men-in-the-moon",
+    "kipling|kim|1901": "kim",
+    "conrad|lord jim|1900": "lord-jim",
+    "stevenson|kidnapped|1886": "kidnapped",
+    "dickens|bleak house|1853": "bleak-house"
   }
 }

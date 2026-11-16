@@ -1,19 +1,23 @@
 [
   [
     "Fiction",
-    11
+    21
+  ],
+  [
+    "Adventure",
+    7
+  ],
+  [
+    "Mystery & Detective",
+    6
+  ],
+  [
+    "Science Fiction",
+    6
   ],
   [
     "Children's & Fable",
     5
-  ],
-  [
-    "Mystery & Detective",
-    5
-  ],
-  [
-    "Adventure",
-    4
   ],
   [
     "Philosophy",
@@ -21,10 +25,6 @@
   ],
   [
     "Poetry",
-    4
-  ],
-  [
-    "Science Fiction",
     4
   ],
   [
