@@ -271,6 +271,12 @@
       "sha": "598f87f072f66e2269dd6919292b2934dbb20492",
       "producer": "build-2026-11-16",
       "class": "hand"
+    },
+    "docs/index.html": {
+      "sha": "0cde68ac30a220521849c8f7bb5cb183ee6b36eb",
+      "producer": "app-deliver@2026-11-04",
+      "class": "generated",
+      "at": "2026-11-16T13:28:00Z"
     }
   }
 }
