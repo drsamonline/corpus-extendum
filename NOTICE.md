@@ -66,6 +66,13 @@ a search for it turns up 2001 books, so the author gate still runs on top.
 The PDF is the archive's scan, unmodified. The EPUB is built from the item's OCR
 text. Credit and the item identifier are in the book's record.
 
+## The shared collection is not covered by that
+
+`shared.html` hosts sixteen Gujarati religious texts that are **in copyright**.
+They are not public domain, they are not part of the library, and nothing in this
+file's dedication applies to them. Their authorship is stated on the page and in
+`data/shared.json`; a takedown request is honoured.
+
 ## What is ours
 
 Catalogue records, metadata, typesetting, generated covers, the site, the

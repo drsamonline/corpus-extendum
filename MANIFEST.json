@@ -18,7 +18,7 @@
       "class": "hand"
     },
     "NOTICE.md": {
-      "sha": "947c07fcfb187f2c9ca1f69a29e396b5ff7a5662",
+      "sha": "0d8be519d9922a0b21bdfb2c8298a2ef8344148c",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -118,7 +118,7 @@
       "class": "hand"
     },
     "index.html": {
-      "sha": "441a7738b78235280d4ab47463faa08edd2649ac",
+      "sha": "d41f317cdccd131ccf9ece24a65719b5b13a0109",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -148,7 +148,7 @@
       "class": "hand"
     },
     "MANIFEST.json": {
-      "sha": "3e8c6e25838a719c4a9f7aff71a528a7e7ce6f9f",
+      "sha": "3f539224de0ec3acab379376a522077fdcc7f19a",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -168,7 +168,7 @@
       "class": "hand"
     },
     "CHANGELOG.md": {
-      "sha": "fab04a980e98904b86696fd89da38dbc1c46bdc7",
+      "sha": "d863cd8ce680e39efa2f2760a589fd891c324632",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -198,7 +198,7 @@
       "class": "hand"
     },
     "docs/RIGHTS.md": {
-      "sha": "30ae0c8b8705b943619efe4582fe656af052c15a",
+      "sha": "19fffeebe5f90721844730c327863600fd8577d1",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -258,7 +258,7 @@
       "class": "hand"
     },
     "LEGAL-INDEX.md": {
-      "sha": "62db1cb1817d6ff80d7210c1f04c8f7b96891046",
+      "sha": "e6c267513e1f08b86f081dd845d930da7a5cd605",
       "producer": "build-2026-11-16",
       "class": "hand"
     },
@@ -289,6 +289,96 @@
     },
     "docs/play/index.html": {
       "sha": "827213f4cd12cd48095ba4d28acfe976faf939e9",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "data/shared.json": {
+      "sha": "e0d8b82f511be22eac21d4cd7f81d37c892e569d",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "shared/aapne-eid-sa-mate-ujavie-chhie.pdf": {
+      "sha": "237dcbdbf6a6ee2127b8f7458ac5c8fd558cb242",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "shared/al-qur-an.pdf": {
+      "sha": "0d1ef9993ad4789a25f8974bb11b3ded81d59898",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "shared/allah-ni-ne-amat-ane-azab.pdf": {
+      "sha": "fecbe481152e4b9046985c887c08239ef3baa111",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "shared/anna-no-prashna.pdf": {
+      "sha": "5c77db8ced05d7589e300ebafb1615a5276ecddc",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "shared/baal-uchher.pdf": {
+      "sha": "830491c1aa920cb0f7525d44d91432810877f812",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "shared/criminals-of-islam.pdf": {
+      "sha": "a31ba5c96e3398976e0ec59c37de0743c02ff7d9",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "shared/islam-etle-shu.pdf": {
+      "sha": "1c4b4130a93adfe0f0f1ea204e9bae0938b78d2e",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "shared/islam-je-matra-satya-deen-chhe.pdf": {
+      "sha": "603d2a862a2155acb85451b44bb0dfadc9b25caf",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "shared/islam-na-ketlak-mulbhut-sidhhant-ke-sanatan-mulyo.pdf": {
+      "sha": "ecc711e76904ae25efdb88dd1daf3d3f95481e5b",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "shared/islamic-samaaj-jivan-islami-muasherat.pdf": {
+      "sha": "c6506cd564c10ef426fcccc4bb672cc90b097fe3",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "shared/karbala-satya-ke-kalpana.pdf": {
+      "sha": "a2ffa74203cbd439af1d32954eabd0a599ede5f6",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "shared/qur-an-ni-aagekuch.pdf": {
+      "sha": "7230ee126d7ee0a1c8508804c61d5792e1713e2d",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "shared/qur-an-nu-pravesh-dvaar.pdf": {
+      "sha": "147c42dc2dfee97d5dac35e572d7b5bb3fd86977",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "shared/salat.pdf": {
+      "sha": "efae366818d97e263b826f8e4a99a19f80fd8ac2",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "shared/the-qur-an-and-the-knowledge.pdf": {
+      "sha": "331626796b3dce51888168a1673f41932f6c5ca0",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "shared/zakat.pdf": {
+      "sha": "9941dfe17080f70b3f5a0fedbfcebcec2bf8c0ce",
+      "producer": "build-2026-11-16",
+      "class": "hand"
+    },
+    "shared.html": {
+      "sha": "62fe939389db00a62b82ca821861d462fde59421",
       "producer": "build-2026-11-16",
       "class": "hand"
     }

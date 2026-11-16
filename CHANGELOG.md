@@ -5,6 +5,31 @@ site and a set of vaults; there are no releases, so this records the build.
 
 ---
 
+## 2026-11-16 · A shared collection, kept outside the library
+
+**Added**
+- `shared.html` — sixteen Gujarati religious texts on the Qur'an, salat, zakat and
+  Karbala, on a **separate page, outside the catalogue, outside the vault and
+  outside the dedupe register**. Each record names its authorship: the texts
+  attributed to Allama Ghulam Ahmad Parwez (d. 1985) remain with their rights
+  holders, and the Gujarati translations by Dr Sohil Momin are his own work
+  while the English originals they translate remain their authors'.
+- The page says "not public domain" at the top, and again on every card, and a
+  takedown route is printed on it.
+
+**Why not in the library**
+- They are in copyright: 2011–2013 documents, and Parwez's work enters the
+  public domain in India in 2045. Putting them in the catalogue would make the
+  shelf's one claim false.
+- They are also unprocessable: a legacy non-Unicode Gujarati font means the text
+  layer is mojibake, so no search, no hash, no EPUB.
+
+**Not done, deliberately**
+- No `rights.basis` field, no vault, no index.txt entry. They cannot be mistaken
+  for library stock by any script that reads the catalogue.
+
+---
+
 ## 2026-11-16 · Thirteen more books, and the thin shelves filled
 
 **Added** — Epictetus' *Short Works* (Long), three Conrad (*The Secret Agent*,

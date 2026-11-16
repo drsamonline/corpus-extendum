@@ -10,6 +10,7 @@ The legal documents for this repository, and what each one is for.
 | [SECURITY.md](SECURITY.md) | How to report a vulnerability |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | The licence grant for contributions, and what gets refused |
 | [docs/RIGHTS.md](docs/RIGHTS.md) | The public-domain test every book must pass, and how to correct a wrong record |
+| [shared.html](shared.html) | The one collection that is **not** public domain, and what its rights notes say |
 
 ## The licence in one line
 
