@@ -229,3 +229,31 @@ permissive SVG rasteriser that renders these traced plates correctly — `resvg`
 replaces anything.
 
 ---
+
+---
+
+## D13 · Docling considered for the text step — rejected, measured
+
+**Considered.** Replacing the spine text extraction with `docling` (MIT, IBM), which parses EPUB
+and PDF into a lossless structured document.
+
+**Rejected on three measurements, 2026-11-18.**
+
+1. **The install is 6.4 GB.** `pip install docling` pulls `torch` (1.2 GB), `torchvision`,
+   `transformers` and the NVIDIA CUDA runtime (**3.0 GB**). The library's declared *core*
+   dependencies are light — that is what made it look cheap — but the published metapackage is not.
+2. **It cannot run on a modest machine.** It failed to initialise in a 2 GB-RAM environment
+   (`OpenBLAS: memory allocation still failed`, then `SystemError`). This pipeline is meant to run
+   offline on ordinary hardware.
+3. **It would replace something already exact.** The current extractor reads the *authored* XHTML
+   from the EPUB spine and strips tags. Run against the shipped `alice-in-wonderland.epub` it
+   reproduces the shipped `.txt` at **100.00% similarity** (144,841 against 144,842 characters —
+   one trailing newline). There is no inference to improve: the text was authored, not rendered.
+
+**Where it would earn its weight:** a pipeline that starts from *scanned* PDFs, where layout has to
+be inferred. This one typesets its own PDFs from the EPUB, so that case does not arise. If a
+scanned-only book ever enters the shelf, docling is the tool to reach for — on a workstation, as a
+one-off, not as a runtime dependency.
+
+**The lesson, since this looked obviously good:** "the core dependencies are light" is a statement
+about a `pyproject.toml`, not about what `pip install` does. Measure the install, then decide.
