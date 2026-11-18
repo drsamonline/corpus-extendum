@@ -136,11 +136,11 @@ def shelf(catalog, vault, out):
 
 
 def reader_shot(catalog, vault, out, tmp):
-    import pymupdf
+    import pypdfium2
     b = next(x for x in catalog if x["slug"] == "pride-and-prejudice")
-    doc = pymupdf.open(vault / "books" / b["slug"] / f"{b['slug']}.pdf")
+    doc = pypdfium2.PdfDocument(str(vault / "books" / b["slug"] / f"{b['slug']}.pdf"))
     page_png = tmp / "reader_page.png"
-    doc[7].get_pixmap(dpi=150).save(page_png)
+    doc[7].render(scale=150 / 72).to_pil().convert("RGB").save(page_png)
 
     W, H = 1440, 880
     img = Image.new("RGB", (W, H), DARK); d = ImageDraw.Draw(img)

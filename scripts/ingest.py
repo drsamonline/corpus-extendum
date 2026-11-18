@@ -787,6 +787,30 @@ def shrink_tree(src: Path, dest: Path, max_px=None, quality=82) -> Path:
     return dest
 
 
+def _pdf_to_pil(source, page=0, dpi=150):
+    """Render one PDF page to a PIL image through PDFium.
+
+    Replaces PyMuPDF for the three PDF-render sites. PyMuPDF is AGPL-3.0, and a
+    pipeline that may one day be served or relicensed cannot carry that for a job
+    PDFium does. Measured against PyMuPDF on the same 1250x1250 render: mean
+    absolute difference 0.86/255, 1.49% of pixels differing by more than 8 — the
+    antialiasing gap between two independent rasterisers.
+
+    `source` is PDF bytes or a path. PDFium cannot open SVG, which is why
+    _render_one still uses PyMuPDF; see the note there.
+    """
+    import pypdfium2
+    if isinstance(source, (bytes, bytearray)):
+        doc = pypdfium2.PdfDocument(bytes(source))
+    else:
+        doc = pypdfium2.PdfDocument(str(source))
+    pg = doc[page]
+    bitmap = pg.render(scale=dpi / 72)
+    im = bitmap.to_pil().convert("RGB")
+    doc.close()
+    return im
+
+
 def svg_to_image(svg_path: Path, max_px=900):
     """Rasterise an SVG through the renderer that already draws it correctly.
 
@@ -794,8 +818,6 @@ def svg_to_image(svg_path: Path, max_px=900):
     WeasyPrint draws them properly, so: SVG -> one-page PDF -> pixmap -> JPEG.
     Aspect ratio comes from the viewBox, so nothing is squashed.
     """
-    import pymupdf
-    from PIL import Image as _Image
     from weasyprint import HTML
     head = svg_path.read_text(encoding="utf-8", errors="ignore")[:2000]
     m = re.search(r'viewBox="([\d.\s-]+)"', head)
@@ -810,11 +832,7 @@ def svg_to_image(svg_path: Path, max_px=900):
                 f"body{{margin:0}}img{{width:{pw}px;height:{ph}px;display:block}}</style></head>"
                 f"<body><img src='{svg_path.as_uri()}'></body></html>")
     pdf_bytes = HTML(string=doc_html).write_pdf()
-    d = pymupdf.open("pdf", pdf_bytes)
-    pix = d[0].get_pixmap(dpi=150)
-    im = _Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
-    d.close()
-    return im
+    return _pdf_to_pil(pdf_bytes, dpi=150)
 
 
 def source_id_from_tree(root: Path):
@@ -845,6 +863,11 @@ def _render_one(args):
     page, which is a fraction of the weight per process.
     """
     svg_path, out_path, max_px, quality = args
+    # PyMuPDF stays here and nowhere else: PDFium cannot open an SVG, and the
+    # alternatives are worse for these files — cairosvg renders the fill-heavy
+    # traced plates as solid black squares, and routing through WeasyPrint pulls
+    # a layout engine into every worker (the reason this function exists).
+    # So the AGPL dependency is reduced to SVG plates, not removed.
     import pymupdf
     from PIL import Image as _Image
     svg_path, out_path = Path(svg_path), Path(out_path)
@@ -884,9 +907,8 @@ def svg_batch_to_images(svg_paths, out_paths, max_px=900, quality=82):
     fraction of the time. Each page is cropped to its ink so the aspect ratio
     survives the square page.
     """
-    import pymupdf
-    from PIL import Image as _Image
     from weasyprint import HTML
+    from PIL import Image as _Image
 
     pages = []
     for sp in svg_paths:
@@ -901,13 +923,13 @@ def svg_batch_to_images(svg_paths, out_paths, max_px=900, quality=82):
         "</style></head><body>" + "".join(pages) + "</body></html>"
     )
     pdf_bytes = HTML(string=doc).write_pdf()
-    pdf = pymupdf.open("pdf", pdf_bytes)
+    import pypdfium2
+    pdf = pypdfium2.PdfDocument(pdf_bytes)
     made = 0
     for i, out in enumerate(out_paths):
-        if i >= pdf.page_count:
+        if i >= len(pdf):
             break
-        pix = pdf[i].get_pixmap(dpi=96)
-        im = _Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
+        im = _pdf_to_pil(pdf_bytes, page=i, dpi=96)
         # crop the white margin so the plate keeps its own proportions
         gray = im.convert("L")
         bbox = gray.point(lambda v: 255 if v < 245 else 0).getbbox()
@@ -1326,7 +1348,6 @@ def build_from_archive(meta: dict, pdf_bytes, txt_bytes, book: dict, out: Path):
     required even when the PDF is present.
     """
     from weasyprint import HTML
-    import pymupdf
 
     slug = book["slug"]
     out.mkdir(parents=True, exist_ok=True)
@@ -1384,10 +1405,7 @@ def build_from_archive(meta: dict, pdf_bytes, txt_bytes, book: dict, out: Path):
     cover_kind = "generated"
     try:
         if pdf_path:
-            doc = pymupdf.open(str(pdf_path))
-            pix = doc[0].get_pixmap(dpi=110)
-            from PIL import Image
-            im = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
+            im = _pdf_to_pil(pdf_path, dpi=110)
             im.thumbnail((600, 900))
             im.save(cover_path, "JPEG", quality=85)
             cover_kind = "scan"
