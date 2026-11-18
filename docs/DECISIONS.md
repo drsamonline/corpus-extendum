@@ -200,3 +200,32 @@ should not take the shelf down. The bundle came from the owner's own
 rather than re-fetched.
 
 **Cost.** ~1.7 MB in the library repo, lazy-loaded per format.
+
+---
+
+## D12 · PyMuPDF confined to SVG plates; PDF rendering moved to PDFium
+
+**Decision.** Every PDF page render now goes through `pypdfium2` (PDFium, the
+renderer inside Chrome). PyMuPDF remains in exactly one function, `_render_one`,
+which rasterises an **SVG** plate.
+
+**Why.** PyMuPDF is AGPL-3.0. That is fine for outputs and fine for a local build
+tool, but it stops being fine the day this pipeline is served as a web app or
+relicensed. Three of the four PDF-render sites had no reason to carry it.
+
+**Evidence the swap is safe.** The same 1250×1250 page rendered both ways:
+**mean absolute difference 0.86/255**, 1.49% of pixels differing by more than 8 —
+the antialiasing gap between two independent rasterisers, at a 900 px JPEG q82
+output.
+
+**Why SVG keeps PyMuPDF.** PDFium cannot open an SVG. The alternatives are worse
+for these files: cairosvg renders the fill-heavy traced plates as solid black
+squares, and routing through WeasyPrint pulls a layout engine into every worker,
+which is the cost D7 exists to avoid.
+
+**So the AGPL dependency is reduced, not removed.** What would remove it: a
+permissive SVG rasteriser that renders these traced plates correctly — `resvg`
+(MPL-2.0) is the candidate — verified against the black-square failure before it
+replaces anything.
+
+---
